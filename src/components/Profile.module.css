@@ -1,0 +1,13 @@
+.content {
+	grid-area: c;
+	background-color: mediumslateblue;
+}
+.content img {
+	width: 100%;
+}
+.posts {
+}
+.item {
+	margin: 10px;
+	color: rgb(66, 68, 61);
+}

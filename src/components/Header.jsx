@@ -1,8 +1,9 @@
+import s from './Header.module.css';
 
 const Header = () => {
 
 	return (
-		<header className='header'>
+		<header className={s.header}>
 			<img src='https://www.mintformations.co.uk/blog/wp-content/uploads/2020/05/shutterstock_583717939.jpg' />
 		</header>
 	)
