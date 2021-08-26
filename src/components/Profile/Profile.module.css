@@ -1,7 +1,6 @@
-.content {
-	grid-area: c;
-	background-color: mediumslateblue;
-}
-.content img {
+.img {
 	width: 100%;
+}
+.discr {
+	padding: 10px;
 }

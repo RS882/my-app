@@ -1,0 +1,18 @@
+.dialogs {
+	display: grid;
+	grid-template-columns: 2fr 10fr;
+}
+.dialogsItem {
+	padding: 10px;
+}
+.dialogsItem .dialog {
+	text-transform: capitalize;
+}
+.dialogsItem .active {
+	color: #ff784f;
+}
+.masseges {
+	padding: 10px;
+}
+.masseges .message {
+}

@@ -11,14 +11,9 @@ const MyPosts = () => {
 				<button>add post</button>
 			</div>
 			<ul className={s.posts}>
-				<Post />
-				<Post />
-				<Post />
-				<Post />
-				<Post />
-				<Post />
-				<Post />
-				<Post />
+				<Post message='Hi, how are you?' like='15' />
+				<Post message="It's my first post" like='20' />
+
 			</ul>
 		</div>
 

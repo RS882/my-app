@@ -1,12 +1,18 @@
 .nav {
 	grid-area: n;
-
-	background-color: darkolivegreen;
+	background-color: #db9d47;
 }
 
 .items {
 }
 .item {
-	margin: 10px;
-	color: #fff;
+	margin: 20px;
+	color: #edffd9;
+}
+.item a {
+	color: inherit;
+	text-transform: uppercase;
+}
+.item .activeLink {
+	color: #ffe19c;
 }
