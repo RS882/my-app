@@ -8,6 +8,7 @@
 .item {
 	margin: 20px;
 	color: #edffd9;
+	transition: all 0.3s ease 0s;
 }
 .item a {
 	color: inherit;

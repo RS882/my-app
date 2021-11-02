@@ -1,0 +1,15 @@
+.message {
+	display: flex;
+	font-weight: bold;
+}
+
+.message:not(:last-child) {
+	margin-bottom: 10px;
+}
+.name {
+	text-transform: capitalize;
+	font-size: 17px;
+	opacity: 0.8;
+	padding-right: 20px;
+	color: #db9d47;
+}

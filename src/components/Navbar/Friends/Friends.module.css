@@ -1,0 +1,14 @@
+.friends {
+	margin-top: 70px;
+	margin-bottom: 20px;
+}
+
+.title {
+	margin-left: 20px;
+	color: #edffd9;
+	text-transform: uppercase;
+	font-size: 20px;
+}
+.friendItem {
+	display: flex;
+}

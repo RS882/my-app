@@ -5,14 +5,36 @@
 .dialogsItem {
 	padding: 10px;
 }
-.dialogsItem .dialog {
-	text-transform: capitalize;
-}
-.dialogsItem .active {
-	color: #ff784f;
-}
 .masseges {
 	padding: 10px;
 }
-.masseges .message {
+
+.postsarea {
+	display: block;
+	margin-bottom: 10px;
+
+	width: 300px;
+	height: 50px;
+	box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+.button {
+	display: block;
+	margin-bottom: 10px;
+	background-color: #ff784f;
+	width: 100px;
+	height: 30px;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #edffd9;
+	box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+}
+.button:hover {
+	background-color: #edffd9;
+	color: #ff784f;
+	transition: all 0.3s ease 0s;
+}
+
+.inputpost {
+	grid-column: 2/3;
+	margin: 10px;
 }

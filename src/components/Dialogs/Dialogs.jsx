@@ -1,39 +1,39 @@
-import { NavLink } from 'react-router-dom';
+
+import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
+import Message from './Message/Message';
+import React from 'react';
+
+
+
 
 const Dialogs = (props) => {
+
+
+	const dialogElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />),
+		messageElements = props.state.messeges.map(m => <Message message={m.message} author={m.author} />),
+		newPostElement = React.createRef(),
+		addPost = () => {
+			const text = newPostElement.current.value;
+			alert(text);
+		};
 
 	return (
 		<div className={s.dialogs}>
 			<ul className={s.dialogsItem}>
-				<li className={s.dialog + ' ' + s.active}>
-					<NavLink to="/dialogs/1">dima</NavLink>
-				</li>
-				<li className={s.dialog}>
-					<NavLink to="/dialogs/2">Alex</NavLink>
-				</li>
-				<li className={s.dialog}>
-					<NavLink to="/dialogs/3">katya</NavLink>
-				</li>
-				<li className={s.dialog}>
-					<NavLink to="/dialogs/4">sergiy</NavLink>
-				</li>
-				<li className={s.dialog}>
-					<NavLink to="/dialogs/5">Sveta</NavLink>
-				</li>
-				<li className={s.dialog}>
-					<NavLink to="/dialogs/6">viktor</NavLink>
-				</li>
-
-
+				{dialogElements}
 			</ul>
 			<ul className={s.masseges}>
-				<li className={s.message}>Hi</li>
-				<li className={s.message}>How are you?</li>
-				<li className={s.message}>I'm fine</li>
-				<li className={s.message}>Yo</li>
+				{messageElements}
+
 			</ul>
+			<div className={s.inputpost}>
+				<textarea ref={newPostElement} className={s.postsarea}></textarea>
+
+				<button onClick={addPost} className={s.button}>add post</button>
+			</div>
 		</div>
+
 	);
 }
 export default Dialogs;
