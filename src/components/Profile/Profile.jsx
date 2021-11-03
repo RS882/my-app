@@ -14,6 +14,8 @@ const Profile = (props) => {
 				addPosts={props.addPosts}
 				newTextPost={props.state.newTextPost}
 				updateNewPostText={props.updateNewPostText}
+				delPostValue={props.delPostValue}
+
 			/>
 		</div>
 	)

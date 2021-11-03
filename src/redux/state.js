@@ -1,5 +1,6 @@
 import { rerenderEntireTee } from "../render";
 
+
 const state = {
 	dialogsPage: {
 		dialogs: [
@@ -16,6 +17,7 @@ const state = {
 			{ id: 3, message: `I'm fine`, author: `me`, },
 			{ id: 4, message: `Yo`, author: `me`, },
 		],
+		newTextMessage: `Enter you message`,
 	},
 	profilePage: {
 		posts: [
@@ -36,17 +38,45 @@ const state = {
 
 export const addPosts = () => {
 	const newPost = {
-		id: 3,
+		id: state.profilePage.posts.length + 1,
 		message: state.profilePage.newTextPost,
 		like: 0,
 	};
 	state.profilePage.posts.push(newPost);
-	state.profilePage.newTextPost = ``;
+	state.profilePage.newTextPost = `Enter you post`;
 	rerenderEntireTee(state);
+
 };
 
 export const updateNewPostText = (text) => {
 	state.profilePage.newTextPost = text;
+	rerenderEntireTee(state);
+};
+
+export const delPostValue = () => {
+	state.profilePage.newTextPost = ``;
+	rerenderEntireTee(state);
+
+};
+
+export const onMessageChange = (text) => {
+	state.dialogsPage.newTextMessage = text;
+	rerenderEntireTee(state);
+};
+
+export const addMessage = () => {
+	const newMessage = {
+		id: state.dialogsPage.messeges.length + 1,
+		message: state.dialogsPage.newTextMessage,
+		author: `me`,
+	};
+	state.dialogsPage.messeges.push(newMessage);
+	state.dialogsPage.newTextMessage = `Enter you message`;
+	rerenderEntireTee(state);
+};
+
+export const delMessageValue = () => {
+	state.dialogsPage.newTextMessage = ``;
 	rerenderEntireTee(state);
 };
 

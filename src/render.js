@@ -2,15 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { addPosts } from './redux/state';
+import { addMessage, addPosts, delMessageValue, delPostValue, onMessageChange, updateNewPostText } from './redux/state';
 import { BrowserRouter, Route } from "react-router-dom";
-import { updateNewPostText } from './redux/state';
+
 
 export const rerenderEntireTee = (state) => {
   ReactDOM.render(
     <React.StrictMode>
       <BrowserRouter>
-        <App state={state} addPosts={addPosts} updateNewPostText={updateNewPostText} />
+        <App state={state}
+          addPosts={addPosts}
+          updateNewPostText={updateNewPostText}
+          onMessageChange={onMessageChange}
+          addMessage={addMessage}
+          delPostValue={delPostValue}
+          delMessageValue={delMessageValue}
+        />
       </BrowserRouter >
     </React.StrictMode>,
     document.getElementById('root')

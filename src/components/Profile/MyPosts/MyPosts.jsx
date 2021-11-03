@@ -1,7 +1,7 @@
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
-import { addPosts } from './../../../redux/state';
+
 
 const MyPosts = (props) => {
 
@@ -15,6 +15,9 @@ const MyPosts = (props) => {
 			const text = newPostElement.current.value;
 			props.updateNewPostText(text);
 
+		},
+		delPostValue = () => {
+			props.delPostValue();
 		};
 
 	return (
@@ -25,6 +28,7 @@ const MyPosts = (props) => {
 
 				<textarea
 					onChange={onPostChange}
+					onFocus={delPostValue}
 					ref={newPostElement}
 					className={s.postsarea}
 					value={props.newTextPost}
