@@ -1,3 +1,5 @@
+import { rerenderEntireTee } from "../render";
+
 const state = {
 	dialogsPage: {
 		dialogs: [
@@ -20,6 +22,7 @@ const state = {
 			{ id: 1, message: `Hi, how are you?`, like: '10', },
 			{ id: 2, message: `It's my first post`, like: '20', },
 		],
+		newTextPost: `Enter you post`,
 	},
 	sidebar: {
 		friends: [
@@ -31,17 +34,20 @@ const state = {
 
 }
 
-export const addPosts = (post) => {
-
-
+export const addPosts = () => {
 	const newPost = {
 		id: 3,
-		message: post,
+		message: state.profilePage.newTextPost,
 		like: 0,
 	};
-
 	state.profilePage.posts.push(newPost);
+	state.profilePage.newTextPost = ``;
+	rerenderEntireTee(state);
+};
 
-}
+export const updateNewPostText = (text) => {
+	state.profilePage.newTextPost = text;
+	rerenderEntireTee(state);
+};
 
 export default state;
