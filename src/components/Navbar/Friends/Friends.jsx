@@ -2,7 +2,7 @@ import FriendItem from './FriendItem/FriendItem';
 import s from './Friends.module.css';
 
 const Friends = (props) => {
-	console.log(props);
+
 
 	const frendItem = props.friends.map(d => <FriendItem name={d.name} id={d.id} avatar={d.avatar} />);
 	return (
