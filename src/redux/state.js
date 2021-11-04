@@ -1,4 +1,4 @@
-import { rerenderEntireTee } from "../render";
+let rerenderEntireTee = (state) => { };
 
 
 const state = {
@@ -34,7 +34,12 @@ const state = {
 		],
 	},
 
-}
+};
+
+export const subscribe = (observer) => {
+	rerenderEntireTee = observer;
+};
+
 
 export const addPosts = () => {
 	const newPost = {
@@ -42,9 +47,12 @@ export const addPosts = () => {
 		message: state.profilePage.newTextPost,
 		like: 0,
 	};
-	state.profilePage.posts.push(newPost);
-	state.profilePage.newTextPost = `Enter you post`;
-	rerenderEntireTee(state);
+	if (state.profilePage.newTextPost !== `Enter you post`) {
+		state.profilePage.posts.push(newPost);
+		state.profilePage.newTextPost = `Enter you post`;
+		rerenderEntireTee(state);
+	}
+
 
 };
 
@@ -70,14 +78,19 @@ export const addMessage = () => {
 		message: state.dialogsPage.newTextMessage,
 		author: `me`,
 	};
-	state.dialogsPage.messeges.push(newMessage);
-	state.dialogsPage.newTextMessage = `Enter you message`;
-	rerenderEntireTee(state);
+	if (state.dialogsPage.newTextMessage !== `Enter you message`) {
+		state.dialogsPage.messeges.push(newMessage);
+		state.dialogsPage.newTextMessage = `Enter you message`;
+		rerenderEntireTee(state);
+	}
 };
 
 export const delMessageValue = () => {
 	state.dialogsPage.newTextMessage = ``;
 	rerenderEntireTee(state);
 };
+
+
+
 
 export default state;
