@@ -5,19 +5,19 @@ import React from 'react';
 
 const MyPosts = (props) => {
 
-	const postElements = props.posts.map(p => <Post message={p.message} like={p.like} />),
+	const postElements = props.posts.posts.map(p => <Post message={p.message} like={p.like} />),
 		newPostElement = React.createRef(),
 		addPost = () => {
-			props.addPosts();
+			props.store.addPosts();
 
 		},
 		onPostChange = () => {
 			const text = newPostElement.current.value;
-			props.updateNewPostText(text);
+			props.store.updateNewPostText(text);
 
 		},
 		delPostValue = () => {
-			props.delPostValue();
+			props.store.delPostValue();
 		};
 
 	return (
@@ -31,7 +31,7 @@ const MyPosts = (props) => {
 					onFocus={delPostValue}
 					ref={newPostElement}
 					className={s.postsarea}
-					value={props.newTextPost}
+					value={props.posts.newTextPost}
 				/>
 
 				<button onClick={addPost} className={s.button}>add post</button>

@@ -12,29 +12,26 @@ import Settings from './components/Settings/Settings';
 
 
 const App = (props) => {
+
   return (
 
     <div className='app-wrapper'>
       <Header />
-      <Navbar state={props.state.sidebar} />
+      <Navbar state={props.store.state.sidebar} />
 
       <div className='app-wrapper__content'>
 
 
         <Route path='/dialogs'
           render={() => <Dialogs
-            state={props.state.dialogsPage}
-            onMessageChange={props.onMessageChange}
-            addMessage={props.addMessage}
-            delMessageValue={props.delMessageValue}
+            state={props.store.state.dialogsPage}
+            store={props.store}
           />} />
 
         <Route path='/profile'
           render={() => <Profile
-            state={props.state.profilePage}
-            addPosts={props.addPosts}
-            updateNewPostText={props.updateNewPostText}
-            delPostValue={props.delPostValue}
+            state={props.store.state.profilePage}
+            store={props.store}
 
 
           />} />

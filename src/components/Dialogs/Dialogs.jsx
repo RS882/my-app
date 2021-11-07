@@ -15,14 +15,14 @@ const Dialogs = (props) => {
 		messageElements = props.state.messeges.map(m => <Message message={m.message} author={m.author} />),
 		newMessageElement = React.createRef(),
 		addMessage = () => {
-			props.addMessage();
+			props.store.addMessage();
 		},
 		onMessageChange = () => {
 			const text = newMessageElement.current.value;
-			props.onMessageChange(text);
+			props.store.onMessageChange(text);
 		},
 		delMessageValue = () => {
-			props.delMessageValue();
+			props.store.delMessageValue();
 		};
 
 	return (
