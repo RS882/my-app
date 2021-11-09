@@ -10,19 +10,18 @@ import React from 'react';
 const Dialogs = (props) => {
 
 
-
 	const dialogElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />),
 		messageElements = props.state.messeges.map(m => <Message message={m.message} author={m.author} />),
 		newMessageElement = React.createRef(),
 		addMessage = () => {
-			props.store.addMessage();
+			props.dispatch({ type: `ADD-MESSAGE`, });
 		},
 		onMessageChange = () => {
 			const text = newMessageElement.current.value;
-			props.store.onMessageChange(text);
+			props.dispatch({ type: `UPDATE-NEW-MESSAGE-TEXT`, text: text, });
 		},
 		delMessageValue = () => {
-			props.store.delMessageValue();
+			props.dispatch({ type: `DEL-MESSAGE-VALUE`, });
 		};
 
 	return (

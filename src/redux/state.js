@@ -1,5 +1,5 @@
 const store = {
-	state: {
+	_state: {
 		dialogsPage: {
 			dialogs: [
 				{ id: 1, name: `dima`, avatar: `green`, },
@@ -34,7 +34,7 @@ const store = {
 
 	},
 
-	addPosts() {
+	_addPosts() {
 		const newPost = {
 			id: this.state.profilePage.posts.length + 1,
 			message: this.state.profilePage.newTextPost,
@@ -43,21 +43,21 @@ const store = {
 		if (this.state.profilePage.newTextPost !== `Enter you post`) {
 			this.state.profilePage.posts.push(newPost);
 			this.state.profilePage.newTextPost = `Enter you post`;
-			this.rerenderEntireTee(this);
+			this.subscribe(this.state);
 		}
 	},
 
-	updateNewPostText(text) {
+	_updateNewPostText(text) {
 		this.state.profilePage.newTextPost = text;
-		this.rerenderEntireTee(this);
+		this.subscribe(this.state);
 	},
 
-	delPostValue() {
+	_delPostValue() {
 		this.state.profilePage.newTextPost = ``;
-		this.rerenderEntireTee(this);
+		this.subscribe(this.state);
 	},
 
-	addMessage() {
+	_addMessage() {
 		const newMessage = {
 			id: this.state.dialogsPage.messeges.length + 1,
 			message: this.state.dialogsPage.newTextMessage,
@@ -66,28 +66,42 @@ const store = {
 		if (this.state.dialogsPage.newTextMessage !== `Enter you message`) {
 			this.state.dialogsPage.messeges.push(newMessage);
 			this.state.dialogsPage.newTextMessage = `Enter you message`;
-			this.rerenderEntireTee(this);
+			this.subscribe(this.state);
 		}
 	},
 
-	onMessageChange(text) {
+	_updateNewMessageChange(text) {
 		this.state.dialogsPage.newTextMessage = text;
-		this.rerenderEntireTee(this);
+		this.subscribe(this.state);
 	},
 
-	delMessageValue() {
+	_delMessageValue() {
 		this.state.dialogsPage.newTextMessage = ``;
-		this.rerenderEntireTee(this);
+		this.subscribe(this.state);
 	},
 
-	_rerenderEntireTee(store) { },
+	_callSubscriber(store) { },
 
-	get rerenderEntireTee() {
-		return this._rerenderEntireTee;
+	get state() {
+		return this._state;
 	},
-	set rerenderEntireTee(observer) {
-		this._rerenderEntireTee = observer;
+
+	get subscribe() {
+		return this._callSubscriber;
 	},
+	set subscribe(observer) {
+		this._callSubscriber = observer;
+	},
+
+	dispatch(action) { // action {type: ``,  }
+		if (action.type === `ADD-POSTS`) this._addPosts();
+		if (action.type === `UPDATE-NEW-POST-TEXT`) this._updateNewPostText(action.text);
+		if (action.type === `DEL-POST-VALUE`) this._delPostValue();
+		if (action.type === `ADD-MESSAGE`) this._addMessage();
+		if (action.type === `UPDATE-NEW-MESSAGE-TEXT`) this._updateNewMessageChange(action.text);
+		if (action.type === `DEL-MESSAGE-VALUE`) this._delMessageValue();
+
+	}
 
 }
 

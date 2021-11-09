@@ -7,12 +7,13 @@ import App from './App';
 
 import { BrowserRouter, Route } from "react-router-dom";
 
-const rerenderEntireTee = (store) => {
+const rerenderEntireTee = (state) => {
 
 	ReactDOM.render(
 		<React.StrictMode>
 			<BrowserRouter>
-				<App store={store}
+				<App state={state}
+					dispatch={store.dispatch.bind(store)}// биндим сторе тк терям контекст вызова при передаче метода
 				/>
 			</BrowserRouter >
 		</React.StrictMode>,
@@ -20,8 +21,8 @@ const rerenderEntireTee = (store) => {
 	);
 }
 
-rerenderEntireTee(store);
-store.rerenderEntireTee = rerenderEntireTee;
+rerenderEntireTee(store.state);
+store.subscribe = rerenderEntireTee;
 
 
 

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import './App.css';
 import './ResetStyle.css';
 import Header from './components/Header/Header';
@@ -17,21 +17,21 @@ const App = (props) => {
 
     <div className='app-wrapper'>
       <Header />
-      <Navbar state={props.store.state.sidebar} />
+      <Navbar state={props.state.sidebar} />
 
       <div className='app-wrapper__content'>
 
 
         <Route path='/dialogs'
           render={() => <Dialogs
-            state={props.store.state.dialogsPage}
-            store={props.store}
+            state={props.state.dialogsPage}
+            dispatch={props.dispatch}
           />} />
 
         <Route path='/profile'
           render={() => <Profile
-            state={props.store.state.profilePage}
-            store={props.store}
+            state={props.state.profilePage}
+            dispatch={props.dispatch}
 
 
           />} />

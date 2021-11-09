@@ -8,16 +8,16 @@ const MyPosts = (props) => {
 	const postElements = props.posts.posts.map(p => <Post message={p.message} like={p.like} />),
 		newPostElement = React.createRef(),
 		addPost = () => {
-			props.store.addPosts();
+			props.dispatch({ type: `ADD-POSTS`, });
 
 		},
 		onPostChange = () => {
 			const text = newPostElement.current.value;
-			props.store.updateNewPostText(text);
+			props.dispatch({ type: `UPDATE-NEW-POST-TEXT`, text: text, });
 
 		},
 		delPostValue = () => {
-			props.store.delPostValue();
+			props.dispatch({ type: `DEL-POST-VALUE`, });
 		};
 
 	return (
