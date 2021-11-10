@@ -1,27 +1,39 @@
+// action type
+
+const ADD_MESSAGE = `ADD-MESSAGE`,
+	UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`,
+	DEL_MESSAGE_VALUE = `DEL-MESSAGE-VALUE`;
+
+
+// reducer
 const dialogsReducer = (state, action) => {
-	const _addPosts = () => {
-		const newPost = {
-			id: this.state.profilePage.posts.length + 1,
-			message: this.state.profilePage.newTextPost,
-			like: 0,
-		};
-		if (this.state.profilePage.newTextPost !== `Enter your post`) {
-			this.state.profilePage.posts.push(newPost);
-			this.state.profilePage.newTextPost = `Enter your post`;
-			this.subscribe(this.state);
-		}
-	},
 
-		_updateNewPostText(text) {
-			this.state.profilePage.newTextPost = text;
-			this.subscribe(this.state);
-		},
+	switch (action.type) {
+		case ADD_MESSAGE:
+			const newMessage = {
+				id: state.messeges.length + 1,
+				message: state.newTextMessage,
+				author: `me`,
+			};
+			if (state.newTextMessage !== `Enter your message`) {
+				state.messeges.push(newMessage);
+				state.newTextMessage = `Enter your message`;
+			}
+			return state;
+		case UPDATE_NEW_MESSAGE_TEXT:
+			state.newTextMessage = action.text;
+			return state;
+		case DEL_MESSAGE_VALUE:
+			state.newTextMessage = ``;
+			return state;
+		default:
+			return state;
+	}
 
-			_delPostValue() {
-		this.state.profilePage.newTextPost = ``;
-		this.subscribe(this.state);
-	},
-
-
-
-}
+};
+//ActionCreation
+export const addMessageActionCreation = () => ({ type: ADD_MESSAGE, });
+export const updateNewMessageTextActionCreation = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, text: text, });
+export const delMessageValueActionCreation = () => ({ type: DEL_MESSAGE_VALUE, });
+//-------------------------------------
+export default dialogsReducer;

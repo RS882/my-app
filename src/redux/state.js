@@ -1,13 +1,7 @@
+import dialogsReducer from "./dialogsReducer";
+import profileReducer from "./profileReducer";
+import sidebarReducer from "./sidebarReducer";
 
-// action type
-const ADD_MESSAGE = `ADD-MESSAGE`,
-	UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`,
-	DEL_MESSAGE_VALUE = `DEL-MESSAGE-VALUE`,
-	ADD_POSTS = `ADD-POSTS`,
-	UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`,
-	DEL_POST_VALUE = `DEL-POST-VALUE`;
-
-//------------------------------------
 const store = {
 	_state: {
 		dialogsPage: {
@@ -44,52 +38,6 @@ const store = {
 
 	},
 
-	_addPosts() {
-		const newPost = {
-			id: this.state.profilePage.posts.length + 1,
-			message: this.state.profilePage.newTextPost,
-			like: 0,
-		};
-		if (this.state.profilePage.newTextPost !== `Enter your post`) {
-			this.state.profilePage.posts.push(newPost);
-			this.state.profilePage.newTextPost = `Enter your post`;
-			this.subscribe(this.state);
-		}
-	},
-
-	_updateNewPostText(text) {
-		this.state.profilePage.newTextPost = text;
-		this.subscribe(this.state);
-	},
-
-	_delPostValue() {
-		this.state.profilePage.newTextPost = ``;
-		this.subscribe(this.state);
-	},
-
-	_addMessage() {
-		const newMessage = {
-			id: this.state.dialogsPage.messeges.length + 1,
-			message: this.state.dialogsPage.newTextMessage,
-			author: `me`,
-		};
-		if (this.state.dialogsPage.newTextMessage !== `Enter your message`) {
-			this.state.dialogsPage.messeges.push(newMessage);
-			this.state.dialogsPage.newTextMessage = `Enter your message`;
-			this.subscribe(this.state);
-		}
-	},
-
-	_updateNewMessageChange(text) {
-		this.state.dialogsPage.newTextMessage = text;
-		this.subscribe(this.state);
-	},
-
-	_delMessageValue() {
-		this.state.dialogsPage.newTextMessage = ``;
-		this.subscribe(this.state);
-	},
-
 	_callSubscriber(store) { },
 
 	get state() {
@@ -104,22 +52,11 @@ const store = {
 	},
 
 	dispatch(action) { // action {type: ``,  }
-		if (action.type === ADD_POSTS) this._addPosts();
-		if (action.type === UPDATE_NEW_POST_TEXT) this._updateNewPostText(action.text);
-		if (action.type === DEL_POST_VALUE) this._delPostValue();
-		if (action.type === ADD_MESSAGE) this._addMessage();
-		if (action.type === UPDATE_NEW_MESSAGE_TEXT) this._updateNewMessageChange(action.text);
-		if (action.type === DEL_MESSAGE_VALUE) this._delMessageValue();
-
+		dialogsReducer(this.state.dialogsPage, action);
+		profileReducer(this.state.profilePage, action);
+		sidebarReducer(this.state.sidebar, action);
+		this.subscribe(this.state);
 	}
-
 }
-//action Creation
-export const addMessageActionCreation = () => ({ type: ADD_MESSAGE, });
-export const updateNewMessageTextActionCreation = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, text: text, });
-export const delMessageValueActionCreation = () => ({ type: DEL_MESSAGE_VALUE, });
-export const addPostsActionCreation = () => ({ type: ADD_POSTS, });
-export const updateNewPostTextActionCreation = (text) => ({ type: UPDATE_NEW_POST_TEXT, text: text, });
-export const delPostValueActionCreation = () => ({ type: DEL_POST_VALUE, });
 
 export default store;
