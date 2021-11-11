@@ -1,6 +1,6 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -21,8 +21,11 @@ const rerenderEntireTee = (state) => {
 	);
 }
 
-rerenderEntireTee(store.state);
-store.subscribe = rerenderEntireTee;
+rerenderEntireTee(store.getState());
+store.subscribe(() => {
+	const state = store.getState();
+	rerenderEntireTee(state)
+});
 
 
 

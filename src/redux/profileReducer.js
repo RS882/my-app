@@ -2,8 +2,21 @@
 const ADD_POSTS = `ADD-POSTS`,
 	UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`,
 	DEL_POST_VALUE = `DEL-POST-VALUE`;
+
+
+
 // reducer
-const profileReducer = (state, action) => {
+const initialState = {
+	posts: [
+		{ id: 1, message: `Hi, how are you?`, like: '10', },
+		{ id: 2, message: `It's my first post`, like: '20', },
+	],
+	newTextPost: `Enter your post`,
+}
+
+
+
+const profileReducer = (state = initialState, action) => {
 
 	switch (action.type) {
 		case ADD_POSTS:

@@ -4,7 +4,6 @@ import s from './Navbar.module.css';
 
 const Navbar = (props) => {
 
-
 	return (
 		<nav className={s.nav}>
 			<ul className={s.items}>
