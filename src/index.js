@@ -14,6 +14,7 @@ const rerenderEntireTee = (state) => {
 			<BrowserRouter>
 				<App state={state}
 					dispatch={store.dispatch.bind(store)}// биндим сторе тк терям контекст вызова при передаче метода
+					store={store}
 				/>
 			</BrowserRouter >
 		</React.StrictMode>,
@@ -22,6 +23,7 @@ const rerenderEntireTee = (state) => {
 }
 
 rerenderEntireTee(store.getState());
+
 store.subscribe(() => {
 	const state = store.getState();
 	rerenderEntireTee(state)

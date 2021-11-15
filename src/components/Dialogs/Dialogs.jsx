@@ -1,28 +1,19 @@
-
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
 import React from 'react';
-import { addMessageActionCreation, updateNewMessageTextActionCreation, delMessageValueActionCreation } from '../../redux/dialogsReducer';
-
-
 
 const Dialogs = (props) => {
 
-	const dialogElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />),
-		messageElements = props.state.messeges.map(m => <Message message={m.message} author={m.author} />),
+	const dialogElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />),
+		messageElements = props.messeges.map(m => <Message message={m.message} author={m.author} />),
 		//newMessageElement = React.createRef(), - не рекомендцутся использовать
-		addMessage = () => {
-			props.dispatch(addMessageActionCreation());
-		},
+		addMessage = () => props.onMessage(),
 		onMessageChange = (e) => {
-			const text = e.target.value
-			//const text = newMessageElement.current.value;
-			props.dispatch(updateNewMessageTextActionCreation(text));
+			const text = e.target.value;
+			props.onMessageChange(text)
 		},
-		delMessageValue = () => {
-			props.dispatch(delMessageValueActionCreation());
-		};
+		delMessageValue = () => props.onDelMessageValue();
 
 	return (
 		<div className={s.dialogs}>
@@ -37,7 +28,7 @@ const Dialogs = (props) => {
 						onFocus={delMessageValue}
 						//ref={newMessageElement}
 						className={s.postsarea}
-						value={props.state.newTextMessage}
+						value={props.newTextMessage}
 					/>
 
 					<button
