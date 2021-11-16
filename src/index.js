@@ -10,27 +10,27 @@ import { BrowserRouter } from "react-router-dom";
 
 
 
-const rerenderEntireTee = () => {
 
-	ReactDOM.render(
-		<React.StrictMode>
-			<BrowserRouter>
 
-				<Provider store={store}>
-					<App />
-				</Provider >
+ReactDOM.render(
+	<React.StrictMode>
+		<BrowserRouter>
 
-			</BrowserRouter >
-		</React.StrictMode>,
-		document.getElementById('root')
-	);
-}
+			<Provider store={store}>
+				<App />
+			</Provider >
 
-rerenderEntireTee();
+		</BrowserRouter >
+	</React.StrictMode>,
+	document.getElementById('root')
+);
 
-store.subscribe(() => {
-	rerenderEntireTee()
-});
+
+// rerenderEntireTee();
+
+// store.subscribe(() => {
+// 	rerenderEntireTee()
+// });
 
 
 
