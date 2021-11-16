@@ -11,22 +11,22 @@ import Settings from './components/Settings/Settings';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 
 
-const App = (props) => {
+const App = () => {
 
   return (
 
     <div className='app-wrapper'>
       <Header />
-      <Navbar state={props.state.sidebar} />
+      <Navbar />
 
       <div className='app-wrapper__content'>
 
 
         <Route path='/dialogs'
-          render={() => < DialogsContainer store={props.store} />} />
+          render={() => < DialogsContainer />} />
 
         <Route path='/profile'
-          render={() => <Profile store={props.store} />} />
+          render={() => <Profile />} />
 
         <Route path='/news' render={() => <News />} />
         <Route path='/music' render={() => <Music />} />

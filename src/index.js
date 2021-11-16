@@ -5,28 +5,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from './storeContext/storeContext';
 
-const rerenderEntireTee = (state) => {
+
+const rerenderEntireTee = () => {
 
 	ReactDOM.render(
 		<React.StrictMode>
 			<BrowserRouter>
-				<App state={state}
-					dispatch={store.dispatch.bind(store)}// биндим сторе тк терям контекст вызова при передаче метода
-					store={store}
-				/>
+
+				<Provider store={store}>
+					<App />
+				</Provider >
+
 			</BrowserRouter >
 		</React.StrictMode>,
 		document.getElementById('root')
 	);
 }
 
-rerenderEntireTee(store.getState());
+rerenderEntireTee();
 
 store.subscribe(() => {
-	const state = store.getState();
-	rerenderEntireTee(state)
+	rerenderEntireTee()
 });
 
 

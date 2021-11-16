@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import Friends from './Friends/Friends';
 import s from './Navbar.module.css';
+import React from 'react';
+import FriendsContainer from './Friends/FriendsContainer';
 
-const Navbar = (props) => {
+const Navbar = () => {
 
 	return (
 		<nav className={s.nav}>
@@ -24,7 +25,7 @@ const Navbar = (props) => {
 				</li>
 			</ul>
 
-			<Friends friends={props.state.friends} />
+			<FriendsContainer />
 		</nav>
 	)
 }
