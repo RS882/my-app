@@ -5,8 +5,8 @@ import React from 'react';
 
 const Dialogs = (props) => {
 
-	const dialogElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} />),
-		messageElements = props.messeges.map(m => <Message message={m.message} author={m.author} />),
+	const dialogElements = props.dialogs.map(d => <DialogItem name={d.name} id={d.id} avatar={d.avatar} key={d.id} />),
+		messageElements = props.messeges.map(m => <Message message={m.message} author={m.author} key={m.id} />),
 		//newMessageElement = React.createRef(), - не рекомендцутся использовать
 		addMessage = () => props.onMessage(),
 		onMessageChange = (e) => {

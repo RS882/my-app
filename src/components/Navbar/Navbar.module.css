@@ -1,13 +1,21 @@
+:root {
+	--firstcolor: #ff784f;
+	--secondcolor: #edffd9;
+	--theecolor: #db9d47;
+	--fourcolor: #ffe19c;
+	--gap: 20px;
+}
+
 .nav {
 	grid-area: n;
-	background-color: #db9d47;
+	background-color: var(--theecolor);
 }
 
 .items {
 }
 .item {
-	margin: 20px;
-	color: #edffd9;
+	margin: var(--gap);
+	color: var(--secondcolor);
 	transition: all 0.3s ease 0s;
 }
 .item a {
@@ -15,5 +23,9 @@
 	text-transform: uppercase;
 }
 .item .activeLink {
-	color: #ffe19c;
+	color: var(--fourcolor);
+}
+.users {
+	font-size: 1.2em;
+	padding: 30px 0;
 }

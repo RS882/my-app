@@ -25,36 +25,37 @@ const initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
 
+
 	switch (action.type) {
+
 		case ADD_MESSAGE:
-			{
-				const newMessage = {
-					id: state.messeges.length + 1,
-					message: state.newTextMessage,
-					author: `me`,
-				};
-				const stateCopy = { ...state };
-				stateCopy.messeges = [...state.messeges];
-
-				if (state.newTextMessage !== `Enter your message`) {
-					stateCopy.messeges.push(newMessage);
-					stateCopy.newTextMessage = `Enter your message`;
+			return (state.newTextMessage !== `Enter your message`) ?
+				{
+					...state,
+					messeges: [
+						...state.messeges,
+						{
+							id: state.messeges.length + 1,
+							message: state.newTextMessage,
+							author: `me`,
+						}
+					],
+					newTextMessage: `Enter your message`,
 				}
-				return stateCopy;
-			}
-		case UPDATE_NEW_MESSAGE_TEXT:
-			{
-				const stateCopy = { ...state };
+				: { ...state };
 
-				stateCopy.newTextMessage = action.text;
-				return stateCopy;
-			}
+		case UPDATE_NEW_MESSAGE_TEXT:
+			return {
+				...state,
+				newTextMessage: action.text,
+			};
+
 		case DEL_MESSAGE_VALUE:
-			{
-				const stateCopy = { ...state };
-				stateCopy.newTextMessage = ``;
-				return stateCopy;
-			}
+			return {
+				...state,
+				newTextMessage: ``,
+			};
+
 		default:
 			return state;
 	}

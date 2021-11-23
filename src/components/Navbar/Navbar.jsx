@@ -20,9 +20,13 @@ const Navbar = () => {
 				<li className={s.item}>
 					<NavLink to='/music' activeClassName={s.activeLink}>music</NavLink>
 				</li>
+				<li className={`${s.item} ${s.users}`} >
+					<NavLink to='/users' activeClassName={s.activeLink}>Find Users</NavLink>
+				</li>
 				<li className={s.item}>
 					<NavLink to='/settings' activeClassName={s.activeLink}>settings</NavLink>
 				</li>
+
 			</ul>
 
 			<FriendsContainer />

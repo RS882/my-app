@@ -6,21 +6,11 @@ import React from 'react';
 
 const MyPosts = (props) => {
 
-	const postElements = props.posts.map(p => <Post message={p.message} like={p.like} />),
+	const postElements = props.posts.map(p => <Post message={p.message} like={p.like} key={p.id} />),
 		//newPostElement = React.createRef(), - не рекомендцутся использовать
-		addPost = () => {
-			props.onPost();
-
-		},
-		upPostChange = (e) => {
-			//const text = newPostElement.current.value;
-			const text = e.target.value;
-			props.onPostChange(text);
-
-		},
-		delPostValue = () => {
-			props.onDelPostValue();
-		};
+		addPost = () => props.onPost(),
+		upPostChange = (e) => props.onPostChange(e.target.value),
+		delPostValue = () => props.onDelPostValue();
 
 	return (
 
