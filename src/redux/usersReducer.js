@@ -57,11 +57,11 @@ const usersReducer = (state = initialState, action) => {
 			};
 		case SET_USERS:
 
-			return (state.users.length !== 0) ? state :
-				{
-					...state,
-					users: [...state.users, ...action.users]
-				};
+			// return (state.users.length !== 0) ? state :
+			return {
+				...state,
+				users: [...state.users, ...action.users]
+			};
 
 
 

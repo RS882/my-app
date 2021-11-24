@@ -5,14 +5,16 @@ import avatarUser from './../../assets/img/user3.jpg'
 
 const Users = (props) => {
 
-	if (props.users.length === 0) {
+	const getUsers = () => {
+		if (props.users.length === 0) {
 
 
-		axios.get('https://social-network.samuraijs.com/api/1.0/users')
-			.then(respons => {
+			axios.get('https://social-network.samuraijs.com/api/1.0/users')
+				.then(respons => {
 
-				props.setUsers(respons.data.items);
-			})
+					props.setUsers(respons.data.items);
+				})
+		}
 	}
 	// 	props.setUsers
 	// 		([
@@ -54,7 +56,7 @@ const Users = (props) => {
 
 	return (
 		<div className={s.wrapper}>
-
+			<button className={`${s.btn} ${s.btn_get}`} onClick={() => getUsers()} >Get Users</button>
 			{props.users.map(e => {
 				return (
 					<div key={e.id} className={s.box}>
@@ -72,7 +74,7 @@ const Users = (props) => {
 							}}>
 						</div>
 
-						<button className={s.btn} onClick={() => props.toogleFollow(e.id)}>
+						<button className={`${s.btn} ${s.btn_follow}`} onClick={() => props.toogleFollow(e.id)}>
 							{(e.followed) ? 'unfollow' : 'follow'}
 						</button>
 					</div>
