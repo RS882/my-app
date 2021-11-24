@@ -8,7 +8,7 @@
 
 .wrapper {
 	display: grid;
-	grid-template-columns: 60%;
+	grid-template-columns: 80%;
 
 	gap: var(--gap);
 }
@@ -74,6 +74,10 @@
 	border-radius: 50%;
 	box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
 	margin-bottom: calc(var(--gap) / 2);
+	background-color: var(--secondcolor);
+	background-size: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 .btn {
