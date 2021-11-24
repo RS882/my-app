@@ -1,10 +1,5 @@
-:root {
-	--firstcolor: #ff784f;
-	--secondcolor: #edffd9;
-	--theecolor: #db9d47;
-	--fourcolor: #ffe19c;
-	--gap: 20px;
-}
+
+
 
 .nav {
 	grid-area: n;

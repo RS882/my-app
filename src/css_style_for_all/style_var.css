@@ -1,0 +1,10 @@
+:root {
+	--firstcolor: #ff784f;
+	--secondcolor: #edffd9;
+	--theecolor: #db9d47;
+	--fourcolor: #ffe19c;
+	--gap: 20px;
+	--shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+	--transition: 0.3s ease 0s;
+	--fontSize: 20px;
+}

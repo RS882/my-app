@@ -4,12 +4,12 @@
 }
 
 .message:not(:last-child) {
-	margin-bottom: 10px;
+	margin-bottom: calc(var(--gap) / 2);
 }
 .name {
 	text-transform: capitalize;
-	font-size: 17px;
+	font-size: var(--fontSize);
 	opacity: 0.8;
-	padding-right: 20px;
-	color: #db9d47;
+	padding-right: var(--gap);
+	color: var(--theecolor);
 }

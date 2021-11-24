@@ -2,5 +2,5 @@
 	width: 100%;
 }
 .discr {
-	padding: 10px;
+	padding: calc(var(--gap) / 2);
 }
