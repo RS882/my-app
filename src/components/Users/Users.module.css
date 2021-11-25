@@ -4,6 +4,21 @@
 
 	gap: var(--gap);
 }
+
+.pagination {
+	display: flex;
+}
+.number {
+	cursor: pointer;
+	font-size: var(--fontSize);
+}
+.number:not(:last-child) {
+	margin-right: var(--gap);
+}
+.number._activ {
+	font-size: 1.5em;
+	font-weight: bold;
+}
 .box {
 	padding: 0 var(--gap);
 	display: grid;
@@ -25,7 +40,7 @@
 	border: 2px solid var(--firstcolor);
 	border-radius: calc(var(--gap) / 2);
 	background-color: var(--secondcolor);
-	box-shadow: var(--shadow);
+	box-shadow: var(--shadow), inset 2px 2px 5px rgba(154, 147, 140, 0.5);
 	padding: calc(var(--gap) / 2);
 	display: grid;
 	grid-template-rows: repeat(2, 1fr);
@@ -38,6 +53,10 @@
 	grid-area: name;
 	font-size: 2em;
 	font-weight: bold;
+	color: rgba(0, 0, 0, 0.6);
+
+	text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
+	/* text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1); */
 }
 .status {
 	grid-area: status;
@@ -62,10 +81,10 @@
 .avatar {
 	grid-area: a;
 	justify-self: center;
-	width: 50px;
-	height: 50px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
-	box-shadow: var(--shadow);
+	box-shadow: var(--shadowOut);
 	margin-bottom: calc(var(--gap) / 2);
 	background-color: var(--secondcolor);
 	background-size: 100%;
@@ -76,6 +95,7 @@
 .btn_follow {
 	grid-area: b;
 	justify-self: center;
+	margin-top: 20px;
 }
 .btn_get {
 	margin: 0 auto;
@@ -85,12 +105,14 @@
 	display: block;
 	margin-bottom: calc(var(--gap) / 2);
 	background-color: var(--firstcolor);
+	border: 2px solid var(--secondcolor);
 	border-radius: calc(var(--gap) / 2);
 	width: 100px;
 	height: 30px;
 	text-transform: uppercase;
 	font-weight: bold;
 	color: var(--secondcolor);
+
 	box-shadow: var(--shadow);
 }
 .btn:hover {
