@@ -8,8 +8,9 @@ const TOOGLE_FOLLOW = `TOOGLE_FOLLOW`,
 const initialState = {
 	users: [],
 	pageSize: 5,
-	totalUsersCount: 0,
+	totalUsersCount: 80,
 	currentPage: 1,
+	showPageNumbers: Array.from(Array(11), (e, i) => i + 1),
 }
 
 
@@ -34,12 +35,26 @@ const usersReducer = (state = initialState, action) => {
 			};
 
 		case SET_CURRENT_PAGE:
+			const pagesNubmer = Math.ceil(state.totalUsersCount / state.pageSize);
+
+			let newShowPageNumbers = [];
+
+			if (pagesNubmer < 12) {
+				newShowPageNumbers = Array.from(Array(pagesNubmer), (e, i) => i + 1)
+			} else
+				if (action.currentPage < 6) {
+					newShowPageNumbers = Array.from(Array(11), (e, i) => i + 1);
+				} else {
+					newShowPageNumbers = Array.from(Array(11), (e, i) => i + action.currentPage - 5)
+				}
+
+
 			return {
 				...state,
 				currentPage: action.currentPage,
+				showPageNumbers: newShowPageNumbers,
 			};
 		case SET_TOTAL_USERS_COUNT:
-
 			return {
 				...state,
 				totalUsersCount: action.totalUsersCout,

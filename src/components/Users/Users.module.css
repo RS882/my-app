@@ -4,6 +4,13 @@
 
 	gap: var(--gap);
 }
+.padington_wrapper {
+	display: flex;
+}
+.pagination_btn {
+	font-size: var(--fontSize);
+	margin-right: var(--gap);
+}
 
 .pagination {
 	display: flex;
@@ -11,14 +18,14 @@
 .number {
 	cursor: pointer;
 	font-size: var(--fontSize);
-}
-.number:not(:last-child) {
 	margin-right: var(--gap);
 }
+
 .number._activ {
 	font-size: 1.5em;
 	font-weight: bold;
 }
+
 .box {
 	padding: 0 var(--gap);
 	display: grid;
@@ -97,10 +104,7 @@
 	justify-self: center;
 	margin-top: 20px;
 }
-.btn_get {
-	margin: 0 auto;
-	margin-top: var(--gap);
-}
+
 .btn {
 	display: block;
 	margin-bottom: calc(var(--gap) / 2);

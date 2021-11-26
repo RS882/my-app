@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
 		pageSize: state.usersPage.pageSize,
 		totalUsersCount: state.usersPage.totalUsersCount,
 		currentPage: state.usersPage.currentPage,
+		showPageNumbers: state.usersPage.showPageNumbers,
 	}
 };
 
