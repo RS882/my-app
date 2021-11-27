@@ -5,6 +5,8 @@ import avatarUser from './../../assets/img/user3.jpg'
 
 const Users = (props) => {
 
+	const pagesNubmer = Math.ceil(props.totalUsersCount / props.pageSize);
+
 	const elemPagination = props.showPageNumbers.map(pageNumber => {
 		return (
 			<li onClick={() => props.onPageChanged(pageNumber)}
@@ -12,20 +14,41 @@ const Users = (props) => {
 				key={pageNumber}>	{pageNumber}</li>
 		)
 	})
+	const onClickBtnNext = (step) => {
+		props.onPageChanged(props.currentPage + step);
+		props.changePadingtonNext(step)
+	}
 
+	const onClickBtnPrev = (step) => {
+		props.onPageChanged(props.currentPage - step);
+		props.changePadingtonPrev(step)
+	}
+
+	const goStartPage = () => {
+		props.onPageChanged(1);
+		props.goStartPage();
+	}
+
+	const goEndPage = () => {
+		props.onPageChanged(pagesNubmer);
+		props.goEndPage();
+	}
 
 	return (
 		<div>
 			<div className={s.padington_wrapper}>
-				<button className={s.pagination_btn}> {'<start'} </button>
-				<button className={s.pagination_btn}> {'<<10'} </button>
-				<button className={s.pagination_btn}> {'<'} </button>
+				<button onClick={goStartPage} className={s.pagination_btn}> {'<start'} </button>
+				<button onClick={() => onClickBtnPrev(100)} className={s.pagination_btn}> {'<<<100'} </button>
+				<button onClick={() => onClickBtnPrev(10)} className={s.pagination_btn}> {'<<10'} </button>
+				<button onClick={() => onClickBtnPrev(1)} className={s.pagination_btn}> {'<'} </button>
 				<ul className={s.pagination}>
 					{elemPagination}
 				</ul>
-				<button className={s.pagination_btn}> {'>'} </button>
-				<button className={s.pagination_btn}> {'10>>'} </button>
-				<button className={s.pagination_btn}> {'end>'} </button>
+				<button onClick={() => onClickBtnNext(1)} className={s.pagination_btn}> {'>'} </button>
+				<button onClick={() => onClickBtnNext(10)} className={s.pagination_btn}> {'10>>'} </button>
+				<button onClick={() => onClickBtnNext(100)} className={s.pagination_btn}> {'100>>>'} </button>
+				<button onClick={goEndPage} className={s.pagination_btn}> {'end>'} </button>
+				<div> {`Total pages - ${pagesNubmer}`}</div>
 			</div>
 
 			<div className={s.wrapper} >

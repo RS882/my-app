@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { setTotalUsersCoutAC, setUsersAC, toogleFollowAC } from '../../redux/usersReducer';
+import { changePadingtonNextAC, changePadingtonPrevAC, goEndPageAC, goStartPageAC, setTotalUsersCoutAC, setUsersAC, toogleFollowAC } from '../../redux/usersReducer';
 import Users from './Users';
 import { setCurrentPageAC } from './../../redux/usersReducer';
 import * as axios from 'axios';
@@ -18,7 +18,7 @@ class UserContainer extends React.Component {
 		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
 			.then(respons => {
 				this.props.setUsers(respons.data.items);
-				// this.props.setTotalUsersCout(respons.data.totalCount)
+				this.props.setTotalUsersCout(respons.data.totalCount)
 			})
 	}
 
@@ -33,10 +33,17 @@ class UserContainer extends React.Component {
 	render() {
 
 		return (
-			<Users showPageNumbers={this.props.showPageNumbers}
+			<Users
 				currentPage={this.props.currentPage}
+				totalUsersCount={this.props.totalUsersCount}
+				pageSize={this.props.pageSize}
+				showPageNumbers={this.props.showPageNumbers}
 				users={this.props.users}
 				onPageChanged={this.onPageChanged}
+				changePadingtonNext={this.props.changePadingtonNext}
+				changePadingtonPrev={this.props.changePadingtonPrev}
+				goStartPage={this.props.goStartPage}
+				goEndPage={this.props.goEndPage}
 				toogleFollow={this.props.toogleFollow}
 			/>
 		);
@@ -61,6 +68,10 @@ const mapDispatchToProps = (dispatch) => {
 		setUsers: (users) => dispatch(setUsersAC(users)),
 		setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
 		setTotalUsersCout: (totalUsersCout) => dispatch(setTotalUsersCoutAC(totalUsersCout)),
+		changePadingtonNext: (countPages) => dispatch(changePadingtonNextAC(countPages)),
+		changePadingtonPrev: (countPages) => dispatch(changePadingtonPrevAC(countPages)),
+		goStartPage: () => dispatch(goStartPageAC()),
+		goEndPage: () => dispatch(goEndPageAC()),
 	}
 }
 
