@@ -5,6 +5,7 @@ import { changePadingtonNextAC, changePadingtonPrevAC, goEndPageAC, goStartPageA
 import Users from './Users';
 import { setCurrentPageAC } from './../../redux/usersReducer';
 import * as axios from 'axios';
+import Padington from './padington/padington';
 
 
 
@@ -29,22 +30,48 @@ class UserContainer extends React.Component {
 				this.props.setUsers(respons.data.items);
 			})
 	}
+
+	onClickBtnNext = (step) => {
+		this.onPageChanged(this.props.currentPage + step);
+		this.props.changePadingtonNext(step)
+	}
+
+	onClickBtnPrev = (step) => {
+		this.onPageChanged(this.props.currentPage - step);
+		this.props.changePadingtonPrev(step)
+	}
+
+	goStartPage = () => {
+		this.onPageChanged(1);
+		this.props.goStartPage();
+	}
+
+	goEndPage = () => {
+		this.onPageChanged(Math.ceil(this.props.totalUsersCount / this.props.pageSize));
+		this.props.goEndPage();
+	}
+
+
 	render() {
 
 		return (
-			<Users
-				currentPage={this.props.currentPage}
-				totalUsersCount={this.props.totalUsersCount}
-				pageSize={this.props.pageSize}
-				showPageNumbers={this.props.showPageNumbers}
-				users={this.props.users}
-				onPageChanged={this.onPageChanged}
-				changePadingtonNext={this.props.changePadingtonNext}
-				changePadingtonPrev={this.props.changePadingtonPrev}
-				goStartPage={this.props.goStartPage}
-				goEndPage={this.props.goEndPage}
-				toogleFollow={this.props.toogleFollow}
-			/>
+			<div>
+				<Padington
+					currentPage={this.props.currentPage}
+					totalUsersCount={this.props.totalUsersCount}
+					pageSize={this.props.pageSize}
+					showPageNumbers={this.props.showPageNumbers}
+					onPageChanged={this.onPageChanged}
+					onClickBtnNext={this.onClickBtnNext}
+					onClickBtnPrev={this.onClickBtnPrev}
+					goStartPage={this.goStartPage}
+					goEndPage={this.goEndPage}
+				/>
+				<Users
+					users={this.props.users}
+					toogleFollow={this.props.toogleFollow}
+				/>
+			</div>
 		);
 
 	}

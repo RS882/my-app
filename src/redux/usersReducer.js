@@ -18,7 +18,6 @@ const initialState = {
 }
 
 
-
 const usersReducer = (state = initialState, action) => {
 
 	switch (action.type) {
@@ -31,21 +30,15 @@ const usersReducer = (state = initialState, action) => {
 
 			};
 		case SET_USERS:
-
-			// return (state.users.length !== 0) ? state :
 			return {
 				...state,
 				users: action.users,
 			};
-
 		case SET_CURRENT_PAGE:
 			return {
 				...state,
 				currentPage: action.currentPage,
-
 			};
-
-
 		case SET_TOTAL_USERS_COUNT:
 			const pagesNubmerStart = Math.ceil(action.totalUsersCount / action.pageSize);
 			return {
@@ -54,7 +47,6 @@ const usersReducer = (state = initialState, action) => {
 				showPageNumbers: (pagesNubmerStart < 11) ? (Array.from(Array(pagesNubmerStart), (e, i) => i + 1))
 					: (Array.from(Array(10), (e, i) => i + 1)),
 			};
-
 		case CHANGE_PADINGTON_NEXT:
 			return {
 				...state,
@@ -71,24 +63,16 @@ const usersReducer = (state = initialState, action) => {
 						state.showPageNumbers.map(p => p - action.countSteps)
 						: state.showPageNumbers,
 			};
-
 		case GO_START_PAGE:
-
 			return {
 				...state,
 				showPageNumbers: Array.from(Array(10), (e, i) => i + 1)
 			};
-
 		case GO_END_PAGE:
-
-
 			const pagesNubmerEnd = Math.ceil(state.totalUsersCount / state.pageSize);
-
-			const newShowPN = Array.from(Array(10), (e, i) => pagesNubmerEnd - i).reverse()
-
 			return {
 				...state,
-				showPageNumbers: newShowPN,
+				showPageNumbers: Array.from(Array(10), (e, i) => pagesNubmerEnd - i).reverse(),
 			};
 		default:
 			return state;
