@@ -73,19 +73,23 @@ const usersReducer = (state = initialState, action) => {
 			};
 
 		case GO_START_PAGE:
-			return state;
-		// return {
-		// 	...state,
-		// 	showPageNumbers: Array.from(Array(10), (e, i) => i + 1)
-		// };
+
+			return {
+				...state,
+				showPageNumbers: Array.from(Array(10), (e, i) => i + 1)
+			};
 
 		case GO_END_PAGE:
-			return state;
-		// const pagesNubmerEnd = Math.ceil(action.totalUsersCount / action.pageSize);
-		// return {
-		// 	...state,
-		// 	showPageNumbers: Array.from(Array(10), (e, i) => pagesNubmerEnd - 1).reverse()
-		// };
+
+
+			const pagesNubmerEnd = Math.ceil(state.totalUsersCount / state.pageSize);
+
+			const newShowPN = Array.from(Array(10), (e, i) => pagesNubmerEnd - i).reverse()
+
+			return {
+				...state,
+				showPageNumbers: newShowPN,
+			};
 		default:
 			return state;
 	}
