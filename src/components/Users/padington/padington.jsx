@@ -15,60 +15,63 @@ const Padington = (props) => {
 			key={pageNumber}>	{pageNumber}</li>
 	));
 
-	const styleHidden = condition => ({ display: condition && 'none' })
+	const styleHidden = condition => ({ visibility: condition && 'hidden' })
 
 	return (
 
-		<div className={s.padington_wrapper}>
-			<button
-				style={styleHidden(firstArrayElemPages === 1)}
-				onClick={props.goStartPage}
-				className={s.pagination_btn}>
-				{'<start'} </button>
-			<button
-				style={styleHidden(firstArrayElemPages < 101)}
-				onClick={() => props.onClickBtnPrev(100)}
-				className={s.pagination_btn}>
-				{'<<<100'} </button>
-			<button
-				style={styleHidden(firstArrayElemPages < 11)}
-				onClick={() => props.onClickBtnPrev(10)}
-				className={s.pagination_btn}>
-				{'<<10'} </button>
-			<button
-				style={styleHidden(firstArrayElemPages === 1)}
-				onClick={() => props.onClickBtnPrev(1)}
-				className={s.pagination_btn}>
-				{'<'} </button>
+		<div className={s.wrapper}>
 
 			<ul className={s.pagination}>
 				{elemPagination}
 			</ul>
+			<div className={s.btns}>
+				<button
+					style={styleHidden(firstArrayElemPages === 1)}
+					onClick={props.goStartPage}
+					className={s.btn}>
+					{'<start'} </button>
+				<button
+					style={styleHidden(firstArrayElemPages < 101)}
+					onClick={() => props.onClickBtnPrev(100)}
+					className={s.btn}>
+					{'<<<100'} </button>
+				<button
+					style={styleHidden(firstArrayElemPages < 11)}
+					onClick={() => props.onClickBtnPrev(10)}
+					className={s.btn}>
+					{'<<10'} </button>
+				<button
+					style={styleHidden(firstArrayElemPages === 1)}
+					onClick={() => props.onClickBtnPrev(1)}
+					className={s.btn}>
+					{'<'} </button>
 
-			<button
-				style={styleHidden(lastArrayElemPages === pagesNubmer)}
-				onClick={() => props.onClickBtnNext(1)}
-				className={s.pagination_btn}>
-				{'>'} </button>
-			<button
-				style={styleHidden(lastArrayElemPages > pagesNubmer - 10)}
-				onClick={() => props.onClickBtnNext(10)}
-				className={s.pagination_btn}>
-				{'10>>'} </button>
-			<button
-				style={styleHidden(lastArrayElemPages > pagesNubmer - 100)}
+				<div className={s.total_count}> {`Total pages - ${pagesNubmer}`}</div>
 
-				onClick={() => props.onClickBtnNext(100)}
-				className={s.pagination_btn}>
-				{'100>>>'} </button>
-			<button
-				style={styleHidden(lastArrayElemPages === pagesNubmer)}
-				onClick={props.goEndPage}
-				className={s.pagination_btn}>
-				{'end>'} </button>
-			<div> {`Total pages - ${pagesNubmer}`}</div>
+				<button
+					style={styleHidden(lastArrayElemPages === pagesNubmer)}
+					onClick={() => props.onClickBtnNext(1)}
+					className={s.btn}>
+					{'>'} </button>
+				<button
+					style={styleHidden(lastArrayElemPages > pagesNubmer - 10)}
+					onClick={() => props.onClickBtnNext(10)}
+					className={s.btn}>
+					{'10>>'} </button>
+				<button
+					style={styleHidden(lastArrayElemPages > pagesNubmer - 100)}
+
+					onClick={() => props.onClickBtnNext(100)}
+					className={s.btn}>
+					{'100>>>'} </button>
+				<button
+					style={styleHidden(lastArrayElemPages === pagesNubmer)}
+					onClick={props.goEndPage}
+					className={s.btn}>
+					{'end>'} </button>
+
+			</div>
 		</div>
-
 
 	);
 

@@ -1,21 +1,57 @@
-.padington_wrapper {
+.wrapper {
 	display: flex;
-}
-.pagination_btn {
-	font-size: var(--fontSize);
-	margin-right: var(--gap);
+	flex-direction: column;
+	border: 1px solid #000;
 }
 
 .pagination {
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: calc(var(--gap) / 2) 0;
+	border: 1px solid rgb(172, 37, 37);
+}
+
+.btns {
+	display: flex;
+	border: 1px solid rgb(75, 23, 196);
+	justify-content: center;
+	align-items: center;
+}
+
+.btn {
+	font-size: var(--fontSize);
+
+	border: 1px solid rgb(129, 11, 94);
+}
+.btn:not(:last-child) {
+	margin-right: var(--gap);
+}
+.total_count {
+	margin-right: var(--gap);
 }
 .number {
 	cursor: pointer;
-	font-size: var(--fontSize);
+	font-size: 14px;
 	margin-right: var(--gap);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--secondcolor);
+	box-shadow: var(--shadow);
+	border: 2px solid var(--secondcolor);
+	color: #bed1a8;
+	font-weight: bold;
+	text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
+	transition: all var(--transition);
 }
 
 .number._activ {
-	font-size: 1.5em;
+	/* font-size: 1.5em; */
+	color: var(--firstcolor);
 	font-weight: bold;
+	border: 2px solid var(--firstcolor);
 }
