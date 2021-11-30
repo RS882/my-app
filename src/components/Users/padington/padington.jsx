@@ -15,7 +15,73 @@ const Padington = (props) => {
 			key={pageNumber}>	{pageNumber}</li>
 	));
 
-	const styleHidden = condition => ({ visibility: condition && 'hidden' })
+	const btnAtrribute = [
+		{
+			disabled: (firstArrayElemPages === 1) || false,
+			hidden: pagesNubmer < 11 || false,
+			onClick: props.goStartPage,
+			className: s.btn,
+			text: '<start',
+		},
+		{
+			disabled: (firstArrayElemPages < 101) || false,
+			hidden: pagesNubmer < 101 || false,
+			onClick: () => props.onClickBtnPrev(100),
+			className: s.btn,
+			text: '<<<100',
+		},
+		{
+			disabled: (firstArrayElemPages < 11) || false,
+			hidden: pagesNubmer < 21 || false,
+			onClick: () => props.onClickBtnPrev(10),
+			className: s.btn,
+			text: '<<10',
+		},
+		{
+			disabled: (firstArrayElemPages === 1) || false,
+			hidden: pagesNubmer < 11 || false,
+			onClick: () => props.onClickBtnPrev(1),
+			className: s.btn,
+			text: '<',
+		},
+		{
+			disabled: (lastArrayElemPages === pagesNubmer) || false,
+			hidden: pagesNubmer < 11 || false,
+			onClick: () => props.onClickBtnNext(1),
+			className: s.btn,
+			text: '>',
+		},
+		{
+			disabled: (lastArrayElemPages > pagesNubmer - 10) || false,
+			hidden: pagesNubmer < 21 || false,
+			onClick: () => props.onClickBtnNext(10),
+			className: s.btn,
+			text: '10>>',
+		},
+		{
+			disabled: (lastArrayElemPages > pagesNubmer - 100) || false,
+			hidden: pagesNubmer < 101 || false,
+			onClick: () => props.onClickBtnNext(100),
+			className: s.btn,
+			text: '100>>>',
+		},
+		{
+			disabled: (lastArrayElemPages === pagesNubmer) || false,
+			hidden: pagesNubmer < 11 || false,
+			onClick: props.goEndPage,
+			className: s.btn,
+			text: 'end>',
+		},
+
+	];
+	const btnsElem = btnAtrribute.map((b, i) => {
+		return (
+			<li className={s.btn_box} key={i}>
+				<button {...b}>{b.text}</button>
+				<div hidden={(i !== 3) || false} className={s.total_count}> {`Total pages - ${pagesNubmer}`}</div>
+			</li>
+		)
+	})
 
 	return (
 
@@ -24,53 +90,10 @@ const Padington = (props) => {
 			<ul className={s.pagination}>
 				{elemPagination}
 			</ul>
-			<div className={s.btns}>
-				<button
-					style={styleHidden(firstArrayElemPages === 1)}
-					onClick={props.goStartPage}
-					className={s.btn}>
-					{'<start'} </button>
-				<button
-					style={styleHidden(firstArrayElemPages < 101)}
-					onClick={() => props.onClickBtnPrev(100)}
-					className={s.btn}>
-					{'<<<100'} </button>
-				<button
-					style={styleHidden(firstArrayElemPages < 11)}
-					onClick={() => props.onClickBtnPrev(10)}
-					className={s.btn}>
-					{'<<10'} </button>
-				<button
-					style={styleHidden(firstArrayElemPages === 1)}
-					onClick={() => props.onClickBtnPrev(1)}
-					className={s.btn}>
-					{'<'} </button>
 
-				<div className={s.total_count}> {`Total pages - ${pagesNubmer}`}</div>
-
-				<button
-					style={styleHidden(lastArrayElemPages === pagesNubmer)}
-					onClick={() => props.onClickBtnNext(1)}
-					className={s.btn}>
-					{'>'} </button>
-				<button
-					style={styleHidden(lastArrayElemPages > pagesNubmer - 10)}
-					onClick={() => props.onClickBtnNext(10)}
-					className={s.btn}>
-					{'10>>'} </button>
-				<button
-					style={styleHidden(lastArrayElemPages > pagesNubmer - 100)}
-
-					onClick={() => props.onClickBtnNext(100)}
-					className={s.btn}>
-					{'100>>>'} </button>
-				<button
-					style={styleHidden(lastArrayElemPages === pagesNubmer)}
-					onClick={props.goEndPage}
-					className={s.btn}>
-					{'end>'} </button>
-
-			</div>
+			<ul className={s.btns}>
+				{btnsElem}
+			</ul>
 		</div>
 
 	);

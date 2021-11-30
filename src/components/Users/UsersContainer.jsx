@@ -20,6 +20,7 @@ class UserContainer extends React.Component {
 			.then(respons => {
 				this.props.setUsers(respons.data.items);
 				this.props.setTotalUsersCout(respons.data.totalCount)
+				// this.props.setTotalUsersCout(120)
 			})
 	}
 

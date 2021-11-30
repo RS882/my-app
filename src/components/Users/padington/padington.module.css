@@ -18,17 +18,23 @@
 	justify-content: center;
 	align-items: center;
 }
-
+.btn_box {
+	display: flex;
+}
 .btn {
 	font-size: var(--fontSize);
-
 	border: 1px solid rgb(129, 11, 94);
 }
 .btn:not(:last-child) {
 	margin-right: var(--gap);
 }
+.btn[disabled] {
+	color: tomato;
+}
+
 .total_count {
 	margin-right: var(--gap);
+	align-self: center;
 }
 .number {
 	cursor: pointer;
