@@ -1,11 +1,12 @@
 import React from 'react';
 import s from './Header.module.css';
+import logo from './../../assets/img/logo.jpg'
 
 const Header = () => {
 
 	return (
 		<header className={s.header}>
-			<img src='https://www.mintformations.co.uk/blog/wp-content/uploads/2020/05/shutterstock_583717939.jpg'
+			<img src={logo}
 				alt='logo' />
 		</header>
 	)

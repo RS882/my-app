@@ -7,6 +7,7 @@ const CHANGE_PADINGTON_NEXT = `CHANGE_PADINGTON_NEXT`;
 const CHANGE_PADINGTON_PREV = `CHANGE_PADINGTON_PREV`;
 const GO_START_PAGE = `GO_START_PAGE`;
 const GO_END_PAGE = `GO_END_PAGE`;
+const TOOGLE_IS_FETCHING = `TOOGLE_IS_FETCHING`
 
 // reducer
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
 	totalUsersCount: 0,
 	currentPage: 1,
 	showPageNumbers: [],
+	isFetching: false,
 }
 
 
@@ -74,6 +76,11 @@ const usersReducer = (state = initialState, action) => {
 				...state,
 				showPageNumbers: Array.from(Array(10), (e, i) => pagesNubmerEnd - i).reverse(),
 			};
+		case TOOGLE_IS_FETCHING:
+			return {
+				...state,
+				isFetching: action.isFetching,
+			}
 		default:
 			return state;
 	}
@@ -89,6 +96,7 @@ export const changePadingtonNextAC = (countSteps) => ({ type: CHANGE_PADINGTON_N
 export const changePadingtonPrevAC = (countSteps) => ({ type: CHANGE_PADINGTON_PREV, countSteps, });
 export const goStartPageAC = () => ({ type: GO_START_PAGE, });
 export const goEndPageAC = () => ({ type: GO_END_PAGE, });
+export const toogleIsFetchingAC = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
 
 //-------------------------------------
 export default usersReducer;
