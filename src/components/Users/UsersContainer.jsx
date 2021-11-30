@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { changePadingtonNextAC, changePadingtonPrevAC, goEndPageAC, goStartPageAC, setTotalUsersCoutAC, setUsersAC, toogleFollowAC } from '../../redux/usersReducer';
+import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, setTotalUsersCout, setUsers, toogleFollow } from '../../redux/usersReducer';
 import Users from './Users';
-import { setCurrentPageAC, toogleIsFetchingAC } from './../../redux/usersReducer';
+import { setCurrentPage, toogleIsFetching } from './../../redux/usersReducer';
 import * as axios from 'axios';
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
@@ -64,7 +64,6 @@ class UserContainer extends React.Component {
 		return (
 			<>
 				{this.props.isFetching && <Preloader />}
-
 				<Padington
 					currentPage={this.props.currentPage}
 					totalUsersCount={this.props.totalUsersCount}
@@ -99,20 +98,31 @@ const mapStateToProps = (state) => {
 	}
 };
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		toogleFollow: (usersID) => dispatch(toogleFollowAC(usersID)),
-		setUsers: (users) => dispatch(setUsersAC(users)),
-		setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
-		setTotalUsersCout: (totalUsersCout) => dispatch(setTotalUsersCoutAC(totalUsersCout)),
-		changePadingtonNext: (countPages) => dispatch(changePadingtonNextAC(countPages)),
-		changePadingtonPrev: (countPages) => dispatch(changePadingtonPrevAC(countPages)),
-		goStartPage: () => dispatch(goStartPageAC()),
-		goEndPage: () => dispatch(goEndPageAC()),
-		toogleIsFetching: (isFetching) => dispatch(toogleIsFetchingAC(isFetching)),
-	}
-}
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		toogleFollow: (usersID) => dispatch(toogleFollowAC(usersID)),
+// 		setUsers: (users) => dispatch(setUsersAC(users)),
+// 		setCurrentPage: (currentPage) => dispatch(setCurrentPageAC(currentPage)),
+// 		setTotalUsersCout: (totalUsersCout) => dispatch(setTotalUsersCoutAC(totalUsersCout)),
+// 		changePadingtonNext: (countPages) => dispatch(changePadingtonNextAC(countPages)),
+// 		changePadingtonPrev: (countPages) => dispatch(changePadingtonPrevAC(countPages)),
+// 		goStartPage: () => dispatch(goStartPageAC()),
+// 		goEndPage: () => dispatch(goEndPageAC()),
+// 		toogleIsFetching: (isFetching) => dispatch(toogleIsFetchingAC(isFetching)),
+// 	}
+// }
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UserContainer);
+const UsersContainer = connect(mapStateToProps,
+	{
+		toogleFollow,
+		setUsers,
+		setCurrentPage,
+		setTotalUsersCout,
+		changePadingtonNext,
+		changePadingtonPrev,
+		goStartPage,
+		goEndPage,
+		toogleIsFetching,
+	})(UserContainer);
 
 export default UsersContainer;

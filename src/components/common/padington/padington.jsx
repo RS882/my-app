@@ -78,7 +78,8 @@ const Padington = (props) => {
 		return (
 			<li className={s.btn_box} key={i}>
 				<button {...b}>{b.text}</button>
-				<div hidden={(i !== 3) || false} className={s.total_count}> {`Total pages - ${pagesNubmer}`}</div>
+				{(i === 3) && <div className={s.total_count}> {`Total pages - ${pagesNubmer}`}</div>}
+
 			</li>
 		)
 	})

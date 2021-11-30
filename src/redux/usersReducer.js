@@ -88,15 +88,15 @@ const usersReducer = (state = initialState, action) => {
 }
 //ActionCreation
 
-export const toogleFollowAC = (usersId) => ({ type: TOOGLE_FOLLOW, usersId, });
-export const setUsersAC = (users) => ({ type: SET_USERS, users, });
-export const setCurrentPageAC = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
-export const setTotalUsersCoutAC = (totalUsersCout) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCout, });
-export const changePadingtonNextAC = (countSteps) => ({ type: CHANGE_PADINGTON_NEXT, countSteps, });
-export const changePadingtonPrevAC = (countSteps) => ({ type: CHANGE_PADINGTON_PREV, countSteps, });
-export const goStartPageAC = () => ({ type: GO_START_PAGE, });
-export const goEndPageAC = () => ({ type: GO_END_PAGE, });
-export const toogleIsFetchingAC = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
+export const toogleFollow = (usersId) => ({ type: TOOGLE_FOLLOW, usersId, });
+export const setUsers = (users) => ({ type: SET_USERS, users, });
+export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
+export const setTotalUsersCout = (totalUsersCout) => ({ type: SET_TOTAL_USERS_COUNT, totalUsersCout, });
+export const changePadingtonNext = (countSteps) => ({ type: CHANGE_PADINGTON_NEXT, countSteps, });
+export const changePadingtonPrev = (countSteps) => ({ type: CHANGE_PADINGTON_PREV, countSteps, });
+export const goStartPage = () => ({ type: GO_START_PAGE, });
+export const goEndPage = () => ({ type: GO_END_PAGE, });
+export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
 
 //-------------------------------------
 export default usersReducer;

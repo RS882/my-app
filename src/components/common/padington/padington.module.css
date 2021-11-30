@@ -28,14 +28,13 @@
 	border-radius: 5px;
 	font-weight: bold;
 	transition: all var(--transition);
+	margin-right: var(--gap);
 }
 .btn:hover,
 .btn:focus {
 	border: 2px solid var(--firstcolor);
 }
-.btn:not(:last-child) {
-	margin-right: var(--gap);
-}
+
 .btn[disabled] {
 	cursor: auto;
 	background-color: var(--secondcolor);
