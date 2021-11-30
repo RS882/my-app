@@ -1,7 +1,7 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	border: 1px solid #000;
+	margin-bottom: var(--gap);
 }
 
 .pagination {
@@ -9,12 +9,10 @@
 	justify-content: center;
 	align-items: center;
 	padding: calc(var(--gap) / 2) 0;
-	border: 1px solid rgb(172, 37, 37);
 }
 
 .btns {
 	display: flex;
-	border: 1px solid rgb(75, 23, 196);
 	justify-content: center;
 	align-items: center;
 }
@@ -22,19 +20,38 @@
 	display: flex;
 }
 .btn {
-	font-size: var(--fontSize);
-	border: 1px solid rgb(129, 11, 94);
+	font-size: 12px;
+	background-color: var(--secondcolor);
+	box-shadow: var(--shadow);
+	border: 2px solid var(--secondcolor);
+	color: var(--firstcolor);
+	border-radius: 5px;
+	font-weight: bold;
+	transition: all var(--transition);
+}
+.btn:hover,
+.btn:focus {
+	border: 2px solid var(--firstcolor);
 }
 .btn:not(:last-child) {
 	margin-right: var(--gap);
 }
 .btn[disabled] {
-	color: tomato;
+	cursor: auto;
+	background-color: var(--secondcolor);
+	box-shadow: var(--shadow);
+	border: 2px solid var(--secondcolor);
+	color: #bed1a8;
 }
 
 .total_count {
 	margin-right: var(--gap);
 	align-self: center;
+	background-color: var(--secondcolor);
+	box-shadow: var(--shadow);
+	border: 2px solid var(--secondcolor);
+	color: #bed1a8;
+	border-radius: 5px;
 }
 .number {
 	cursor: pointer;

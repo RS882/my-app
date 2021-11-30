@@ -72,6 +72,17 @@ class UserContainer extends React.Component {
 					users={this.props.users}
 					toogleFollow={this.props.toogleFollow}
 				/>
+				<Padington
+					currentPage={this.props.currentPage}
+					totalUsersCount={this.props.totalUsersCount}
+					pageSize={this.props.pageSize}
+					showPageNumbers={this.props.showPageNumbers}
+					onPageChanged={this.onPageChanged}
+					onClickBtnNext={this.onClickBtnNext}
+					onClickBtnPrev={this.onClickBtnPrev}
+					goStartPage={this.goStartPage}
+					goEndPage={this.goEndPage}
+				/>
 			</div>
 		);
 
