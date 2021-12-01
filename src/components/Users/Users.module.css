@@ -1,7 +1,6 @@
 .wrapper {
 	display: grid;
 	grid-template-columns: 80%;
-
 	gap: var(--gap);
 }
 .padington_wrapper {
@@ -49,6 +48,7 @@
 	background-color: var(--secondcolor);
 	box-shadow: var(--shadow), inset 2px 2px 5px rgba(154, 147, 140, 0.5);
 	padding: calc(var(--gap) / 2);
+	margin-bottom: calc(var(--gap) * 1.5);
 	display: grid;
 	grid-template-rows: repeat(2, 1fr);
 	grid-template-columns: repeat(2, 1fr);
@@ -88,8 +88,8 @@
 .avatar {
 	grid-area: a;
 	justify-self: center;
-	width: 100px;
-	height: 100px;
+	width: 80px;
+	height: 80px;
 	border-radius: 50%;
 	box-shadow: var(--shadowOut);
 	margin-bottom: calc(var(--gap) / 2);
@@ -102,7 +102,7 @@
 .btn_follow {
 	grid-area: b;
 	justify-self: center;
-	margin-top: 20px;
+	margin-top: calc(var(--gap) / 2);
 }
 
 .btn {

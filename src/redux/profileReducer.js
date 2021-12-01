@@ -1,8 +1,8 @@
 // action type
-const ADD_POSTS = `ADD-POSTS`,
-	UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`,
-	DEL_POST_VALUE = `DEL-POST-VALUE`;
-
+const ADD_POSTS = `ADD-POSTS`;
+const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
+const DEL_POST_VALUE = `DEL-POST-VALUE`;
+const SET_USER_PROFILE = `SET_USER_PROFILE`;
 
 
 // reducer
@@ -12,6 +12,7 @@ const initialState = {
 		{ id: 2, message: `It's my first post`, like: '20', },
 	],
 	newTextPost: `Enter your post`,
+	profile: null,
 }
 
 
@@ -33,7 +34,7 @@ const profileReducer = (state = initialState, action) => {
 					],
 					newTextPost: `Enter your post`,
 				}
-				: { ...state };
+				: state;
 
 		case UPDATE_NEW_POST_TEXT:
 			return {
@@ -47,6 +48,13 @@ const profileReducer = (state = initialState, action) => {
 				newTextPost: ``,
 			};
 
+		case SET_USER_PROFILE:
+
+			return {
+				...state,
+				profile: action.profile,
+			};
+
 		default:
 			return state;
 	}
@@ -55,8 +63,8 @@ const profileReducer = (state = initialState, action) => {
 //ActionCreation
 
 export const addPostsActionCreation = () => ({ type: ADD_POSTS, });
-export const updateNewPostTextActionCreation = (text) => ({ type: UPDATE_NEW_POST_TEXT, text: text, });
+export const updateNewPostTextActionCreation = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
 export const delPostValueActionCreation = () => ({ type: DEL_POST_VALUE, });
-
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
 //-------------------------------------
 export default profileReducer;

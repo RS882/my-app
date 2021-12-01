@@ -52,7 +52,7 @@ const store = {
 		this._callSubscriber = observer;
 	},
 
-	dispatch(action) { // action {type: ``,  }
+	dispatch(action) { // action {type: ``,  } //отправляем в редюсер
 		this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
 		this._state.profilePage = profileReducer(this._state.profilePage, action);
 		this._state.sidebar = sidebarReducer(this._state.sidebar, action);
