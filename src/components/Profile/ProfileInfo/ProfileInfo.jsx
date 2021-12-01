@@ -2,24 +2,18 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import bg from './../../../assets/img/bg.jpg'
 import Preloader from '../../common/preloader/preloader';
+import ProfileUser from './ProfileUser/ProfileUser';
 
 const ProfileInfo = (props) => {
-	if (!props.profile) {
-		return <Preloader />
-	}
+	if (!props.profile) return <Preloader />
 
 	return (
 		< >
-			<div >
+			<div className={s.img_box}>
 				<img className={s.img} src={bg}
 					alt='background' />
 			</div>
-			<div className={s.discr}>
-				<div>
-					<img src={props.profile.photos.large} alt='user' />
-				</div>
-
-			</div>
+			<ProfileUser {...props} />
 
 		</>
 	)
