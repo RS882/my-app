@@ -16,7 +16,7 @@ import mainLink from './../../assets/social_icon/3171663_link_share_icon.svg';
 import other from './../../assets/social_icon/social-media.png';
 import Preloader from '../common/preloader/preloader';
 import { withRouter } from 'react-router-dom';
-
+import avatarUser from './../../assets/img/user3.jpg';
 
 class ProfileContainer extends React.Component {
 
@@ -58,6 +58,7 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
+	avatarUser,
 	jobIcon,
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })

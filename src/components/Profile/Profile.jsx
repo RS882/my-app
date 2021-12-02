@@ -5,12 +5,14 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
 
+
 	return (
 		<div >
 			<ProfileInfo
 				profile={props.profile}
 				social={props.social}
 				jobIcon={props.jobIcon}
+				avatarUser={props.avatarUser}
 			/>
 			<MyPostsContainer />
 		</div>

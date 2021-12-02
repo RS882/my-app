@@ -10,7 +10,9 @@ const ProfileUser = (props) => {
 		<div className={s.wrapper}>
 			<div className={s.user_info}>
 				<div className={s.img_box}>
-					<img className={s.img} src={props.profile.photos.large} alt='user' />
+					<img className={s.img} src={
+						(props.profile.photos.large) ? props.profile.photos.large : props.avatarUser}
+						alt='user' />
 				</div>
 				<div className={s.fullname}>{props.profile.fullName}</div>
 				<article className={s.about} >{props.profile.aboutMe}	</article>

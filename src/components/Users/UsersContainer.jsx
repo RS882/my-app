@@ -7,7 +7,7 @@ import { setCurrentPage, toogleIsFetching } from './../../redux/usersReducer';
 import * as axios from 'axios';
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
-
+import avatarUser from './../../assets/img/user3.jpg';
 
 
 
@@ -78,6 +78,7 @@ class UserContainer extends React.Component {
 				<Users
 					users={this.props.users}
 					toogleFollow={this.props.toogleFollow}
+					avatarUser={this.props.avatarUser}
 				/>
 
 			</>
@@ -95,6 +96,7 @@ const mapStateToProps = (state) => {
 		currentPage: state.usersPage.currentPage,
 		showPageNumbers: state.usersPage.showPageNumbers,
 		isFetching: state.usersPage.isFetching,
+		avatarUser,
 	}
 };
 

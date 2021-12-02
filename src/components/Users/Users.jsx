@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Users.module.css';
-import avatarUser from './../../assets/img/user3.jpg'
+
 import { NavLink } from 'react-router-dom';
 
 
@@ -22,7 +22,7 @@ const Users = (props) => {
 						<NavLink to={`/profile/${e.id}`}>
 							<div className={s.avatar}
 								style={{
-									backgroundImage: e.photos.small ? `url(${e.photos.small})` : ` url(${avatarUser})`,
+									backgroundImage: e.photos.small ? `url(${e.photos.small})` : ` url(${props.avatarUser})`,
 								}}>
 							</div>
 						</NavLink>
