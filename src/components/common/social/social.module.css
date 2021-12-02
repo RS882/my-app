@@ -1,0 +1,24 @@
+.wrapper {
+	display: flex;
+}
+.link_box {
+	width: 40px;
+	margin: calc(var(--gap) / 2);
+}
+.link {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	padding: 5px;
+	transition: all var(--transition);
+}
+.link:hover,
+.link:focus {
+	border: 2px solid var(--firstcolor);
+	box-shadow: var(--shadow);
+}
+
+.img {
+	width: 100%;
+}

@@ -9,8 +9,8 @@ const Profile = (props) => {
 		<div >
 			<ProfileInfo
 				profile={props.profile}
+				social={props.social}
 				jobIcon={props.jobIcon}
-				socialIcon={props.socialIcon}
 			/>
 			<MyPostsContainer />
 		</div>

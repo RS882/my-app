@@ -8,13 +8,14 @@ const ProfileInfo = (props) => {
 	if (!props.profile) return <Preloader />
 
 	return (
-		< >
+		<>
 			<div className={s.img_box}>
 				<img className={s.img} src={bg}
 					alt='background' />
 			</div>
-			<ProfileUser {...props} />
-
+			<div className={s.wrapper}>
+				<ProfileUser {...props} />
+			</div>
 		</>
 	)
 }

@@ -10,21 +10,11 @@ import website from './../../assets/social_icon/1873909_world_social media_earth
 import vk from './../../assets/social_icon/6214529_logo_vk_vkontakte_icon.svg';
 import twitter from './../../assets/social_icon/1249999_social media_twitter_network_message_interaction_icon.svg';
 import instagram from './../../assets/social_icon/3259424_instagram_social media_social_icon.svg';
-import youtube from './../../assets/social_icon/317714_video_youtube_icon.svg';
+import youtube from './../../assets/social_icon/3259396_media_social_youtube_icon.svg';
 import github from './../../assets/social_icon/3259374_github_media_social_icon.svg';
 import mainLink from './../../assets/social_icon/3171663_link_share_icon.svg';
-
-// facebook": "facebook.com",
-//     "website": null,
-//     "vk": "vk.com/dimych",
-//     "twitter": "https://twitter.com/@sdf",
-//     "instagram": "instagra.com/sds",
-//     "youtube": null,
-//     "github": "github.com",
-//     "mainLink"
-
-
-
+import other from './../../assets/social_icon/social-media.png';
+import Preloader from '../common/preloader/preloader';
 
 
 class ProfileContainer extends React.Component {
@@ -39,8 +29,25 @@ class ProfileContainer extends React.Component {
 	}
 
 	render() {
+		let social = [];
 
-		return <Profile {...this.props} profile={this.props.profile} />
+		if (!this.props.profile) {
+			return <Preloader />
+		} else {
+			social = Object.entries(this.props.profile.contacts)
+				.filter(el => el[1])
+				.map(el => ({
+					name: el[0],
+					url: el[1],
+					img: (el[0] in this.props.profile.contacts) ?
+						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
+				}))
+
+		}
+
+
+
+		return <Profile {...this.props} profile={this.props.profile} social={social} />
 	}
 
 }
@@ -48,7 +55,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	jobIcon,
-	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, },
+	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 
 export default connect(mapStateToProps, { setUserProfile, })(ProfileContainer)

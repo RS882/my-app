@@ -22,7 +22,7 @@ const Users = (props) => {
 						<NavLink to={`/profile/${e.id}`}>
 							<div className={s.avatar}
 								style={{
-									backgroundImage: (e.photos.small) ? `url(${e.photos.small})` : ` url(${avatarUser})`,
+									backgroundImage: e.photos.small ? `url(${e.photos.small})` : ` url(${avatarUser})`,
 								}}>
 							</div>
 						</NavLink>

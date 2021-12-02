@@ -4,16 +4,16 @@
 	background-color: var(--secondcolor);
 	border: 4px solid var(--firstcolor);
 	border-radius: 5px;
-	width: 60%;
+
 	box-shadow: var(--shadow);
-	display: grid;
-	grid-template-columns: 50% 40% 1fr;
-	gap: calc(var(--gap) / 2);
+
+	display: flex;
 }
 
 .user_info {
 	display: flex;
 	flex-direction: column;
+	margin-right: calc(var(--gap) / 2);
 }
 .img_box {
 	width: 100%;
@@ -53,10 +53,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin-right: calc(var(--gap) / 2);
 }
 .looking {
 	width: 40%;
 	margin-bottom: calc(var(--gap) / 2);
+	box-shadow: var(--shadowOut);
 }
 
 .contacts {
