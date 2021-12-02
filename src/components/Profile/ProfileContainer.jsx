@@ -15,12 +15,15 @@ import github from './../../assets/social_icon/3259374_github_media_social_icon.
 import mainLink from './../../assets/social_icon/3171663_link_share_icon.svg';
 import other from './../../assets/social_icon/social-media.png';
 import Preloader from '../common/preloader/preloader';
+import { withRouter } from 'react-router-dom';
 
 
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+
+		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${(this.props.match.params.userId) ? this.props.match.params.userId : 2
+			}`)
 			.then(respons => {
 
 				this.props.setUserProfile(respons.data)
@@ -59,4 +62,6 @@ const mapStateToProps = (state) => ({
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 
-export default connect(mapStateToProps, { setUserProfile, })(ProfileContainer)
+const WithRoterProfileContainer = withRouter(ProfileContainer);
+
+export default connect(mapStateToProps, { setUserProfile, })(WithRoterProfileContainer)
