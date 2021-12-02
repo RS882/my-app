@@ -3,7 +3,7 @@
 }
 .link_box {
 	width: 40px;
-	margin: calc(var(--gap) / 2);
+	margin: calc(var(--gap) / 4);
 }
 .link {
 	display: block;

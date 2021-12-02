@@ -38,7 +38,8 @@ class ProfileContainer extends React.Component {
 				.filter(el => el[1])
 				.map(el => ({
 					name: el[0],
-					url: el[1],
+					url: (el[1].startsWith('https://') || el[1].startsWith('http://')) ?
+						el[1] : 'https://' + el[1],
 					img: (el[0] in this.props.profile.contacts) ?
 						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
 				}))
