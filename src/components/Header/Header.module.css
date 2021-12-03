@@ -3,7 +3,33 @@
 	background-color: var(--firstcolor);
 	width: 100%;
 	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-.header img {
+.img_box {
 	height: 100%;
+}
+.img {
+	width: 100%;
+	height: 100%;
+}
+
+.link {
+	color: var(--secondcolor);
+	padding: var(--gap);
+	border: 1px solid #fff;
+}
+
+.login_box {
+	height: 100%;
+	border-radius: 50%;
+	padding: 5px;
+	margin-right: var(--gap);
+}
+.img_log {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	box-shadow: var(--shadowOut);
 }
