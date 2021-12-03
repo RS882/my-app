@@ -15,7 +15,7 @@ const initialState = {
 	pageSize: 5,
 	totalUsersCount: 0,
 	currentPage: 1,
-	showPageNumbers: [],
+	showPageNumbers: (Array.from(Array(10), (e, i) => i + 1)),
 	isFetching: false,
 }
 
@@ -42,12 +42,9 @@ const usersReducer = (state = initialState, action) => {
 				currentPage: action.currentPage,
 			};
 		case SET_TOTAL_USERS_COUNT:
-			const pagesNubmerStart = Math.ceil(action.totalUsersCount / action.pageSize);
 			return {
 				...state,
 				totalUsersCount: action.totalUsersCout,
-				showPageNumbers: (pagesNubmerStart < 11) ? (Array.from(Array(pagesNubmerStart), (e, i) => i + 1))
-					: (Array.from(Array(10), (e, i) => i + 1)),
 			};
 		case CHANGE_PADINGTON_NEXT:
 			return {
