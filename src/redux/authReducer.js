@@ -1,8 +1,8 @@
 // action type
 
 const SET_AUTH_USER = `SET_AUTH_USER`;
-const TOOGLE_IS_FETCHING = `TOOGLE_IS_FETCHING`;
-const SET_USER_PROFILE = `SET_USER_PROFILE`;
+const TOOGLE_IS_FETCHING_AUTH = `TOOGLE_IS_FETCHING_AUTH`;
+const SET_AUTH_USER_PROFILE = `SET_AUTH_USER_PROFILE`;
 
 // reducer
 const initialState = {
@@ -26,13 +26,13 @@ const authReducer = (state = initialState, action) => {
 				...action.data,
 				isAuth: true,
 			};
-		case TOOGLE_IS_FETCHING:
+		case TOOGLE_IS_FETCHING_AUTH:
 			return {
 				...state,
 				isFetching: action.isFetching,
 			}
 
-		case SET_USER_PROFILE:
+		case SET_AUTH_USER_PROFILE:
 
 			return {
 				...state,
@@ -48,7 +48,7 @@ const authReducer = (state = initialState, action) => {
 
 
 export const setAuthUser = (userId, email, login) => ({ type: SET_AUTH_USER, data: { userId, email, login, }, });
-export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
-export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
+export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
+export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
 //-------------------------------------
 export default authReducer;
