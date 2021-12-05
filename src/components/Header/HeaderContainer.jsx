@@ -22,27 +22,22 @@ class HeaderContainer extends React.Component {
 					this.props.setAuthUser(id, email, login)
 					return id;
 				}
-
 			})
 			.then(id => {
 				axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
 					.then(respons => {
 						this.props.setUserProfileAuth(respons.data)
-
 					})
 			})
 	}
 
 
 	render() {
-
-
 		return (
 			<Header {...this.props} img={this.props.img ? this.props.img : avatarUser} />
 		)
 	}
 }
-
 
 const mapStateToProps = (state) => ({
 	login: state.auth.login,

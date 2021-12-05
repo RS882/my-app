@@ -27,7 +27,10 @@ const Header = (props) => {
 						</NavLink>
 					</div>
 					: <Link to={'/login'} className={`${s.img_box_login}`} title='Login'>
-						<img className={`${s.img}  ${s.loginImg}`} src={props.loginImg} alt='login' />
+						<div className={s.login}>
+							login
+						</div>
+
 					</Link>}
 			</div>
 
