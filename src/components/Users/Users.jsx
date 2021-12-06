@@ -2,9 +2,34 @@ import React from 'react';
 import s from './Users.module.css';
 
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Users = (props) => {
+
+	const toogleFollowAxios = (follow, id) => {
+
+		!follow ?
+			(axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
+				withCredentials: true,
+				headers: {
+					'API-KEY': '578be10a-aad1-411e-a770-f4db95af6204'
+				},
+			})
+				.then(respons => {
+					if (respons.data.resultCode === 0) props.toogleFollow(id);
+				}))
+			: (axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
+				withCredentials: true,
+				headers: {
+					'API-KEY': '578be10a-aad1-411e-a770-f4db95af6204'
+				},
+			})
+				.then(respons => {
+					if (respons.data.resultCode === 0) props.toogleFollow(id);
+				}))
+	}
+
 
 	return (
 
@@ -26,7 +51,7 @@ const Users = (props) => {
 								}}>
 							</div>
 						</NavLink>
-						<button className={`${s.btn} ${s.btn_follow}`} onClick={() => props.toogleFollow(e.id)}>
+						<button className={`${s.btn} ${s.btn_follow}`} onClick={() => toogleFollowAxios(e.followed, e.id)}>
 							{(e.followed) ? 'unfollow' : 'follow'}
 						</button>
 					</div>

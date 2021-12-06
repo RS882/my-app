@@ -19,7 +19,9 @@ class UserContainer extends React.Component {
 
 	componentDidMount() {
 		this.props.toogleIsFetching(true);
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
+			withCredentials: true
+		})
 			.then(respons => {
 				this.props.toogleIsFetching(false);
 				this.props.setUsers(respons.data.items);
@@ -31,7 +33,9 @@ class UserContainer extends React.Component {
 	onPageChanged = (pageNumber) => {
 		this.props.toogleIsFetching(true);
 		this.props.setCurrentPage(pageNumber)
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
+			withCredentials: true
+		})
 			.then(respons => {
 				this.props.toogleIsFetching(false);
 				this.props.setUsers(respons.data.items);
