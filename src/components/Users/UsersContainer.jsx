@@ -8,6 +8,7 @@ import * as axios from 'axios';
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
 import avatarUser from './../../assets/img/user3.jpg';
+import { userAPI } from '../../api/api';
 
 
 
@@ -19,13 +20,11 @@ class UserContainer extends React.Component {
 
 	componentDidMount() {
 		this.props.toogleIsFetching(true);
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-			withCredentials: true
-		})
-			.then(respons => {
+		userAPI.getUser(this.props.currentPage, this.props.pageSize)
+			.then(data => {
 				this.props.toogleIsFetching(false);
-				this.props.setUsers(respons.data.items);
-				this.props.setTotalUsersCout(respons.data.totalCount)
+				this.props.setUsers(data.items);
+				this.props.setTotalUsersCout(data.totalCount)
 				// this.props.setTotalUsersCout(120)
 			})
 	}
@@ -33,12 +32,10 @@ class UserContainer extends React.Component {
 	onPageChanged = (pageNumber) => {
 		this.props.toogleIsFetching(true);
 		this.props.setCurrentPage(pageNumber)
-		axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {
-			withCredentials: true
-		})
-			.then(respons => {
+		userAPI.getUser(pageNumber, this.props.pageSize)
+			.then(data => {
 				this.props.toogleIsFetching(false);
-				this.props.setUsers(respons.data.items);
+				this.props.setUsers(data.items);
 			})
 	}
 
