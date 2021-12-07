@@ -26,7 +26,8 @@ const Users = (props) => {
 		<div className={s.wrapper} >
 
 			{props.users.map(e => {
-				const buttonDisebled = props.followInProgres.includes(e.id)
+				const buttonDisebled = props.followInProgres.includes(e.id);
+
 				return (
 					<div key={e.id} className={s.box}>
 						<div className={s.text}>
@@ -44,9 +45,10 @@ const Users = (props) => {
 						</NavLink>
 						<button className={`${s.btn} ${s.btn_follow}`}
 							disabled={buttonDisebled}
-							// style={{
-							// 	backgroundColor:
-							// }}
+							style={{
+								backgroundColor: buttonDisebled && '#edffd9',
+								color: buttonDisebled && '#bed1a8',
+							}}
 							onClick={() => toogleFollowAxios(e.followed, e.id)}>
 							{(e.followed) ? 'unfollow' : 'follow'}
 						</button>
