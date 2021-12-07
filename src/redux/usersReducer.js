@@ -7,7 +7,8 @@ const CHANGE_PADINGTON_NEXT = `CHANGE_PADINGTON_NEXT`;
 const CHANGE_PADINGTON_PREV = `CHANGE_PADINGTON_PREV`;
 const GO_START_PAGE = `GO_START_PAGE`;
 const GO_END_PAGE = `GO_END_PAGE`;
-const TOOGLE_IS_FETCHING = `TOOGLE_IS_FETCHING`
+const TOOGLE_IS_FETCHING = `TOOGLE_IS_FETCHING`;
+const TOOGLE_FOLLOW_IN_PROGRES = `TOOGLE_FOLLOW_IN_PROGRES`;
 
 // reducer
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
 	currentPage: 1,
 	showPageNumbers: (Array.from(Array(10), (e, i) => i + 1)),
 	isFetching: false,
+	followInProgres: [],
 }
 
 
@@ -77,7 +79,16 @@ const usersReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isFetching: action.isFetching,
-			}
+			};
+		case TOOGLE_FOLLOW_IN_PROGRES:
+
+			return {
+				...state,
+				followInProgres: action.isFetching ?
+					[...state.followInProgres, action.userId]
+					: state.followInProgres.filter(id => id !== action.userId),
+			};
+
 		default:
 			return state;
 	}
@@ -94,6 +105,6 @@ export const changePadingtonPrev = (countSteps) => ({ type: CHANGE_PADINGTON_PRE
 export const goStartPage = () => ({ type: GO_START_PAGE, });
 export const goEndPage = () => ({ type: GO_END_PAGE, });
 export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
-
+export const toogleFollowInProgres = (isFetching, userId) => ({ type: TOOGLE_FOLLOW_IN_PROGRES, isFetching, userId })
 //-------------------------------------
 export default usersReducer;

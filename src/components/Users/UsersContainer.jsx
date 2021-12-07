@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, setTotalUsersCout, setUsers, toogleFollow } from '../../redux/usersReducer';
 import Users from './Users';
-import { setCurrentPage, toogleIsFetching } from './../../redux/usersReducer';
+import { setCurrentPage, toogleIsFetching, toogleFollowInProgres } from './../../redux/usersReducer';
 
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
@@ -19,6 +19,7 @@ class UserContainer extends React.Component {
 	// };
 
 	componentDidMount() {
+
 		this.props.toogleIsFetching(true);
 		userAPI.getUser(this.props.currentPage, this.props.pageSize)
 			.then(data => {
@@ -62,6 +63,8 @@ class UserContainer extends React.Component {
 
 	render() {
 
+
+
 		return (
 			<>
 				{this.props.isFetching && <Preloader />}
@@ -79,7 +82,9 @@ class UserContainer extends React.Component {
 				<Users
 					users={this.props.users}
 					toogleFollow={this.props.toogleFollow}
+					toogleFollowInProgres={this.props.toogleFollowInProgres}
 					avatarUser={this.props.avatarUser}
+					followInProgres={this.props.followInProgres}
 				/>
 
 			</>
@@ -90,6 +95,7 @@ class UserContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
+
 	return {
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,
@@ -97,6 +103,7 @@ const mapStateToProps = (state) => {
 		currentPage: state.usersPage.currentPage,
 		showPageNumbers: state.usersPage.showPageNumbers,
 		isFetching: state.usersPage.isFetching,
+		followInProgres: state.usersPage.followInProgres,
 		avatarUser,
 	}
 };
@@ -115,7 +122,7 @@ const mapStateToProps = (state) => {
 // 	}
 // }
 
-const UsersContainer = connect(mapStateToProps,
+export default connect(mapStateToProps,
 	{
 		toogleFollow,
 		setUsers,
@@ -126,6 +133,5 @@ const UsersContainer = connect(mapStateToProps,
 		goStartPage,
 		goEndPage,
 		toogleIsFetching,
+		toogleFollowInProgres,
 	})(UserContainer);
-
-export default UsersContainer;

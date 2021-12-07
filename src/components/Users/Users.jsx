@@ -9,12 +9,16 @@ import { userAPI } from './../../api/api';
 const Users = (props) => {
 
 	const toogleFollowAxios = (follow, id) => {
+		props.toogleFollowInProgres(true, id);
 		(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
-			.then(data => data.resultCode === 0 && props.toogleFollow(id))
+			.then(data => data.resultCode === 0 && props.toogleFollow(id));
+
+		props.toogleFollowInProgres(false, id);
 	}
 
 
 	return (
+
 
 		<div className={s.wrapper} >
 
@@ -34,7 +38,13 @@ const Users = (props) => {
 								}}>
 							</div>
 						</NavLink>
-						<button className={`${s.btn} ${s.btn_follow}`} onClick={() => toogleFollowAxios(e.followed, e.id)}>
+						<button className={`${s.btn} ${s.btn_follow}`}
+							disabled={
+								props.followInProgres.some(id => id === e.id)
+							}
+							onClick={() =>
+
+								toogleFollowAxios(e.followed, e.id)}>
 							{(e.followed) ? 'unfollow' : 'follow'}
 						</button>
 					</div>

@@ -22,7 +22,7 @@ import { profileAPI } from '../../api/api';
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
-		debugger
+
 		profileAPI.getProfile(this.props.match.params.userId)
 			.then(data => this.props.setUserProfile(data))
 	}
@@ -50,12 +50,15 @@ class ProfileContainer extends React.Component {
 
 }
 
+
 const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	avatarUser,
 	jobIcon,
+
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
+
 
 const WithRoterProfileContainer = withRouter(ProfileContainer);
 

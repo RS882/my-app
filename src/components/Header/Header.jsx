@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './Header.module.css';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
 
@@ -20,17 +20,17 @@ const Header = (props) => {
 								{props.login}
 							</li>
 						</ul>
-						{/* <Link to={`/profile/${props.id}`}> */}
-						<div className={s.img_box_log}>
-							<img className={s.img_log} src={props.img} alt='avatar' />
-						</div>
-						{/* </Link> */}
+						<NavLink to={`/myProfile`}>
+							<div className={s.img_box_log}>
+								<img className={s.img_log} src={props.img} alt='avatar' />
+							</div>
+						</NavLink>
 					</div>)
-					: (<Link to={'/login'} className={`${s.img_box_login}`} title='Login'>
+					: (<NavLink to={'/login'} className={`${s.img_box_login}`} title='Login'>
 						<div className={s.login}>
 							login
 						</div>
-					</Link>)}
+					</NavLink>)}
 			</div>
 
 		</header>

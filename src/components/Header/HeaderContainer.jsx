@@ -17,6 +17,7 @@ class HeaderContainer extends React.Component {
 				if (data.resultCode === 0) {
 					const { id, email, login, } = data.data;
 					this.props.setAuthUser(id, email, login)
+
 					return id;
 				}
 			})
@@ -28,6 +29,7 @@ class HeaderContainer extends React.Component {
 
 
 	render() {
+
 		return (
 			<Header {...this.props} img={this.props.img ? this.props.img : avatarUser} />
 		)
