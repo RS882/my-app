@@ -2,32 +2,15 @@ import React from 'react';
 import s from './Users.module.css';
 
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
+
+import { userAPI } from './../../api/api';
 
 
 const Users = (props) => {
 
 	const toogleFollowAxios = (follow, id) => {
-
-		!follow ?
-			(axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, {
-				withCredentials: true,
-				headers: {
-					'API-KEY': '578be10a-aad1-411e-a770-f4db95af6204'
-				},
-			})
-				.then(respons => {
-					if (respons.data.resultCode === 0) props.toogleFollow(id);
-				}))
-			: (axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {
-				withCredentials: true,
-				headers: {
-					'API-KEY': '578be10a-aad1-411e-a770-f4db95af6204'
-				},
-			})
-				.then(respons => {
-					if (respons.data.resultCode === 0) props.toogleFollow(id);
-				}))
+		(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
+			.then(data => data.resultCode === 0 && props.toogleFollow(id))
 	}
 
 

@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { setUserProfile } from './../../redux/profileReducer';
@@ -17,18 +17,14 @@ import other from './../../assets/social_icon/social-media.png';
 import Preloader from '../common/preloader/preloader';
 import { withRouter } from 'react-router-dom';
 import avatarUser from './../../assets/img/user3.jpg';
+import { profileAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
-
-		axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${(this.props.match.params.userId) ? this.props.match.params.userId : 2
-			}`)
-			.then(respons => {
-
-				this.props.setUserProfile(respons.data)
-
-			})
+		debugger
+		profileAPI.getProfile(this.props.match.params.userId)
+			.then(data => this.props.setUserProfile(data))
 	}
 
 	render() {
@@ -48,8 +44,6 @@ class ProfileContainer extends React.Component {
 				}))
 
 		}
-
-
 
 		return <Profile {...this.props} profile={this.props.profile} social={social} />
 	}

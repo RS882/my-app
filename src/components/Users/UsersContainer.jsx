@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, setTotalUsersCout, setUsers, toogleFollow } from '../../redux/usersReducer';
 import Users from './Users';
 import { setCurrentPage, toogleIsFetching } from './../../redux/usersReducer';
-import * as axios from 'axios';
+
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
 import avatarUser from './../../assets/img/user3.jpg';
