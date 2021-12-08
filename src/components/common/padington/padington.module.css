@@ -65,7 +65,7 @@
 	background-color: var(--secondcolor);
 	box-shadow: var(--shadow);
 	border: 2px solid var(--secondcolor);
-	color: #bed1a8;
+	color: var(--firstcolor);
 	font-weight: bold;
 	text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2), 0px -5px 35px rgba(255, 255, 255, 0.3);
 	transition: all var(--transition);

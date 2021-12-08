@@ -15,14 +15,10 @@ const Users = (props) => {
 				data.resultCode === 0 && props.toogleFollow(id)
 				props.toogleFollowInProgres(false, id);
 			});
-
-
 	}
 
 
 	return (
-
-
 		<div className={s.wrapper} >
 
 			{props.users.map(e => {
@@ -48,6 +44,7 @@ const Users = (props) => {
 							style={{
 								backgroundColor: buttonDisebled && '#edffd9',
 								color: buttonDisebled && '#bed1a8',
+								cursor: buttonDisebled && 'auto',
 							}}
 							onClick={() => toogleFollowAxios(e.followed, e.id)}>
 							{(e.followed) ? 'unfollow' : 'follow'}

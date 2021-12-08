@@ -57,6 +57,13 @@
 	height: 100%;
 	border-radius: 50%;
 	box-shadow: var(--shadowOut);
+	border: 2px solid var(--fourcolor);
+	transition: all var(--transition);
+}
+.img_log:hover,
+.img_log:focus {
+	box-shadow: var(--shadow);
+	border: 4px solid var(--secondcolor);
 }
 .link {
 	color: var(--secondcolor);

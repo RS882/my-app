@@ -21,19 +21,20 @@ import { profileAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
 
+
+
 	componentDidMount() {
 
 		profileAPI.getProfile(this.props.match.params.userId)
 			.then(data => this.props.setUserProfile(data))
 	}
 
-	render() {
-		let social = [];
 
-		if (!this.props.profile) {
-			return <Preloader />
-		} else {
-			social = Object.entries(this.props.profile.contacts)
+	render() {
+
+
+		const social = (this.props.profile) ?
+			(Object.entries(this.props.profile.contacts)
 				.filter(el => el[1])
 				.map(el => ({
 					name: el[0],
@@ -41,9 +42,8 @@ class ProfileContainer extends React.Component {
 						el[1] : 'https://' + el[1],
 					img: (el[0] in this.props.profile.contacts) ?
 						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
-				}))
+				}))) : [];
 
-		}
 
 		return <Profile {...this.props} profile={this.props.profile} social={social} />
 	}
