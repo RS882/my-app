@@ -3,12 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, setTotalUsersCout, setUsers, toogleFollow } from '../../redux/usersReducer';
 import Users from './Users';
-import { setCurrentPage, toogleIsFetching, toogleFollowInProgres } from './../../redux/usersReducer';
+import { setCurrentPage, toogleIsFetching, toogleFollowInProgres, getUsers, onPageChanged, toogleFollowBtn } from './../../redux/usersReducer';
 
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
 import avatarUser from './../../assets/img/user3.jpg';
-import { userAPI } from '../../api/api';
+
 
 
 
@@ -19,52 +19,33 @@ class UserContainer extends React.Component {
 	// };
 
 	componentDidMount() {
-
-		this.props.toogleIsFetching(true);
-		userAPI.getUser(this.props.currentPage, this.props.pageSize)
-			.then(data => {
-				this.props.toogleIsFetching(false);
-				this.props.setUsers(data.items);
-				this.props.setTotalUsersCout(data.totalCount)
-				// this.props.setTotalUsersCout(120)
-			})
+		this.props.getUsers(this.props.currentPage, this.props.pageSize);
 	}
 
-	onPageChanged = (pageNumber) => {
-		this.props.toogleIsFetching(true);
-		this.props.setCurrentPage(pageNumber)
-		userAPI.getUser(pageNumber, this.props.pageSize)
-			.then(data => {
-				this.props.toogleIsFetching(false);
-				this.props.setUsers(data.items);
-			})
-	}
+
 
 	onClickBtnNext = (step) => {
-		this.onPageChanged(this.props.currentPage + step);
+		this.props.onPageChanged(this.props.currentPage + step);
 		this.props.changePadingtonNext(step)
 	}
 
 	onClickBtnPrev = (step) => {
-		this.onPageChanged(this.props.currentPage - step);
+		this.props.onPageChanged(this.props.currentPage - step);
 		this.props.changePadingtonPrev(step);
 	}
 
 	goStartPage = () => {
-		this.onPageChanged(1);
+		this.props.onPageChanged(1);
 		this.props.goStartPage();
 	}
 
 	goEndPage = () => {
-		this.onPageChanged(Math.ceil(this.props.totalUsersCount / this.props.pageSize));
+		this.props.onPageChanged(Math.ceil(this.props.totalUsersCount / this.props.pageSize));
 		this.props.goEndPage();
 	}
 
 
 	render() {
-
-
-
 		return (
 			<>
 				{this.props.isFetching && <Preloader />}
@@ -73,7 +54,7 @@ class UserContainer extends React.Component {
 					totalUsersCount={this.props.totalUsersCount}
 					pageSize={this.props.pageSize}
 					showPageNumbers={this.props.showPageNumbers}
-					onPageChanged={this.onPageChanged}
+					onPageChanged={this.props.onPageChanged}
 					onClickBtnNext={this.onClickBtnNext}
 					onClickBtnPrev={this.onClickBtnPrev}
 					goStartPage={this.goStartPage}
@@ -81,10 +62,9 @@ class UserContainer extends React.Component {
 				/>
 				<Users
 					users={this.props.users}
-					toogleFollow={this.props.toogleFollow}
-					toogleFollowInProgres={this.props.toogleFollowInProgres}
 					avatarUser={this.props.avatarUser}
 					followInProgres={this.props.followInProgres}
+					toogleFollowBtn={this.props.toogleFollowBtn}
 				/>
 
 			</>
@@ -95,7 +75,6 @@ class UserContainer extends React.Component {
 
 
 const mapStateToProps = (state) => {
-
 	return {
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,
@@ -124,14 +103,11 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps,
 	{
-		toogleFollow,
-		setUsers,
-		setCurrentPage,
-		setTotalUsersCout,
 		changePadingtonNext,
 		changePadingtonPrev,
 		goStartPage,
 		goEndPage,
-		toogleIsFetching,
-		toogleFollowInProgres,
+		getUsers,
+		onPageChanged,
+		toogleFollowBtn,
 	})(UserContainer);

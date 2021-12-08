@@ -6,11 +6,9 @@ import React from 'react';
 
 const MyPosts = (props) => {
 
-	const postElements = props.posts.map(p => <Post message={p.message} like={p.like} key={p.id} />),
-		//newPostElement = React.createRef(), - не рекомендцутся использовать
-		addPost = () => props.onPost(),
-		upPostChange = (e) => props.onPostChange(e.target.value),
-		delPostValue = () => props.onDelPostValue();
+	const postElements = props.posts.map(p => <Post message={p.message} like={p.like} key={p.id} />);
+	//newPostElement = React.createRef(), - не рекомендцутся использовать
+
 
 	return (
 
@@ -18,14 +16,14 @@ const MyPosts = (props) => {
 			<h3 className={s.poststitle}>my posts</h3>
 			<div >
 				<textarea
-					onChange={upPostChange}
-					onFocus={delPostValue}
+					onChange={(e) => props.upPostChange(e.target.value)}
+					onFocus={() => props.delPostValue()}
 					//ref={newPostElement}
 					className={s.postsarea}
 					value={props.newTextPost}
 				/>
 				<button
-					onClick={addPost}
+					onClick={() => props.addPost()}
 					className={s.button}
 				>add post</button>
 			</div>

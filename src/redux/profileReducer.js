@@ -1,3 +1,5 @@
+import { profileAPI } from "../api/api";
+
 // action type
 const ADD_POSTS = `ADD-POSTS`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
@@ -35,21 +37,17 @@ const profileReducer = (state = initialState, action) => {
 					newTextPost: `Enter your post`,
 				}
 				: state;
-
 		case UPDATE_NEW_POST_TEXT:
 			return {
 				...state,
 				newTextPost: action.text,
 			};
-
 		case DEL_POST_VALUE:
 			return {
 				...state,
 				newTextPost: ``,
 			};
-
 		case SET_USER_PROFILE:
-
 			return {
 				...state,
 				profile: action.profile,
@@ -62,9 +60,19 @@ const profileReducer = (state = initialState, action) => {
 }
 //ActionCreation
 
-export const addPostsActionCreation = () => ({ type: ADD_POSTS, });
-export const updateNewPostTextActionCreation = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
-export const delPostValueActionCreation = () => ({ type: DEL_POST_VALUE, });
+export const addPost = () => ({ type: ADD_POSTS, });
+export const upPostChange = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
+export const delPostValue = () => ({ type: DEL_POST_VALUE, });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
+//ThunkCreation
+export const getProfile = (userId) => {
+	return (dispatch) => {
+		profileAPI.getProfile(userId)
+			.then(data => dispatch(setUserProfile(data)))
+	}
+}
+
+
+
 //-------------------------------------
 export default profileReducer;

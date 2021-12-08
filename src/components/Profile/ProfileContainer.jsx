@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUserProfile } from './../../redux/profileReducer';
+import { getProfile } from './../../redux/profileReducer';
 import Profile from './Profile';
 import jobIcon from './../../assets/img/looking.jpg';
 
@@ -14,24 +14,17 @@ import youtube from './../../assets/social_icon/3259396_media_social_youtube_ico
 import github from './../../assets/social_icon/3259374_github_media_social_icon.svg';
 import mainLink from './../../assets/social_icon/3171663_link_share_icon.svg';
 import other from './../../assets/social_icon/social-media.png';
-import Preloader from '../common/preloader/preloader';
+
 import { withRouter } from 'react-router-dom';
 import avatarUser from './../../assets/img/user3.jpg';
-import { profileAPI } from '../../api/api';
+
 
 class ProfileContainer extends React.Component {
 
-
-
 	componentDidMount() {
-
-		profileAPI.getProfile(this.props.match.params.userId)
-			.then(data => this.props.setUserProfile(data))
+		this.props.getProfile(this.props.match.params.userId)
 	}
-
-
 	render() {
-
 
 		const social = (this.props.profile) ?
 			(Object.entries(this.props.profile.contacts)
@@ -44,12 +37,10 @@ class ProfileContainer extends React.Component {
 						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
 				}))) : [];
 
-
 		return <Profile {...this.props} profile={this.props.profile} social={social} />
 	}
 
 }
-
 
 const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
@@ -62,4 +53,4 @@ const mapStateToProps = (state) => ({
 
 const WithRoterProfileContainer = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { setUserProfile, })(WithRoterProfileContainer)
+export default connect(mapStateToProps, { getProfile })(WithRoterProfileContainer)

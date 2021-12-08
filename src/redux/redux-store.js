@@ -1,9 +1,10 @@
 import dialogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 import sidebarReducer from "./sidebarReducer";
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
+import thunkMiddleware from 'redux-thunk'
 
 const reducers = combineReducers({ // аналогично старому файлу state
 	dialogsPage: dialogsReducer,
@@ -14,7 +15,7 @@ const reducers = combineReducers({ // аналогично старому фай
 
 });
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 window.store = store;
 

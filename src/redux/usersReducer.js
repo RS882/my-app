@@ -1,3 +1,5 @@
+import { userAPI } from './../api/api';
+
 // action type
 const TOOGLE_FOLLOW = `TOOGLE_FOLLOW`;
 const SET_USERS = `SET_USERS`;
@@ -95,7 +97,6 @@ const usersReducer = (state = initialState, action) => {
 
 }
 //ActionCreation
-
 export const toogleFollow = (usersId) => ({ type: TOOGLE_FOLLOW, usersId, });
 export const setUsers = (users) => ({ type: SET_USERS, users, });
 export const setCurrentPage = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage, });
@@ -106,5 +107,42 @@ export const goStartPage = () => ({ type: GO_START_PAGE, });
 export const goEndPage = () => ({ type: GO_END_PAGE, });
 export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
 export const toogleFollowInProgres = (isFetching, userId) => ({ type: TOOGLE_FOLLOW_IN_PROGRES, isFetching, userId })
+
+// ThunkCreation
+export const getUsers = (currentPage, pageSize) => {
+	return (dispatch) => {
+		dispatch(toogleIsFetching(true));
+		userAPI.getUser(currentPage, pageSize)
+			.then(data => {
+				dispatch(toogleIsFetching(false));
+				dispatch(setUsers(data.items));
+				dispatch(setTotalUsersCout(data.totalCount));
+				// dispatch(setTotalUsersCout(120));
+			})
+	}
+};
+
+export const onPageChanged = (pageNumber, pageSize) => {
+	return (dispatch) => {
+		dispatch(toogleIsFetching(true));
+		dispatch(setCurrentPage(pageNumber));
+		userAPI.getUser(pageNumber, pageSize)
+			.then(data => {
+				dispatch(toogleIsFetching(false));
+				dispatch(setUsers(data.items));
+			})
+	}
+};
+export const toogleFollowBtn = (follow, id) => {
+	return (dispatch) => {
+		dispatch(toogleFollowInProgres(true, id));
+		(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
+			.then(data => {
+				data.resultCode === 0 && dispatch(toogleFollow(id))
+				dispatch(toogleFollowInProgres(false, id));
+			});
+	}
+};
+
 //-------------------------------------
 export default usersReducer;
