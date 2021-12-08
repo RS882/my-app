@@ -87,7 +87,7 @@
 
 .avatar {
 	grid-area: a;
-	justify-self: center;
+	margin: 0 auto;
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
@@ -97,6 +97,13 @@
 	background-size: 100%;
 	background-position: center center;
 	background-repeat: no-repeat;
+	border: 2px solid var(--secondcolor);
+	transition: all var(--transition);
+}
+.avatar:hover,
+.avatar:focus {
+	box-shadow: var(--shadow);
+	border: 4px solid var(--firstcolor);
 }
 
 .btn_follow {

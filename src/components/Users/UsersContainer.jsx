@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, setTotalUsersCout, setUsers, toogleFollow } from '../../redux/usersReducer';
+import { changePadingtonNext, changePadingtonPrev, goEndPage, goStartPage, } from '../../redux/usersReducer';
 import Users from './Users';
-import { setCurrentPage, toogleIsFetching, toogleFollowInProgres, getUsers, onPageChanged, toogleFollowBtn } from './../../redux/usersReducer';
+import { getUsers, onPageChanged, toogleFollowBtn } from './../../redux/usersReducer';
 
 import Padington from '../common/padington/padington';
 import Preloader from '../common/preloader/preloader';
