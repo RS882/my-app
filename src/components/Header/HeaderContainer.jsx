@@ -5,6 +5,7 @@ import logo from './../../assets/img/logo.jpg'
 import Header from './Header';
 import { getAuthUser } from './../../redux/authReducer';
 import avatarUser from './../../assets/img/user3.jpg';
+;
 
 
 
@@ -31,7 +32,9 @@ class HeaderContainer extends React.Component {
 	render() {
 
 		return (
+
 			<Header {...this.props} img={this.props.img ? this.props.img : avatarUser} />
+
 		)
 	}
 }
@@ -40,8 +43,10 @@ const mapStateToProps = (state) => ({
 	login: state.auth.login,
 	id: state.auth.userId,
 	isAuth: state.auth.isAuth,
+	isFetching: state.auth.isFetching,
 	logo,
 	img: (state.auth.profile) && state.auth.profile.photos.small,
+
 })
 
 

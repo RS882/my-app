@@ -52,21 +52,23 @@ export const setAuthUser = (userId, email, login) => ({ type: SET_AUTH_USER, dat
 export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
 export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
 //ThunkCreation
-export const getAuthUser = () => {
-	return (dispatch) => {
-		loginAPI.getAuthUser()
-			.then(data => {
-				if (data.resultCode === 0) {
-					const { id, email, login, } = data.data;
-					dispatch(setAuthUser(id, email, login))
-					return id;
-				}
-			})
-			.then(id => {
-				profileAPI.getProfile(id)
-					.then(data => dispatch(setUserProfileAuth(data)))
-			})
-	}
+export const getAuthUser = () => (dispatch) => {
+	dispatch(toogleIsFetchingAuth(true))
+	loginAPI.getAuthUser()
+		.then(data => {
+			dispatch(toogleIsFetchingAuth(false))
+			if (data.resultCode === 0) {
+				const { id, email, login, } = data.data;
+				dispatch(setAuthUser(id, email, login))
+
+				return id;
+			}
+		})
+		.then(id => {
+			profileAPI.getProfile(id)
+				.then(data => dispatch(setUserProfileAuth(data)))
+		})
 }
+
 //-------------------------------------
 export default authReducer;

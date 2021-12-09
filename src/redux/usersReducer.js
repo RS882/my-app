@@ -109,40 +109,37 @@ export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isF
 export const toogleFollowInProgres = (isFetching, userId) => ({ type: TOOGLE_FOLLOW_IN_PROGRES, isFetching, userId })
 
 // ThunkCreation
-export const getUsers = (currentPage, pageSize) => {
-	return (dispatch) => {
-		dispatch(toogleIsFetching(true));
-		userAPI.getUser(currentPage, pageSize)
-			.then(data => {
-				dispatch(toogleIsFetching(false));
-				dispatch(setUsers(data.items));
-				dispatch(setTotalUsersCout(data.totalCount));
-				// dispatch(setTotalUsersCout(120));
-			})
-	}
-};
+export const getUsers = (currentPage, pageSize) => (dispatch) => {
+	dispatch(toogleIsFetching(true));
+	userAPI.getUser(currentPage, pageSize)
+		.then(data => {
+			dispatch(toogleIsFetching(false));
+			dispatch(setUsers(data.items));
+			dispatch(setTotalUsersCout(data.totalCount));
+			// dispatch(setTotalUsersCout(120));
+		})
+}
 
-export const onPageChanged = (pageNumber, pageSize) => {
-	return (dispatch) => {
-		dispatch(toogleIsFetching(true));
-		dispatch(setCurrentPage(pageNumber));
-		userAPI.getUser(pageNumber, pageSize)
-			.then(data => {
-				dispatch(toogleIsFetching(false));
-				dispatch(setUsers(data.items));
-			})
-	}
-};
-export const toogleFollowBtn = (follow, id) => {
-	return (dispatch) => {
-		dispatch(toogleFollowInProgres(true, id));
-		(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
-			.then(data => {
-				data.resultCode === 0 && dispatch(toogleFollow(id))
-				dispatch(toogleFollowInProgres(false, id));
-			});
-	}
-};
+
+export const onPageChanged = (pageNumber, pageSize) => (dispatch) => {
+	dispatch(toogleIsFetching(true));
+	dispatch(setCurrentPage(pageNumber));
+	userAPI.getUser(pageNumber, pageSize)
+		.then(data => {
+			dispatch(toogleIsFetching(false));
+			dispatch(setUsers(data.items));
+		})
+}
+
+export const toogleFollowBtn = (follow, id) => (dispatch) => {
+	dispatch(toogleFollowInProgres(true, id));
+	(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
+		.then(data => {
+			data.resultCode === 0 && dispatch(toogleFollow(id))
+			dispatch(toogleFollowInProgres(false, id));
+		});
+}
+
 
 //-------------------------------------
 export default usersReducer;

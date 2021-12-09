@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Header.module.css';
 
 import { NavLink } from 'react-router-dom';
+import Preloader from './../common/preloader/preloader';
 
 const Header = (props) => {
 
@@ -12,6 +13,9 @@ const Header = (props) => {
 			</div>
 
 			<div className={s.wrraper}>
+
+				{props.isFetching && <Preloader />}
+
 				{props.isAuth ?
 					(<div className={s.login_box}>
 						<ul className={s.user}>
