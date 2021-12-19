@@ -65,6 +65,7 @@ class UserContainer extends React.Component {
 					avatarUser={this.props.avatarUser}
 					followInProgres={this.props.followInProgres}
 					toogleFollowBtn={this.props.toogleFollowBtn}
+					isBtnDisebled={this.props.isBtnDisebled}
 				/>
 
 			</>
@@ -84,6 +85,7 @@ const mapStateToProps = (state) => {
 		isFetching: state.usersPage.isFetching,
 		followInProgres: state.usersPage.followInProgres,
 		avatarUser,
+		isBtnDisebled: !state.auth.isAuth,
 	}
 };
 

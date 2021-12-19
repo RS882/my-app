@@ -12,7 +12,8 @@ const Users = (props) => {
 		<div className={s.wrapper} >
 
 			{props.users.map(e => {
-				const buttonDisebled = props.followInProgres.includes(e.id);
+
+				const buttonDisebled = props.isBtnDisebled || props.followInProgres.includes(e.id);
 
 				return (
 					<div key={e.id} className={s.box}>
