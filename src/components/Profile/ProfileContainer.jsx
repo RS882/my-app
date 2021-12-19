@@ -17,6 +17,7 @@ import other from './../../assets/social_icon/social-media.png';
 
 import { withRouter } from 'react-router-dom';
 import avatarUser from './../../assets/img/user3.jpg';
+import { withAuthRedirect } from '../HOC/withAuthRedirect';
 
 
 class ProfileContainer extends React.Component {
@@ -25,6 +26,8 @@ class ProfileContainer extends React.Component {
 		this.props.getProfile(this.props.match.params.userId)
 	}
 	render() {
+
+
 
 		const social = (this.props.profile) ?
 			(Object.entries(this.props.profile.contacts)
@@ -50,7 +53,7 @@ const mapStateToProps = (state) => ({
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 
-
-const WithRoterProfileContainer = withRouter(ProfileContainer);
+const withRedirect = withAuthRedirect(ProfileContainer)
+const WithRoterProfileContainer = withRouter(withRedirect);
 
 export default connect(mapStateToProps, { getProfile })(WithRoterProfileContainer)
