@@ -17,7 +17,7 @@ const initialState = {
 	messeges: [
 		{ id: 1, message: `Hi`, author: `dima`, },
 		{ id: 2, message: `How are you?`, author: `dima`, },
-		{ id: 3, message: `I'm fine`, author: `me`, },
+		{ id: 3, message: `I'm fine`, author: `ME`, },
 		{ id: 4, message: `Yo`, author: `me`, },
 	],
 	newTextMessage: `Enter your message`,

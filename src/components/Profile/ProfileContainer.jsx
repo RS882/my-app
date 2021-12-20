@@ -18,6 +18,7 @@ import other from './../../assets/social_icon/social-media.png';
 import { withRouter } from 'react-router-dom';
 import avatarUser from './../../assets/img/user3.jpg';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
+import { compose } from 'redux';
 
 
 class ProfileContainer extends React.Component {
@@ -49,11 +50,16 @@ const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	avatarUser,
 	jobIcon,
-
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 
-const withRedirect = withAuthRedirect(ProfileContainer)
-const WithRoterProfileContainer = withRouter(withRedirect);
+export default compose(
+	connect(mapStateToProps, { getProfile }),
+	withRouter,
+	withAuthRedirect
+)(ProfileContainer);
 
-export default connect(mapStateToProps, { getProfile })(WithRoterProfileContainer)
+// const withRedirect = withAuthRedirect(ProfileContainer)
+// const WithRoterProfileContainer = withRouter(withRedirect);
+
+// export default connect(mapStateToProps, { getProfile })(WithRoterProfileContainer)
