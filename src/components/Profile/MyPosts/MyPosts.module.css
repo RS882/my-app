@@ -2,11 +2,16 @@
 	padding: calc(var(--gap) / 2);
 }
 .postsarea {
-	display: block;
+	width: 50%;
 	margin-bottom: calc(var(--gap) / 2);
-	width: 300px;
-	height: 50px;
-	box-shadow: var(--shadowOut);
+
+	padding: calc(var(--gap) / 2);
+	margin-left: calc(var(--gap) / 2);
+	margin-top: calc(var(--gap) / 2);
+	background-color: var(--secondcolor);
+	border: 2px solid var(--firstcolor);
+	border-radius: 5px;
+	box-shadow: var(--shadow);
 }
 .button {
 	display: block;

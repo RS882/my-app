@@ -7,7 +7,7 @@
 	margin-bottom: calc(var(--gap) / 2);
 }
 .name {
-	text-transform: capitalize;
+	/* text-transform: capitalize; */
 	font-size: var(--fontSize);
 	opacity: 0.8;
 	padding-right: var(--gap);

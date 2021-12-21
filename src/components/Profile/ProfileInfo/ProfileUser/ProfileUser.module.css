@@ -1,6 +1,7 @@
 .wrapper {
 	padding: calc(var(--gap) / 2);
 	margin-left: calc(var(--gap) / 2);
+	margin-top: calc(var(--gap) / 2);
 	background-color: var(--secondcolor);
 	border: 4px solid var(--firstcolor);
 	border-radius: 5px;

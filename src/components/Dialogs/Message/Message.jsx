@@ -8,7 +8,9 @@ const Message = (props) => {
 
 	return (
 		<li style={{ marginLeft: marginL + '%' }} className={s.message} >
-			<div className={s.name}>{props.author.toLowerCase()}</div>
+			<div className={s.name}>
+				{marginL === 30 ? props.author.toLowerCase() : props.author}
+			</div>
 			<div>{props.message}</div>
 		</li >
 	)

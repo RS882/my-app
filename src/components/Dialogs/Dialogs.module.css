@@ -10,12 +10,21 @@
 }
 
 .postsarea {
-	display: block;
+	/* display: block;
 	margin-bottom: calc(var(--gap) / 2);
 
 	width: 300px;
 	height: 50px;
-	box-shadow: var(--shadowOut);
+	box-shadow: var(--shadowOut); */
+	margin-bottom: calc(var(--gap) / 2);
+	width: 50%;
+	padding: calc(var(--gap) / 2);
+	margin-left: calc(var(--gap) / 2);
+	margin-top: calc(var(--gap) / 2);
+	background-color: var(--secondcolor);
+	border: 2px solid var(--firstcolor);
+	border-radius: 5px;
+	box-shadow: var(--shadow);
 }
 .button {
 	display: block;
