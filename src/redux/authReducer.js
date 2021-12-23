@@ -60,7 +60,6 @@ export const getAuthUser = () => (dispatch) => {
 			if (data.resultCode === 0) {
 				const { id, email, login, } = data.data;
 				dispatch(setAuthUser(id, email, login))
-
 				return id;
 			}
 		})

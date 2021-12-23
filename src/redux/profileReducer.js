@@ -65,8 +65,8 @@ export const upPostChange = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
 export const delPostValue = () => ({ type: DEL_POST_VALUE, });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
 //ThunkCreation
-export const getProfile = (userId) => (dispatch) => {
-	profileAPI.getProfile(userId)
+export const getProfile = (userId, meId) => (dispatch) => {
+	profileAPI.getProfile(userId, meId)
 		.then(data => dispatch(setUserProfile(data)))
 }
 

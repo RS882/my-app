@@ -24,7 +24,8 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
-		this.props.getProfile(this.props.match.params.userId)
+		this.props.getProfile(this.props.match.params.userId, this.props.meId)
+
 	}
 	render() {
 
@@ -50,6 +51,7 @@ const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	avatarUser,
 	jobIcon,
+	meId: state.auth.userId,
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 

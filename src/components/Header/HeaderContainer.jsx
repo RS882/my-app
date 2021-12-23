@@ -14,6 +14,7 @@ class HeaderContainer extends React.Component {
 	componentDidMount() {
 
 		this.props.getAuthUser();
+
 		// loginAPI.getAuthUser()
 		// 	.then(data => {
 		// 		if (data.resultCode === 0) {
