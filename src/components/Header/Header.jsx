@@ -24,7 +24,8 @@ const Header = (props) => {
 								{props.login}
 							</li>
 						</ul>
-						<NavLink to={`/myProfile`}>
+						<NavLink onClick={props.showMyProfile} to={`/profile/${props.id}`}>
+
 							<div className={s.img_box_log}>
 								<img className={s.img_log} src={props.img} alt='avatar' />
 							</div>

@@ -7,6 +7,7 @@ const DEL_POST_VALUE = `DEL-POST-VALUE`;
 const SET_USER_PROFILE = `SET_USER_PROFILE`;
 
 
+
 // reducer
 const initialState = {
 	posts: [
@@ -53,6 +54,7 @@ const profileReducer = (state = initialState, action) => {
 				profile: action.profile,
 			};
 
+
 		default:
 			return state;
 	}
@@ -64,6 +66,7 @@ export const addPost = () => ({ type: ADD_POSTS, });
 export const upPostChange = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
 export const delPostValue = () => ({ type: DEL_POST_VALUE, });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
+
 //ThunkCreation
 export const getProfile = (userId, meId) => (dispatch) => {
 	profileAPI.getProfile(userId, meId)
