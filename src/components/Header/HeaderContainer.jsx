@@ -5,7 +5,7 @@ import logo from './../../assets/img/logo.jpg'
 import Header from './Header';
 import { getAuthUser } from './../../redux/authReducer';
 import avatarUser from './../../assets/img/user3.jpg';
-import { setUserProfile } from './../../redux/profileReducer';
+import { setUserProfile, setUserStatus } from './../../redux/profileReducer';
 ;
 
 
@@ -30,7 +30,10 @@ class HeaderContainer extends React.Component {
 		// 	})
 	}
 
-	showMyProfile = () => this.props.setUserProfile(this.props.myProfile)
+	showMyProfile = () => {
+		this.props.setUserProfile(this.props.myProfile)
+		this.props.setUserStatus(this.props.myStatus)
+	}
 
 	render() {
 		return (
@@ -49,9 +52,12 @@ const mapStateToProps = (state) => ({
 	isFetching: state.auth.isFetching,
 	logo,
 	myProfile: state.auth.profile,
+	myStatus: state.auth.status,
 	img: (state.auth.profile) && state.auth.profile.photos.small,
 
 })
 
 
-export default connect(mapStateToProps, { getAuthUser, setUserProfile })(HeaderContainer);
+export default connect(mapStateToProps,
+	{ getAuthUser, setUserProfile, setUserStatus })
+	(HeaderContainer);

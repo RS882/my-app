@@ -28,13 +28,18 @@ class ProfileContainer extends React.Component {
 			this.props.match.params.userId :
 			this.props.meId;
 		this.props.getProfile(userId, this.props.meId);
-
 		this.props.getUserStatus(userId);
 	}
 
 
 	render() {
 
+		// if (this.props.meId && this.props.profile.userId) {
+		// 	const isMe = this.props.meId === this.props.profile.userId
+		// }
+		const isMe =
+			this.props.meId && this.props.profile ?
+				(this.props.meId === this.props.profile.userId) : false;
 
 		const social = (this.props.profile) ?
 			(Object.entries(this.props.profile.contacts)
@@ -47,7 +52,11 @@ class ProfileContainer extends React.Component {
 						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
 				}))) : [];
 
-		return <Profile {...this.props} profile={this.props.profile} social={social} />
+		return <Profile {...this.props}
+			profile={this.props.profile}
+			social={social}
+			isMe={isMe}
+		/>
 	}
 
 }
