@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProfile } from './../../redux/profileReducer';
+import { getProfile, getUserStatus, updateUserStatus } from './../../redux/profileReducer';
 import Profile from './Profile';
 import jobIcon from './../../assets/img/looking.jpg';
 
@@ -24,11 +24,16 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
-		this.props.getProfile(this.props.match.params.userId, this.props.meId)
+		const userId = this.props.match.params.userId ?
+			this.props.match.params.userId :
+			this.props.meId;
+		this.props.getProfile(userId, this.props.meId);
 
+		this.props.getUserStatus(userId);
 	}
-	render() {
 
+
+	render() {
 
 
 		const social = (this.props.profile) ?
@@ -49,6 +54,7 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
+	status: state.profilePage.status,
 	avatarUser,
 	jobIcon,
 	meId: state.auth.userId,
@@ -56,7 +62,7 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-	connect(mapStateToProps, { getProfile }),
+	connect(mapStateToProps, { getProfile, getUserStatus, updateUserStatus }),
 	withRouter,
 	withAuthRedirect
 )(ProfileContainer);

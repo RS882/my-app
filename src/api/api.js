@@ -23,6 +23,12 @@ export const userAPI = {
 export const profileAPI = {
 	getProfile: (userId, meId = 2) => instance.get(`profile/${userId ? userId : meId}`)
 		.then(respons => respons.data),
+
+	getStatus: (userId) => instance.get(`profile/status/${userId}`)
+		.then(respons => respons.data),
+
+	updateStatus: (userStatus) => instance.put(`profile/status`, { status: userStatus })
+		.then(respons => respons.data),
 }
 
 export const loginAPI = {

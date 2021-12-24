@@ -4,14 +4,24 @@ import s from './ProfileStatus.module.css';
 class ProfileStatus extends React.Component {
 	state = {
 		editMode: false,
+		status: this.props.status || `______`,
 	}
-	toogleEditMode = () => this.setState({
-		editMode: !this.state.editMode,
-	})
+	toogleEditMode = () => {
+		this.setState({
+			editMode: !this.state.editMode,
+		})
+		this.props.updateUserStatus(this.state.status)
+	}
 	// this.forceUpdate(); - такую перерисовку не рекомнедуется использовать
 	selectStatus = (e) => e.target.select();// віделем содержимое input 
 
+	onChangeStatus = (e) => this.setState({
+		status: e.target.value,
+	})
+
 	render() {
+		// console.log(this.props);
+		// debugger
 		return (
 			<div className={s.wrapper}>
 				<h3 className={s.title}>my status</h3>
@@ -24,7 +34,8 @@ class ProfileStatus extends React.Component {
 							autoFocus={true}
 							onBlur={this.toogleEditMode}
 							onFocus={this.selectStatus}
-							defaultValue={this.props.status}
+							onChange={this.onChangeStatus}
+							value={this.state.status}
 						// value={this.props.status}
 						/>
 					</div>}

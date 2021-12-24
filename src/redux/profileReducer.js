@@ -5,6 +5,7 @@ const ADD_POSTS = `ADD-POSTS`;
 const UPDATE_NEW_POST_TEXT = `UPDATE-NEW-POST-TEXT`;
 const DEL_POST_VALUE = `DEL-POST-VALUE`;
 const SET_USER_PROFILE = `SET_USER_PROFILE`;
+const SET_USER_STATUS = `SET_USER_STATUS`;
 
 
 
@@ -16,6 +17,7 @@ const initialState = {
 	],
 	newTextPost: `Enter your post`,
 	profile: null,
+	status: ``,
 }
 
 
@@ -53,7 +55,11 @@ const profileReducer = (state = initialState, action) => {
 				...state,
 				profile: action.profile,
 			};
-
+		case SET_USER_STATUS:
+			return {
+				...state,
+				status: action.status,
+			};
 
 		default:
 			return state;
@@ -66,11 +72,22 @@ export const addPost = () => ({ type: ADD_POSTS, });
 export const upPostChange = (text) => ({ type: UPDATE_NEW_POST_TEXT, text, });
 export const delPostValue = () => ({ type: DEL_POST_VALUE, });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
-
+export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status, });
 //ThunkCreation
 export const getProfile = (userId, meId) => (dispatch) => {
 	profileAPI.getProfile(userId, meId)
 		.then(data => dispatch(setUserProfile(data)))
+}
+export const getUserStatus = (userId) => (dispatch) => {
+	profileAPI.getStatus(userId)
+		.then(data => {
+			dispatch(setUserStatus(data))
+		})
+}
+
+export const updateUserStatus = (status) => (dispatch) => {
+	profileAPI.updateStatus(status)
+		.then(pesponse => pesponse.resultCode === 0 && dispatch(setUserStatus(status)))
 }
 
 
