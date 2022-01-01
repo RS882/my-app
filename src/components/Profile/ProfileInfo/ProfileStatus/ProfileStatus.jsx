@@ -10,6 +10,7 @@ class ProfileStatus extends React.Component {
 		if (this.props.isMe) {
 			this.setState({
 				editMode: !this.state.editMode,
+				status: this.props.status || `no status`
 			})
 			this.props.updateUserStatus(this.state.status)
 		}
@@ -22,8 +23,7 @@ class ProfileStatus extends React.Component {
 	});
 
 	render() {
-		// console.log(this.props);
-		// debugger
+
 		return (
 			<div className={s.wrapper}>
 				<h3 className={s.title}>
@@ -32,7 +32,9 @@ class ProfileStatus extends React.Component {
 						`User status`}
 				</h3>
 				{!this.state.editMode ?
-					<div className={s.status} onDoubleClick={this.toogleEditMode}>
+					<div className={s.status}
+						style={{ cursor: (this.props.isMe) ? `pointer` : `auto` }}
+						onDoubleClick={this.toogleEditMode}>
 						{this.props.status || `no status`}
 					</div> :
 
@@ -44,7 +46,8 @@ class ProfileStatus extends React.Component {
 							onChange={this.onChangeStatus}
 							value={this.state.status}
 						/>
-					</div>}
+					</div>
+				}
 			</div>
 		)
 			;

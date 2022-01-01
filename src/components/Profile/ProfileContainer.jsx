@@ -34,9 +34,7 @@ class ProfileContainer extends React.Component {
 
 	render() {
 
-		// if (this.props.meId && this.props.profile.userId) {
-		// 	const isMe = this.props.meId === this.props.profile.userId
-		// }
+
 		const isMe =
 			this.props.meId && this.props.profile ?
 				(this.props.meId === this.props.profile.userId) : false;

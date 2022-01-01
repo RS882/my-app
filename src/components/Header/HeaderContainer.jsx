@@ -5,7 +5,9 @@ import logo from './../../assets/img/logo.jpg'
 import Header from './Header';
 import { getAuthUser } from './../../redux/authReducer';
 import avatarUser from './../../assets/img/user3.jpg';
-import { setUserProfile, setUserStatus } from './../../redux/profileReducer';
+import { setUserProfile, getUserStatus } from './../../redux/profileReducer';
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 ;
 
 
@@ -32,10 +34,13 @@ class HeaderContainer extends React.Component {
 
 	showMyProfile = () => {
 		this.props.setUserProfile(this.props.myProfile)
-		this.props.setUserStatus(this.props.myStatus)
+		if ((/profile/i).test(this.props.location.pathname)) {
+			this.props.getUserStatus(this.props.id)
+		}
 	}
 
 	render() {
+
 		return (
 
 			<Header {...this.props} img={this.props.img ? this.props.img : avatarUser}
@@ -52,12 +57,12 @@ const mapStateToProps = (state) => ({
 	isFetching: state.auth.isFetching,
 	logo,
 	myProfile: state.auth.profile,
-	myStatus: state.auth.status,
 	img: (state.auth.profile) && state.auth.profile.photos.small,
 
 })
 
 
-export default connect(mapStateToProps,
-	{ getAuthUser, setUserProfile, setUserStatus })
-	(HeaderContainer);
+export default compose(
+	connect(mapStateToProps, { getAuthUser, setUserProfile, getUserStatus }),
+	withRouter
+)(HeaderContainer);
