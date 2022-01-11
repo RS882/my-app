@@ -5,7 +5,7 @@ import { loginAPI, profileAPI } from './../api/api';
 const SET_AUTH_USER = `SET_AUTH_USER`;
 const TOOGLE_IS_FETCHING_AUTH = `TOOGLE_IS_FETCHING_AUTH`;
 const SET_AUTH_USER_PROFILE = `SET_AUTH_USER_PROFILE`;
-// const SET_USER_STATUS_AUTH = `SET_USER_STATUS_AUTH`;
+
 
 // reducer
 const initialState = {
@@ -42,11 +42,7 @@ const authReducer = (state = initialState, action) => {
 				...state,
 				profile: action.profile,
 			};
-		// case SET_USER_STATUS_AUTH:
-		// 	return {
-		// 		...state,
-		// 		status: action.status,
-		// 	}
+
 
 		default:
 			return state;
@@ -59,7 +55,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUser = (userId, email, login) => ({ type: SET_AUTH_USER, data: { userId, email, login, }, });
 export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
 export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
-// export const setUserStatusAuth = (status) => ({ type: SET_USER_STATUS_AUTH, status, })
+
 //ThunkCreation
 export const getAuthUser = () => (dispatch) => {
 	dispatch(toogleIsFetchingAuth(true))
@@ -75,12 +71,9 @@ export const getAuthUser = () => (dispatch) => {
 		.then(id => {
 			profileAPI.getProfile(id)
 				.then(data => dispatch(setUserProfileAuth(data)))
-			return id
+
 		})
-	// .then(id => {
-	// 	profileAPI.getStatus(id)
-	// 		.then(data => dispatch(setUserStatusAuth(data)))
-	// })
+
 }
 
 //-------------------------------------

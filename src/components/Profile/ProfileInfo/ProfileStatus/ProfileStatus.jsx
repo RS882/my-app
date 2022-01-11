@@ -6,21 +6,21 @@ class ProfileStatus extends React.Component {
 		editMode: false,
 		status: this.props.status || `no status`,
 	}
+
+	componentDidUpdate(prevProps, prevState) {
+		(prevProps.status !== this.props.status) && this.setState({ status: this.props.status, })
+	}
+
 	toogleEditMode = () => {
 		if (this.props.isMe) {
-			this.setState({
-				editMode: !this.state.editMode,
-				status: this.props.status || `no status`
-			})
+			this.setState({ editMode: !this.state.editMode, })
 			this.props.updateUserStatus(this.state.status)
 		}
 	}
 	// this.forceUpdate(); - такую перерисовку не рекомнедуется использовать
 	selectStatus = (e) => e.target.select();// віделем содержимое input 
 
-	onChangeStatus = (e) => this.setState({
-		status: e.target.value,
-	});
+	onChangeStatus = (e) => this.setState({ status: e.target.value, });
 
 	render() {
 
