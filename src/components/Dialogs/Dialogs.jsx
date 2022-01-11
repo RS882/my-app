@@ -19,24 +19,12 @@ const Dialogs = (props) => {
 			</ul>
 			<div className={s.masseges}>
 				{messageElements}
-				{/* <li className={s.inputpost}> */}
-				{/* <textarea
-						onChange={(e) => props.updateNewMessageText(e.target.value)}
-						onFocus={() => props.delMessageValue()}
-						//ref={newMessageElement}
-						className={s.postsarea}
-						value={props.newTextMessage}
-					/>
 
-					<button
-						onClick={() => props.addMessage()}
-						className={s.button}
-					>send</button> */}
 				<AddMessageForm
 					addMessage={props.addMessage}
 					newTextMessage={props.newTextMessage}
 					delMessageValue={props.delMessageValue} />
-				{/* </li> */}
+
 			</div>
 
 		</div>
@@ -45,14 +33,10 @@ const Dialogs = (props) => {
 }
 
 const AddMessageForm = (props) => {
-	let formData = {
-		newTextMessage: props.newTextMessage,
-	}
+	let formData = { newTextMessage: props.newTextMessage, }
 	return (
 		<Form
-			onSubmit={(values) => {
-				props.addMessage(values.newTextMessage)
-			}}
+			onSubmit={(values) => props.addMessage(values.newTextMessage)}
 			initialValues={{
 				...formData
 			}}

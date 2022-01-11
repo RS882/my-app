@@ -2,7 +2,7 @@
 
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
-import { addMessage, updateNewMessageText, delMessageValue } from './../../redux/dialogsReducer';
+import { addMessage, delMessageValue } from './../../redux/dialogsReducer';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
 import { compose } from 'redux';
 

@@ -1,6 +1,7 @@
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
+import { Form, Field } from 'react-final-form';
 
 
 
@@ -14,23 +15,41 @@ const MyPosts = (props) => {
 
 		<div className={s.postsBlock}>
 			<h3 className={s.poststitle}>my posts</h3>
-			<div >
-				<textarea
-					onChange={(e) => props.upPostChange(e.target.value)}
-					onFocus={() => props.delPostValue()}
-					//ref={newPostElement}
-					className={s.postsarea}
-					value={props.newTextPost}
-				/>
-				<button
-					onClick={() => props.addPost()}
-					className={s.button}
-				>add post</button>
-			</div>
+
+			<AddPostForm
+				delPostValue={props.delPostValue}
+				addPost={props.addPost}
+				newTextPost={props.newTextPost} />
+
 			<ul className={s.posts}>
 				{postElements}
 			</ul>
 		</div>
+
+	)
+}
+
+const AddPostForm = (props) => {
+	let formData = { newTextPost: props.newTextPost, }
+
+	return (
+		<Form
+			onSubmit={(values) => props.addPost(values.newTextPost)}
+			initialValues={{
+				...formData
+			}}
+			render={({ handleSubmit }) =>
+				<form onSubmit={handleSubmit} >
+					<Field
+						component='textarea'
+						name='newTextPost'
+						onFocus={props.delPostValue}
+						className={s.postsarea}
+					/>
+					<button className={s.button}>add post</button>
+				</form>
+			}
+		/>
 
 	)
 }
