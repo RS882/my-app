@@ -3,11 +3,19 @@ import React from 'react';
 import { Form, Field } from 'react-final-form'
 import { loginAPI } from '../../api/api';
 
+
 const Login = (props) => {
 
 	const onSubmit = (formData) => {
 		loginAPI.loginUser(formData)
-			.then(data => console.log(data))
+			.then(data => {
+
+				console.log(data);
+			})
+		// .then(id => {
+		// 	loginAPI.getAuthUser()
+		// 		.then(data => console.log(data))
+		// })
 		// const dataJson = JSON.stringify(formData);
 
 	}

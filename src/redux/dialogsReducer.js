@@ -1,7 +1,6 @@
 // action type
 
 const ADD_MESSAGE = `ADD-MESSAGE`,
-	UPDATE_NEW_MESSAGE_TEXT = `UPDATE-NEW-MESSAGE-TEXT`,
 	DEL_MESSAGE_VALUE = `DEL-MESSAGE-VALUE`;
 
 // reducer
@@ -29,26 +28,21 @@ const dialogsReducer = (state = initialState, action) => {
 	switch (action.type) {
 
 		case ADD_MESSAGE:
-			return (state.newTextMessage !== `Enter your message`) ?
+
+			return (action.newMessage !== `Enter your message`) ?
 				{
 					...state,
 					messeges: [
 						...state.messeges,
 						{
 							id: state.messeges.length + 1,
-							message: state.newTextMessage,
+							message: action.newMessage,
 							author: `me`,
 						}
 					],
 					newTextMessage: `Enter your message`,
 				}
 				: { ...state };
-
-		case UPDATE_NEW_MESSAGE_TEXT:
-			return {
-				...state,
-				newTextMessage: action.text,
-			};
 
 		case DEL_MESSAGE_VALUE:
 			return {
@@ -62,8 +56,7 @@ const dialogsReducer = (state = initialState, action) => {
 
 };
 //ActionCreation
-export const addMessage = () => ({ type: ADD_MESSAGE, });
-export const updateNewMessageText = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, text: text, });
+export const addMessage = (newMessage) => ({ type: ADD_MESSAGE, newMessage });
 export const delMessageValue = () => ({ type: DEL_MESSAGE_VALUE, });
 //-------------------------------------
 export default dialogsReducer;

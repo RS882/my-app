@@ -1,6 +1,5 @@
 .login {
 	display: grid;
-
 	row-gap: calc(var(--gap) / 2);
 	max-width: 30%;
 	min-width: 200px;
@@ -15,7 +14,7 @@
 }
 .title {
 	color: var(--firstcolor);
-	justify-self: center;
+	text-align: center;
 	margin-top: calc(var(--gap) / 2);
 	text-transform: uppercase;
 	font-size: 1.5em;
@@ -23,7 +22,6 @@
 }
 
 .form {
-	width: inherit;
 	display: grid;
 	row-gap: calc(var(--gap) / 2);
 	padding: 0px calc(var(--gap) / 2) 0px calc(var(--gap) / 2);

@@ -76,5 +76,11 @@ export const getAuthUser = () => (dispatch) => {
 
 }
 
+export const getLoginUser = (formData) => (dispatch) => {
+	loginAPI.loginUser(formData)
+		.then(data => data.userId)
+		.then()
+}
+
 //-------------------------------------
 export default authReducer;
