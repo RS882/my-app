@@ -43,10 +43,7 @@ const LoginForm = (props) => {
 			initialValues={{
 				...formData,
 			}}
-			validate={(values) => {
 
-				// console.log(values);
-			}}
 			render={({ handleSubmit, values }) => (
 				<form onSubmit={handleSubmit} className={s.form}>
 					<div>

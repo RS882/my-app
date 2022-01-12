@@ -2,6 +2,7 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
 import { Form, Field } from 'react-final-form';
+import { composeValidators, maxLength, required, mustBeNumber, emailValid } from './../../../utilits/validators';
 
 
 
@@ -31,6 +32,7 @@ const MyPosts = (props) => {
 
 const AddPostForm = (props) => {
 	let formData = { newTextPost: props.newTextPost, }
+	const maxLength10 = maxLength(10)
 
 	return (
 		<Form
@@ -38,11 +40,13 @@ const AddPostForm = (props) => {
 			initialValues={{
 				...formData
 			}}
+
 			render={({ handleSubmit }) =>
 				<form onSubmit={handleSubmit} >
 					<Field
 						component='textarea'
 						name='newTextPost'
+						validate={composeValidators(required, maxLength10)}
 						onFocus={props.delPostValue}
 						className={s.postsarea}
 					/>
