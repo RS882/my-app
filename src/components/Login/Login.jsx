@@ -2,6 +2,8 @@ import s from './Login.module.css';
 import React from 'react';
 import { Form, Field } from 'react-final-form'
 import { loginAPI } from '../../api/api';
+import { required } from './../../utilits/validators';
+import { Input } from '../common/formControl/formControl';
 
 
 const Login = (props) => {
@@ -48,7 +50,8 @@ const LoginForm = (props) => {
 				<form onSubmit={handleSubmit} className={s.form}>
 					<div>
 						<Field
-							component='input'
+							component={Input}
+							validate={required}
 							name='email'
 							className={s.input}
 							placeholder='Email'
@@ -56,7 +59,8 @@ const LoginForm = (props) => {
 					</div>
 					<div>
 						<Field
-							component='input'
+							component={Input}
+							validate={required}
 							name='password'
 							className={s.input}
 							placeholder='Password' />
@@ -64,7 +68,7 @@ const LoginForm = (props) => {
 					<div className={`${s.input} ${s.remember}`}>
 						<Field
 							id='login_remember'
-							component='input'
+							component={Input}
 							name='rememberMe'
 							className={s.checkbox}
 							type='checkbox' />

@@ -3,6 +3,8 @@ import s from './Dialogs.module.css';
 import Message from './Message/Message';
 import React from 'react';
 import { Field, Form } from 'react-final-form';
+import { Textarea } from './../common/formControl/formControl';
+import { composeValidators, maxLength, required } from '../../utilits/validators';
 
 
 const Dialogs = (props) => {
@@ -34,6 +36,7 @@ const Dialogs = (props) => {
 
 const AddMessageForm = (props) => {
 	let formData = { newTextMessage: props.newTextMessage, }
+	const maxLength50 = maxLength(50)
 	return (
 		<Form
 			onSubmit={(values) => props.addMessage(values.newTextMessage)}
@@ -43,7 +46,8 @@ const AddMessageForm = (props) => {
 			render={({ handleSubmit }) =>
 				<form className={s.inputpost} onSubmit={handleSubmit}>
 					<Field
-						component='textarea'
+						component={Textarea}
+						validate={composeValidators(required, maxLength50)}
 						name='newTextMessage'
 						onFocus={props.delMessageValue}
 						className={s.postsarea}

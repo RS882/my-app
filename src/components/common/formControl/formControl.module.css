@@ -1,0 +1,17 @@
+.error span {
+	border: 3px double red;
+	position: absolute;
+	padding: 2px;
+	border-radius: 5px;
+	background-color: #fff;
+	color: red;
+	font-size: 12px;
+	top: 0%;
+	left: 0;
+	transform: translate(-102%, 0);
+	transition: all var(--transition);
+}
+
+.formBox {
+	position: relative;
+}

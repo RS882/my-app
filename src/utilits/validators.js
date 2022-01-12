@@ -2,7 +2,7 @@ export const required = (value) => (value ? undefined : `This field is required`
 
 export const maxLength = (maxLength) => (value) =>
 	(value && value.length <= maxLength) ? undefined :
-		`The allowed number of characters is not more than ${maxLength}`;
+		`Max length is not more than ${maxLength}`;
 
 export const mustBeNumber = (value) => (isNaN(value) ?
 	`Must be a number` : undefined);
