@@ -39,11 +39,14 @@ const AddMessageForm = (props) => {
 	const maxLength50 = maxLength(50)
 	return (
 		<Form
-			onSubmit={(values) => props.addMessage(values.newTextMessage)}
+			onSubmit={(values, form) => {
+				props.addMessage(values.newTextMessage)
+				form.resetFieldState('newTextMessage')
+			}}
 			initialValues={{
 				...formData
 			}}
-			render={({ handleSubmit }) =>
+			render={({ handleSubmit, submitting, errors, pristine }) =>
 				<form className={s.inputpost} onSubmit={handleSubmit}>
 					<Field
 						component={Textarea}
@@ -51,8 +54,12 @@ const AddMessageForm = (props) => {
 						name='newTextMessage'
 						onFocus={props.delMessageValue}
 						className={s.postsarea}
+
 					/>
-					<button className={s.button}>send</button>
+					<button
+						className={s.button}
+						disabled={submitting || pristine || Object.keys(errors).length > 0}
+					>send</button>
 				</form >
 			}
 		/>

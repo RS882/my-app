@@ -1,8 +1,8 @@
 .login {
 	display: grid;
 	row-gap: calc(var(--gap) / 2);
-	max-width: 30%;
-	min-width: 200px;
+
+	width: 230px;
 	margin-bottom: calc(var(--gap) / 2);
 	padding: calc(var(--gap) / 2);
 	margin-left: calc(var(--gap) / 2);
@@ -24,7 +24,6 @@
 .form {
 	display: grid;
 	row-gap: calc(var(--gap) / 2);
-	padding: 0px calc(var(--gap) / 2) 0px calc(var(--gap) / 2);
 }
 
 .input {
@@ -40,6 +39,11 @@
 	padding-bottom: 5px;
 	text-transform: capitalize;
 	color: var(--firstcolor);
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-between;
 }
 
 .button {
@@ -64,4 +68,12 @@
 	background-color: var(--secondcolor);
 	color: var(--firstcolor);
 	transition: all var(--transition);
+}
+
+.btn[disabled] {
+	cursor: auto;
+	background-color: var(--secondcolor);
+	box-shadow: var(--shadow);
+	border: 2px solid var(--secondcolor);
+	color: #bed1a8;
 }

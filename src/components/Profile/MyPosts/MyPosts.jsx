@@ -37,22 +37,34 @@ const AddPostForm = (props) => {
 
 	return (
 		<Form
-			onSubmit={(values) => props.addPost(values.newTextPost)}
+			onSubmit={(values, form) => {
+				props.addPost(values.newTextPost)
+				form.resetFieldState(`newTextPost`)
+			}}
 			initialValues={{
 				...formData
 			}}
 
-			render={({ handleSubmit }) =>
-				<form onSubmit={handleSubmit} >
-					<Field
-						component={Textarea}
-						name='newTextPost'
-						validate={composeValidators(required, maxLength50)}
-						onFocus={props.delPostValue}
-						className={s.postsarea}
-					/>
-					<button className={s.button}>add post</button>
-				</form>
+			render={({ handleSubmit, submitting, pristine, errors }) => {
+
+				return (
+					<form onSubmit={handleSubmit} >
+						<Field
+							component={Textarea}
+							name='newTextPost'
+							validate={composeValidators(required, maxLength50)}
+							onFocus={props.delPostValue}
+							className={s.postsarea}
+
+						/>
+						<button
+							className={s.button}
+							disabled={submitting || pristine || Object.keys(errors).length > 0}
+						>add post</button>
+					</form>
+				)
+			}
+
 			}
 		/>
 

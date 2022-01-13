@@ -9,16 +9,14 @@ import { Input } from '../common/formControl/formControl';
 const Login = (props) => {
 
 	const onSubmit = (formData) => {
-		loginAPI.loginUser(formData)
-			.then(data => {
+		console.log(formData);
+		// loginAPI.loginUser(formData)
+		// 	.then(data => {
 
-				console.log(data);
-			})
-		// .then(id => {
-		// 	loginAPI.getAuthUser()
-		// 		.then(data => console.log(data))
-		// })
-		// const dataJson = JSON.stringify(formData);
+		// 		console.log(data);
+		// 	})
+
+
 
 	}
 
@@ -39,47 +37,70 @@ const LoginForm = (props) => {
 		rememberMe: false,
 	};
 
+
 	return (
 		<Form
-			onSubmit={props.onSubmit}
+			onSubmit={(values, form) => {
+				props.onSubmit(values)
+				form.restart()
+			}}
 			initialValues={{
 				...formData,
 			}}
 
-			render={({ handleSubmit, values }) => (
-				<form onSubmit={handleSubmit} className={s.form}>
-					<div>
-						<Field
-							component={Input}
-							validate={required}
-							name='email'
-							className={s.input}
-							placeholder='Email'
-						/>
-					</div>
-					<div>
-						<Field
-							component={Input}
-							validate={required}
-							name='password'
-							className={s.input}
-							placeholder='Password' />
-					</div>
-					<div className={`${s.input} ${s.remember}`}>
-						<Field
-							id='login_remember'
-							component={Input}
-							name='rememberMe'
-							className={s.checkbox}
-							type='checkbox' />
-						<label htmlFor='login_remember' className={s.label} >remember me</label>
-					</div>
-					<div className={s.button}>
-						<button className={`${s.input} ${s.btn}`}>submit</button>
-					</div>
-					<pre>{JSON.stringify(values, 0, 2)}</pre>
-				</form>
-			)}
+			render={({ handleSubmit, form, submitting, pristine, errors }) => {
+
+				return (
+					<form onSubmit={handleSubmit} className={s.form}>
+						<div>
+							<Field
+								component={Input}
+								validate={required}
+								name='email'
+								className={s.input}
+								placeholder='Email'
+							/>
+						</div>
+						<div>
+							<Field
+								component={Input}
+								validate={required}
+								name='password'
+								className={s.input}
+								placeholder='Password' />
+						</div>
+						<div className={`${s.input} ${s.remember}`}>
+							<Field
+								id='login_remember'
+								component={Input}
+								name='rememberMe'
+								className={s.checkbox}
+								type='checkbox' />
+							<label htmlFor='login_remember' className={s.label} >remember me</label>
+						</div>
+						<div className={s.buttons}>
+							<div className={s.button}>
+								<button
+									type="submit"
+									className={`${s.input} ${s.btn} `}
+									disabled={submitting || Object.keys(errors).length > 0}
+								>submit</button>
+							</div>
+							<div className={s.button}>
+								<button
+									type="button"
+									className={`${s.input} ${s.btn}`}
+									onClick={form.restart}
+									disabled={submitting || pristine}
+								>
+									Reset
+								</button>
+							</div>
+						</div>
+
+					</form>
+				)
+			}}
 		/>
 	)
 }

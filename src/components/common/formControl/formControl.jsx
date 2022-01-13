@@ -17,7 +17,6 @@ const FormControl = ({ input, meta, FormType, ...props }) => {
 	)
 }
 
-export const Textarea = (props) => <FormControl {...props} FormType="textarea"></FormControl>
+export const Textarea = (props) => <FormControl {...props} FormType="textarea" />
 
-
-export const Input = (props) => <FormControl {...props} FormType="input"></FormControl>
+export const Input = (props) => <FormControl {...props} FormType="input" />
