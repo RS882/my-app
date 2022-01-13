@@ -14,7 +14,6 @@ const TextareaForm = (props) => {
 				form.resetFieldState(props.nameForm)
 			}}
 			initialValues={{ ...formData }}
-
 			render={({ handleSubmit, submitting, pristine, errors }) =>
 				<form onSubmit={handleSubmit} >
 					<Field

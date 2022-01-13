@@ -25,13 +25,18 @@ const Header = (props) => {
 							</li>
 						</ul>
 						<NavLink onClick={props.showMyProfile} to={`/profile/${props.id}`}>
-
 							<div className={s.img_box_log}>
 								<img className={s.img_log} src={props.img} alt='avatar' />
 							</div>
 						</NavLink>
+
+						<div className={`${s.img_box_login} ${s.logout}`}>
+							<button onClick={props.logoutUser} className={s.login}>logout</button>
+						</div>
+
 					</div>)
-					: (<NavLink to={'/login'} className={`${s.img_box_login}`} title='Login'>
+
+					: (<NavLink to={'/login'} className={s.img_box_login} title='Login'>
 						<div className={s.login}>
 							login
 						</div>

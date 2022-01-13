@@ -38,8 +38,10 @@ export const loginAPI = {
 	loginUser: (data) => instance.post(`/auth/login`, {
 		email: data.email,
 		password: data.password,
-		rememberMe: data.rememberMe,
-	})
-	// .then(respons => respons.data),
+		rememberMe: data.rememberMe || false,
+	}).then(respons => respons.data),
+
+	logoutUser: () => instance.delete(`/auth/login`,)
+		.then(respons => respons.data),
 }
 

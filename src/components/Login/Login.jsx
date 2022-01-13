@@ -1,27 +1,14 @@
 import s from './Login.module.css';
 import React from 'react';
 import { Form, Field } from 'react-final-form'
-import { loginAPI } from '../../api/api';
-import { required } from './../../utilits/validators';
+import { required, emailValid, composeValidators } from './../../utilits/validators';
 import { Input } from '../common/formControl/formControl';
+import { connect } from 'react-redux';
+import { loginUser } from './../../redux/authReducer';
 
 
 const Login = (props) => {
-
-	const onSubmit = (formData) => {
-		console.log(formData);
-		// loginAPI.loginUser(formData)
-		// 	.then(data => {
-
-		// 		console.log(data);
-		// 	})
-
-
-
-	}
-
-
-
+	const onSubmit = (formData) => props.loginUser(formData)
 	return (
 		<div className={s.login}>
 			<h2 className={s.title}>login</h2>
@@ -36,26 +23,20 @@ const LoginForm = (props) => {
 		password: ``,
 		rememberMe: false,
 	};
-
-
 	return (
 		<Form
 			onSubmit={(values, form) => {
 				props.onSubmit(values)
 				form.restart()
 			}}
-			initialValues={{
-				...formData,
-			}}
-
+			initialValues={{ ...formData, }}
 			render={({ handleSubmit, form, submitting, pristine, errors }) => {
-
 				return (
 					<form onSubmit={handleSubmit} className={s.form}>
 						<div>
 							<Field
 								component={Input}
-								validate={required}
+								validate={composeValidators(required, emailValid)}
 								name='email'
 								className={s.input}
 								placeholder='Email'
@@ -66,6 +47,7 @@ const LoginForm = (props) => {
 								component={Input}
 								validate={required}
 								name='password'
+								type='password'
 								className={s.input}
 								placeholder='Password' />
 						</div>
@@ -92,18 +74,13 @@ const LoginForm = (props) => {
 									className={`${s.input} ${s.btn}`}
 									onClick={form.restart}
 									disabled={submitting || pristine}
-								>
-									Reset
-								</button>
+								>Reset</button>
 							</div>
 						</div>
-
 					</form>
 				)
 			}}
 		/>
 	)
 }
-
-
-export default Login;
+export default connect(null, { loginUser })(Login);

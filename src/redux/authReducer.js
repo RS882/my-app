@@ -15,7 +15,7 @@ const initialState = {
 	isFetching: false,
 	isAuth: false,
 	profile: null,
-	status: ``,
+
 }
 
 
@@ -28,7 +28,7 @@ const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				...action.data,
-				isAuth: true,
+
 			};
 		case TOOGLE_IS_FETCHING_AUTH:
 			return {
@@ -52,7 +52,7 @@ const authReducer = (state = initialState, action) => {
 //ActionCreation
 
 
-export const setAuthUser = (userId, email, login) => ({ type: SET_AUTH_USER, data: { userId, email, login, }, });
+export const setAuthUser = (userId, email, login, isAuth) => ({ type: SET_AUTH_USER, data: { userId, email, login, isAuth, }, });
 export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
 export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
 
@@ -64,7 +64,7 @@ export const getAuthUser = () => (dispatch) => {
 			dispatch(toogleIsFetchingAuth(false))
 			if (data.resultCode === 0) {
 				const { id, email, login, } = data.data;
-				dispatch(setAuthUser(id, email, login))
+				dispatch(setAuthUser(id, email, login, true))
 				return id;
 			}
 		})
@@ -75,11 +75,23 @@ export const getAuthUser = () => (dispatch) => {
 		})
 
 }
-
-export const getLoginUser = (formData) => (dispatch) => {
+export const loginUser = (formData) => (dispatch) => {
 	loginAPI.loginUser(formData)
-		.then(data => data.userId)
-		.then()
+		.then(data => {
+			if (data.resultCode === 0) {
+				dispatch(getAuthUser())
+			}
+		})
+}
+
+export const logoutUser = () => (dispatch) => {
+	loginAPI.logoutUser()
+		.then(data => {
+			if (data.resultCode === 0) {
+				dispatch(setAuthUser(null, null, null, false))
+				dispatch(setUserProfileAuth(null))
+			}
+		})
 }
 
 //-------------------------------------
