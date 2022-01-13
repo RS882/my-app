@@ -82,14 +82,17 @@ export const loginUser = (formData) => (dispatch) => {
 				dispatch(getAuthUser())
 			}
 		})
+
 }
 
 export const logoutUser = () => (dispatch) => {
+	dispatch(toogleIsFetchingAuth(true))
 	loginAPI.logoutUser()
 		.then(data => {
 			if (data.resultCode === 0) {
 				dispatch(setAuthUser(null, null, null, false))
 				dispatch(setUserProfileAuth(null))
+				dispatch(toogleIsFetchingAuth(false))
 			}
 		})
 }

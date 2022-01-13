@@ -5,10 +5,16 @@ import { required, emailValid, composeValidators } from './../../utilits/validat
 import { Input } from '../common/formControl/formControl';
 import { connect } from 'react-redux';
 import { loginUser } from './../../redux/authReducer';
+import { Redirect } from 'react-router-dom';
+
 
 
 const Login = (props) => {
-	const onSubmit = (formData) => props.loginUser(formData)
+
+	if (props.isAuth) return <Redirect to='/profile' />;
+
+
+	const onSubmit = (formData) => props.loginUser(formData);
 	return (
 		<div className={s.login}>
 			<h2 className={s.title}>login</h2>
@@ -83,4 +89,11 @@ const LoginForm = (props) => {
 		/>
 	)
 }
-export default connect(null, { loginUser })(Login);
+
+const mapStateToProps = (state) => ({
+	isAuth: state.auth.isAuth,
+})
+
+
+
+export default connect(mapStateToProps, { loginUser })(Login);

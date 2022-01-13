@@ -31,7 +31,11 @@ const Header = (props) => {
 						</NavLink>
 
 						<div className={`${s.img_box_login} ${s.logout}`}>
-							<button onClick={props.logoutUser} className={s.login}>logout</button>
+							<button
+								onClick={props.logoutUser}
+								disabled={props.isFetching}
+								className={s.login}>
+								logout</button>
 						</div>
 
 					</div>)
