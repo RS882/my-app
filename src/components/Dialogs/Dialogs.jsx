@@ -5,6 +5,7 @@ import React from 'react';
 import { Field, Form } from 'react-final-form';
 import { Textarea } from './../common/formControl/formControl';
 import { composeValidators, maxLength, required } from '../../utilits/validators';
+import TextareaForm from './../forms/TextareaForm/TextareaForm';
 
 
 const Dialogs = (props) => {
@@ -21,49 +22,16 @@ const Dialogs = (props) => {
 			</ul>
 			<div className={s.masseges}>
 				{messageElements}
-
-				<AddMessageForm
-					addMessage={props.addMessage}
-					newTextMessage={props.newTextMessage}
-					delMessageValue={props.delMessageValue} />
-
+				<TextareaForm
+					delValue={props.delMessageValue}
+					addValue={props.addMessage}
+					newTextValue={props.newTextMessage}
+					nameForm={`newTextMessage`}
+					maxLengthText={50}
+					buttonName={`send`}
+				/>
 			</div>
-
 		</div>
-
 	);
 }
-
-const AddMessageForm = (props) => {
-	let formData = { newTextMessage: props.newTextMessage, }
-	const maxLength50 = maxLength(50)
-	return (
-		<Form
-			onSubmit={(values, form) => {
-				props.addMessage(values.newTextMessage)
-				form.resetFieldState('newTextMessage')
-			}}
-			initialValues={{
-				...formData
-			}}
-			render={({ handleSubmit, submitting, errors, pristine }) =>
-				<form className={s.inputpost} onSubmit={handleSubmit}>
-					<Field
-						component={Textarea}
-						validate={composeValidators(required, maxLength50)}
-						name='newTextMessage'
-						onFocus={props.delMessageValue}
-						className={s.postsarea}
-
-					/>
-					<button
-						className={s.button}
-						disabled={submitting || pristine || Object.keys(errors).length > 0}
-					>send</button>
-				</form >
-			}
-		/>
-	)
-}
-
 export default Dialogs;

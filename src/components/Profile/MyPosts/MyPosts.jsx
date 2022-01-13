@@ -4,6 +4,8 @@ import React from 'react';
 import { Form, Field } from 'react-final-form';
 import { composeValidators, maxLength, required } from './../../../utilits/validators';
 import { Textarea } from './../../common/formControl/formControl';
+import TextareaForm from './../../forms/TextareaForm/TextareaForm';
+
 
 
 
@@ -17,12 +19,14 @@ const MyPosts = (props) => {
 
 		<div className={s.postsBlock}>
 			<h3 className={s.poststitle}>my posts</h3>
-
-			<AddPostForm
-				delPostValue={props.delPostValue}
-				addPost={props.addPost}
-				newTextPost={props.newTextPost} />
-
+			<TextareaForm
+				delValue={props.delPostValue}
+				addValue={props.addPost}
+				newTextValue={props.newTextPost}
+				nameForm={`newTextPost`}
+				maxLengthText={50}
+				buttonName={`add post`}
+			/>
 			<ul className={s.posts}>
 				{postElements}
 			</ul>
@@ -31,44 +35,8 @@ const MyPosts = (props) => {
 	)
 }
 
-const AddPostForm = (props) => {
-	let formData = { newTextPost: props.newTextPost, }
-	const maxLength50 = maxLength(50)
 
-	return (
-		<Form
-			onSubmit={(values, form) => {
-				props.addPost(values.newTextPost)
-				form.resetFieldState(`newTextPost`)
-			}}
-			initialValues={{
-				...formData
-			}}
 
-			render={({ handleSubmit, submitting, pristine, errors }) => {
 
-				return (
-					<form onSubmit={handleSubmit} >
-						<Field
-							component={Textarea}
-							name='newTextPost'
-							validate={composeValidators(required, maxLength50)}
-							onFocus={props.delPostValue}
-							className={s.postsarea}
-
-						/>
-						<button
-							className={s.button}
-							disabled={submitting || pristine || Object.keys(errors).length > 0}
-						>add post</button>
-					</form>
-				)
-			}
-
-			}
-		/>
-
-	)
-}
 
 export default MyPosts;

@@ -1,43 +1,7 @@
 .postsBlock {
 	padding: calc(var(--gap) / 2);
 }
-.postsarea {
-	width: 50%;
-	margin-bottom: calc(var(--gap) / 2);
 
-	padding: calc(var(--gap) / 2);
-	margin-left: calc(var(--gap) / 2);
-	margin-top: calc(var(--gap) / 2);
-	background-color: var(--secondcolor);
-	border: 2px solid var(--firstcolor);
-	border-radius: 5px;
-	box-shadow: var(--shadow);
-}
-.button {
-	display: block;
-	margin-bottom: calc(var(--gap) / 2);
-	background-color: var(--firstcolor);
-	border: 2px solid var(--secondcolor);
-	border-radius: calc(var(--gap) / 2);
-	width: 100px;
-	height: 30px;
-	text-transform: uppercase;
-	font-weight: bold;
-	color: var(--secondcolor);
-	box-shadow: var(--shadow);
-}
-.button:hover {
-	background-color: var(--secondcolor);
-	color: var(--firstcolor);
-	transition: all var(--transition);
-}
-.button[disabled] {
-	cursor: auto;
-	background-color: var(--secondcolor);
-	box-shadow: var(--shadow);
-	border: 2px solid var(--secondcolor);
-	color: #bed1a8;
-}
 
 .poststitle {
 	margin-bottom: calc(var(--gap) / 2);
