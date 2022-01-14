@@ -82,6 +82,15 @@
 	box-shadow: var(--shadowOut);
 }
 
+.img_box_logout {
+	display: flex;
+	border: none;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+	box-shadow: var(--shadowOut);
+}
+
 .login {
 	display: flex;
 	justify-content: center;
@@ -110,7 +119,7 @@
 }
 .login:hover[disabled] {
 	border: none;
-	box-shadow: none;
+	box-shadow: var(--shadowOut);
 	text-shadow: none;
 }
 

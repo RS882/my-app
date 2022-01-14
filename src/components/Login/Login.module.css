@@ -1,7 +1,7 @@
 .login {
+	position: relative;
 	display: grid;
 	row-gap: calc(var(--gap) / 2);
-
 	width: 230px;
 	margin-bottom: calc(var(--gap) / 2);
 	padding: calc(var(--gap) / 2);

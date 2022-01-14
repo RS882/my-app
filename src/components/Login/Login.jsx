@@ -4,25 +4,51 @@ import { Form, Field } from 'react-final-form'
 import { required, emailValid, composeValidators } from './../../utilits/validators';
 import { Input } from '../common/formControl/formControl';
 import { connect } from 'react-redux';
-import { loginUser } from './../../redux/authReducer';
+import { loginUser, delErrorMessage } from './../../redux/authReducer';
 import { Redirect } from 'react-router-dom';
+import Preloader from './../common/preloader/preloader';
+import Modal from '../common/modal/modal';
 
 
 
-const Login = (props) => {
-
-	if (props.isAuth) return <Redirect to='/profile' />;
+class Login extends React.Component {
 
 
-	const onSubmit = (formData) => props.loginUser(formData);
-	return (
-		<div className={s.login}>
-			<h2 className={s.title}>login</h2>
-			<LoginForm onSubmit={onSubmit} />
-		</div>
-	);
+
+	onSubmit = (formData) => this.props.loginUser(formData);
+
+
+	render() {
+
+
+		if (this.props.isAuth) return <Redirect to='/profile' />;
+		const ddd = [`eiieiowezz saddADAS DdsADAfsFSSFSFAS Fasfio`,
+			`kaksakskei ieiowezzsaddAD ASDdsADAfsFSSFSFASFas fioeiieiowezzsaddADASDdsADAfsFSSFSFASFasfio
+		 `, `lllleiieiowezzsaddADA SDdsADAfsFS SFSFASFasfioss`]
+		return (
+			<div className={s.login}>
+				<h2 className={s.title}>login</h2>
+				<LoginForm onSubmit={this.onSubmit} />
+				{this.props.isFetching && <Preloader />}
+				{(this.props.errorMessadge && this.props.errorMessadge.length > 0)
+					&& <Modal closeModal={this.props.delErrorMessage} content={ddd} />}
+			</div>
+		);
+	}
+
 };
 
+
+const mapStateToProps = (state) => ({
+	isAuth: state.auth.isAuth,
+	isFetching: state.auth.isFetching,
+	errorMessadge: state.auth.errorMessadge,
+})
+
+
+export default connect(mapStateToProps, { loginUser, delErrorMessage })(Login);
+
+//----------------------------------
 const LoginForm = (props) => {
 	let formData = {
 		email: ``,
@@ -71,7 +97,7 @@ const LoginForm = (props) => {
 								<button
 									type="submit"
 									className={`${s.input} ${s.btn} `}
-									disabled={submitting || Object.keys(errors).length > 0}
+									disabled={submitting || pristine || Object.keys(errors).length > 0}
 								>submit</button>
 							</div>
 							<div className={s.button}>
@@ -83,17 +109,10 @@ const LoginForm = (props) => {
 								>Reset</button>
 							</div>
 						</div>
-					</form>
+					</form >
 				)
 			}}
 		/>
 	)
 }
 
-const mapStateToProps = (state) => ({
-	isAuth: state.auth.isAuth,
-})
-
-
-
-export default connect(mapStateToProps, { loginUser })(Login);

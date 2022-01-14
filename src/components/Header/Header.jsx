@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Header.module.css';
 
 import { NavLink } from 'react-router-dom';
-import Preloader from './../common/preloader/preloader';
+
 
 const Header = (props) => {
 
@@ -14,7 +14,7 @@ const Header = (props) => {
 
 			<div className={s.wrraper}>
 
-				{props.isFetching && <Preloader />}
+
 
 				{props.isAuth ?
 					(<div className={s.login_box}>
@@ -30,7 +30,10 @@ const Header = (props) => {
 							</div>
 						</NavLink>
 
-						<div className={`${s.img_box_login} ${s.logout}`}>
+						<div className={
+							props.isFetching ? `${s.img_box_logout} ${s.logout}`
+								: `${s.img_box_login} ${s.logout}`
+						}>
 							<button
 								onClick={props.logoutUser}
 								disabled={props.isFetching}
