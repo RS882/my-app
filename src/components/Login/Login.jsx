@@ -4,34 +4,30 @@ import { Form, Field } from 'react-final-form'
 import { required, emailValid, composeValidators } from './../../utilits/validators';
 import { Input } from '../common/formControl/formControl';
 import { connect } from 'react-redux';
-import { loginUser, delErrorMessage } from './../../redux/authReducer';
+import { loginUser, delErrorMessage, delRedirectLoginUrl } from './../../redux/authReducer';
 import { Redirect } from 'react-router-dom';
 import Preloader from './../common/preloader/preloader';
 import Modal from '../common/modal/modal';
 
 
-
 class Login extends React.Component {
 
-
+	componentWillUnmount() {
+		this.props.delRedirectLoginUrl()
+	}
 
 	onSubmit = (formData) => this.props.loginUser(formData);
 
-
 	render() {
 
-
-		if (this.props.isAuth) return <Redirect to='/profile' />;
-		const ddd = [`eiieiowezz saddADAS DdsADAfsFSSFSFAS Fasfio`,
-			`kaksakskei ieiowezzsaddAD ASDdsADAfsFSSFSFASFas fioeiieiowezzsaddADASDdsADAfsFSSFSFASFasfio
-		 `, `lllleiieiowezzsaddADA SDdsADAfsFS SFSFASFasfioss`]
+		if (this.props.isAuth) { return <Redirect to={this.props.redirectUrl || `/profile`} /> };
 		return (
 			<div className={s.login}>
 				<h2 className={s.title}>login</h2>
 				<LoginForm onSubmit={this.onSubmit} />
 				{this.props.isFetching && <Preloader />}
 				{(this.props.errorMessadge && this.props.errorMessadge.length > 0)
-					&& <Modal closeModal={this.props.delErrorMessage} content={ddd} />}
+					&& <Modal closeModal={this.props.delErrorMessage} content={this.props.errorMessadge} />}
 			</div>
 		);
 	}
@@ -43,10 +39,11 @@ const mapStateToProps = (state) => ({
 	isAuth: state.auth.isAuth,
 	isFetching: state.auth.isFetching,
 	errorMessadge: state.auth.errorMessadge,
+	redirectUrl: state.auth.loginRedirectUrl,
 })
 
-
-export default connect(mapStateToProps, { loginUser, delErrorMessage })(Login);
+export default connect(mapStateToProps,
+	{ loginUser, delErrorMessage, delRedirectLoginUrl })(Login);
 
 //----------------------------------
 const LoginForm = (props) => {
