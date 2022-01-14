@@ -44,5 +44,8 @@ export const loginAPI = {
 
 	logoutUser: () => instance.delete(`/auth/login`,)
 		.then(respons => respons.data),
+
+	getCapcha: () => instance.get(`/security/get-captcha-url`)
+		.then(respons => respons.data),
 }
 

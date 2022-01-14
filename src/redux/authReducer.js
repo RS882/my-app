@@ -9,6 +9,7 @@ const ADD_ERROR_MESSAGE = `ADD_ERROR_MESSAGE`;
 const DEL_ERROR_MESSAGE = `DEL_ERROR_MESSAGE`;
 const ADD_REDIRECT_LOGIN_URL = `ADD_REDIRECT_LOGIN_URL`;
 const DEL_REDIRECT_LOGIN_URL = `DEL_REDIRECT_LOGIN_URL`;
+const SET_CAPCHA = `SET_CAPCHA`;
 // reducer
 const initialState = {
 	userId: null,
@@ -18,7 +19,9 @@ const initialState = {
 	isAuth: false,
 	profile: null,
 	errorMessage: null,
+	resultCode: null,
 	loginRedirectUrl: null,
+	capcha: null,
 }
 
 
@@ -44,12 +47,13 @@ const authReducer = (state = initialState, action) => {
 		case ADD_ERROR_MESSAGE:
 			return {
 				...state,
-				errorMessage: action.error,
+				...action.payload,
 			};
 		case DEL_ERROR_MESSAGE:
 			return {
 				...state,
 				errorMessage: null,
+
 			};
 		case ADD_REDIRECT_LOGIN_URL:
 			return {
@@ -60,6 +64,11 @@ const authReducer = (state = initialState, action) => {
 			return {
 				...state,
 				loginRedirectUrl: null,
+			};
+		case SET_CAPCHA:
+			return {
+				...state,
+				capcha: action.url,
 			};
 		default:
 			return state;
@@ -72,10 +81,11 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUser = (userId, email, login, isAuth) => ({ type: SET_AUTH_USER, data: { userId, email, login, isAuth, }, });
 export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
 export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
-export const addErrorMessage = (error) => ({ type: ADD_ERROR_MESSAGE, error, });
+export const addErrorMessage = (errorMessage, resultCode) => ({ type: ADD_ERROR_MESSAGE, payload: { errorMessage, resultCode, } });
 export const delErrorMessage = () => ({ type: DEL_ERROR_MESSAGE, });
 export const addRedirectLoginUrl = (url) => ({ type: ADD_REDIRECT_LOGIN_URL, url, });
 export const delRedirectLoginUrl = () => ({ type: DEL_REDIRECT_LOGIN_URL, });
+export const setCapcha = (url) => ({ type: SET_CAPCHA, url, });
 
 //ThunkCreation
 export const getAuthUser = () => (dispatch) => {
@@ -104,11 +114,11 @@ export const loginUser = (formData) => (dispatch) => {
 				dispatch(getAuthUser())
 			}
 			dispatch(toogleIsFetchingAuth(false))
-			return data
+			return data;
 		})
 		.then(error => {
 			if (error.messages.length > 0) {
-				dispatch(addErrorMessage(error.messages))
+				dispatch(addErrorMessage(error.messages, error.resultCode))
 			}
 		})
 }
@@ -120,11 +130,20 @@ export const logoutUser = () => (dispatch) => {
 			if (data.resultCode === 0) {
 				dispatch(setAuthUser(null, null, null, false))
 				dispatch(setUserProfileAuth(null))
-				dispatch(addErrorMessage(null))
+				dispatch(addErrorMessage(null, null))
 				dispatch(addRedirectLoginUrl(null))
+				dispatch(setCapcha(null))
 			}
 			dispatch(toogleIsFetchingAuth(false))
 		})
+}
+
+export const getCapcha = () => (dispatch) => {
+	loginAPI.getCapcha()
+		.then(data => {
+			dispatch(setCapcha(data.url))
+		})
+
 }
 
 //-------------------------------------
