@@ -17,7 +17,7 @@ const initialState = {
 	isFetching: false,
 	isAuth: false,
 	profile: null,
-	errorMessadge: null,
+	errorMessage: null,
 	loginRedirectUrl: null,
 }
 
@@ -44,12 +44,12 @@ const authReducer = (state = initialState, action) => {
 		case ADD_ERROR_MESSAGE:
 			return {
 				...state,
-				errorMessadge: action.error,
+				errorMessage: action.error,
 			};
 		case DEL_ERROR_MESSAGE:
 			return {
 				...state,
-				errorMessadge: null,
+				errorMessage: null,
 			};
 		case ADD_REDIRECT_LOGIN_URL:
 			return {

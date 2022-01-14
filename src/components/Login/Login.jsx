@@ -19,15 +19,14 @@ class Login extends React.Component {
 	onSubmit = (formData) => this.props.loginUser(formData);
 
 	render() {
-
+		const isError = this.props.errorMessage && this.props.errorMessage.length > 0;
 		if (this.props.isAuth) { return <Redirect to={this.props.redirectUrl || `/profile`} /> };
 		return (
 			<div className={s.login}>
 				<h2 className={s.title}>login</h2>
-				<LoginForm onSubmit={this.onSubmit} />
+				<LoginForm isError={isError} onSubmit={this.onSubmit} />
 				{this.props.isFetching && <Preloader />}
-				{(this.props.errorMessadge && this.props.errorMessadge.length > 0)
-					&& <Modal closeModal={this.props.delErrorMessage} content={this.props.errorMessadge} />}
+				{isError && <Modal closeModal={this.props.delErrorMessage} content={this.props.errorMessage} />}
 			</div>
 		);
 	}
@@ -38,7 +37,7 @@ class Login extends React.Component {
 const mapStateToProps = (state) => ({
 	isAuth: state.auth.isAuth,
 	isFetching: state.auth.isFetching,
-	errorMessadge: state.auth.errorMessadge,
+	errorMessage: state.auth.errorMessage,
 	redirectUrl: state.auth.loginRedirectUrl,
 })
 
@@ -52,11 +51,13 @@ const LoginForm = (props) => {
 		password: ``,
 		rememberMe: false,
 	};
+	console.log(props.isError);
 	return (
 		<Form
 			onSubmit={(values, form) => {
 				props.onSubmit(values)
-				form.restart()
+				props.isError && form.restart()
+
 			}}
 			initialValues={{ ...formData, }}
 			render={({ handleSubmit, form, submitting, pristine, errors }) => {
