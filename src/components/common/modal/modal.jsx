@@ -1,27 +1,37 @@
 
 import s from './modal.module.css';
 
+import React from 'react';
 
-const Modal = (props) => {
 
-	const arrData = (Array.isArray(props.content)) ? props.content
-		: [props.content];
-	const content = () => arrData.map((el, i) =>
+class Modal extends React.Component {
+
+
+
+	arrData = (Array.isArray(this.props.content)) ? this.props.content
+		: [this.props.content];
+	content = () => this.arrData.map((el, i) =>
 		<div className={s.content} key={i}>{el}</div>);
 
-	const onClickCloseModal = () => props.closeModal();
+	onClickCloseModal = () => {
+		this.props.closeModal()
 
-	return (
-		<div className={s.wrapper}>
-			<div className={s.modal}>
-				{content()}
-				<div>
-					<button className={s.btn} onClick={onClickCloseModal}>ok</button>
+	};
+
+	render() {
+		return (
+			<div className={s.wrapper}>
+				<div className={s.modal}>
+					{this.content()}
+					<div>
+						<button className={s.btn} onClick={this.onClickCloseModal}>ok</button>
+					</div>
 				</div>
-			</div>
 
-		</div>
-	)
+			</div>
+		)
+
+	}
 
 }
 

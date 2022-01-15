@@ -10,16 +10,16 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
-import { connect } from 'react-redux';
-import { setClickTarget } from './redux/clickTargerReducer';
 
 
-const App = (props) => {
 
-  const onClickApp = (e) => props.setClickTarget(e.target)
+
+const App = () => {
+
+
   return (
 
-    <div onClick={onClickApp} className='app-wrapper'>
+    <div className='app-wrapper'>
       <HeaderContainer />
       <Navbar />
 
@@ -47,4 +47,6 @@ const App = (props) => {
 }
 
 
-export default connect(null, { setClickTarget })(App);
+
+
+export default App;

@@ -5,7 +5,7 @@ import { applyMiddleware, combineReducers, createStore } from "redux";
 import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from 'redux-thunk'
-import clickTargetReducer from "./clickTargerReducer";
+
 
 const reducers = combineReducers({ // аналогично старому файлу state
 	dialogsPage: dialogsReducer,
@@ -13,7 +13,7 @@ const reducers = combineReducers({ // аналогично старому фай
 	sidebar: sidebarReducer,
 	usersPage: usersReducer,
 	auth: authReducer,
-	clickTarget: clickTargetReducer,
+
 
 });
 

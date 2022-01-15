@@ -23,8 +23,6 @@ class Login extends React.Component {
 		this.capchaUrl = (this.props.capcha) ? this.props.capcha : null;
 	}
 
-
-
 	render() {
 		const isError = this.props.errorMessage && this.props.errorMessage.length > 0;
 		if (this.props.isAuth) { return <Redirect to={this.props.redirectUrl || `/profile`} /> };
