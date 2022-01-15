@@ -19,9 +19,9 @@ const initialState = {
 	isAuth: false,
 	profile: null,
 	errorMessage: null,
-	resultCode: null,
-	loginRedirectUrl: null,
 	capcha: null,
+	loginRedirectUrl: null,
+
 }
 
 
@@ -47,7 +47,7 @@ const authReducer = (state = initialState, action) => {
 		case ADD_ERROR_MESSAGE:
 			return {
 				...state,
-				...action.payload,
+				errorMessage: action.errorMessage,
 			};
 		case DEL_ERROR_MESSAGE:
 			return {
@@ -81,7 +81,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUser = (userId, email, login, isAuth) => ({ type: SET_AUTH_USER, data: { userId, email, login, isAuth, }, });
 export const toogleIsFetchingAuth = (isFetching) => ({ type: TOOGLE_IS_FETCHING_AUTH, isFetching })
 export const setUserProfileAuth = (profile) => ({ type: SET_AUTH_USER_PROFILE, profile, });
-export const addErrorMessage = (errorMessage, resultCode) => ({ type: ADD_ERROR_MESSAGE, payload: { errorMessage, resultCode, } });
+export const addErrorMessage = (errorMessage) => ({ type: ADD_ERROR_MESSAGE, errorMessage });
 export const delErrorMessage = () => ({ type: DEL_ERROR_MESSAGE, });
 export const addRedirectLoginUrl = (url) => ({ type: ADD_REDIRECT_LOGIN_URL, url, });
 export const delRedirectLoginUrl = () => ({ type: DEL_REDIRECT_LOGIN_URL, });
@@ -110,15 +110,19 @@ export const loginUser = (formData) => (dispatch) => {
 	dispatch(toogleIsFetchingAuth(true))
 	loginAPI.loginUser(formData)
 		.then(data => {
-			if (data.resultCode === 0) {
-				dispatch(getAuthUser())
-			}
+			if (data.resultCode === 0) dispatch(getAuthUser());
 			dispatch(toogleIsFetchingAuth(false))
-			return data;
+			return { messages: data.messages, resultCode: data.resultCode };
 		})
 		.then(error => {
 			if (error.messages.length > 0) {
-				dispatch(addErrorMessage(error.messages, error.resultCode))
+				dispatch(addErrorMessage(error.messages))
+				if (error.resultCode === 10) {
+					loginAPI.getCapcha()
+						.then(capcha => {
+							dispatch(setCapcha(capcha.url))
+						})
+				}
 			}
 		})
 }
@@ -130,7 +134,7 @@ export const logoutUser = () => (dispatch) => {
 			if (data.resultCode === 0) {
 				dispatch(setAuthUser(null, null, null, false))
 				dispatch(setUserProfileAuth(null))
-				dispatch(addErrorMessage(null, null))
+				dispatch(addErrorMessage(null))
 				dispatch(addRedirectLoginUrl(null))
 				dispatch(setCapcha(null))
 			}
@@ -138,13 +142,7 @@ export const logoutUser = () => (dispatch) => {
 		})
 }
 
-export const getCapcha = () => (dispatch) => {
-	loginAPI.getCapcha()
-		.then(data => {
-			dispatch(setCapcha(data.url))
-		})
 
-}
 
 //-------------------------------------
 export default authReducer;

@@ -39,6 +39,7 @@ export const loginAPI = {
 		email: data.email,
 		password: data.password,
 		rememberMe: data.rememberMe || false,
+		captcha: data.captcha,
 	})
 		.then(respons => respons.data),
 

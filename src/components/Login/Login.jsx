@@ -4,7 +4,7 @@ import { Form, Field } from 'react-final-form'
 import { required, emailValid, composeValidators } from './../../utilits/validators';
 import { Input } from '../common/formControl/formControl';
 import { connect } from 'react-redux';
-import { loginUser, delErrorMessage, delRedirectLoginUrl, getCapcha } from './../../redux/authReducer';
+import { loginUser, delErrorMessage, delRedirectLoginUrl } from './../../redux/authReducer';
 import { Redirect } from 'react-router-dom';
 import Preloader from './../common/preloader/preloader';
 import Modal from '../common/modal/modal';
@@ -18,13 +18,14 @@ class Login extends React.Component {
 
 	onSubmit = (formData) => this.props.loginUser(formData);
 
+	capchaUrl = null;
+
 	closeModal = () => {
 		this.props.delErrorMessage();
-		if (this.props.resultCode === 10) {
-			this.props.getCapcha();
-			console.log(this.props.capcha);
-		}
+		this.capchaUrl = (this.props.capcha) ? this.props.capcha : null;
 	}
+
+
 
 	render() {
 		const isError = this.props.errorMessage && this.props.errorMessage.length > 0;
@@ -32,7 +33,9 @@ class Login extends React.Component {
 		return (
 			<div className={s.login}>
 				<h2 className={s.title}>login</h2>
-				<LoginForm isError={isError} onSubmit={this.onSubmit} />
+				<LoginForm isError={isError}
+					capchaUrl={this.capchaUrl}
+					onSubmit={this.onSubmit} />
 				{this.props.isFetching && <Preloader />}
 				{isError && <Modal closeModal={this.closeModal} content={this.props.errorMessage} />}
 			</div>
@@ -46,13 +49,12 @@ const mapStateToProps = (state) => ({
 	isAuth: state.auth.isAuth,
 	isFetching: state.auth.isFetching,
 	errorMessage: state.auth.errorMessage,
-	resultCode: state.auth.resultCode,
 	capcha: state.auth.capcha,
 	redirectUrl: state.auth.loginRedirectUrl,
 })
 
 export default connect(mapStateToProps,
-	{ loginUser, delErrorMessage, delRedirectLoginUrl, getCapcha })(Login);
+	{ loginUser, delErrorMessage, delRedirectLoginUrl, })(Login);
 
 //----------------------------------
 const LoginForm = (props) => {
@@ -60,8 +62,9 @@ const LoginForm = (props) => {
 		email: ``,
 		password: ``,
 		rememberMe: false,
+		captcha: null,
 	};
-	console.log(props.isError);
+	debugger
 	return (
 		<Form
 			onSubmit={(values, form) => {
