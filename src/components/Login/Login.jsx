@@ -16,9 +16,7 @@ class Login extends React.Component {
 		this.props.delRedirectLoginUrl()
 	}
 
-	onSubmit = (formData) => this.props.loginUser(formData);
-
-	capchaUrl = null;
+	onSubmit = (formData) => this.props.loginUser(formData)
 
 	closeModal = () => {
 		this.props.delErrorMessage();
@@ -64,7 +62,7 @@ const LoginForm = (props) => {
 		rememberMe: false,
 		captcha: null,
 	};
-	debugger
+
 	return (
 		<Form
 			onSubmit={(values, form) => {
@@ -103,9 +101,22 @@ const LoginForm = (props) => {
 								type='checkbox' />
 							<label htmlFor='login_remember' className={s.label} >remember me</label>
 						</div>
-
-
-
+						{props.capchaUrl &&
+							<>
+								<div className={s.capchaBox}>
+									<img src={props.capchaUrl} alt={`capcha`} />
+								</div>
+								<div>
+									<Field
+										component={Input}
+										validate={required}
+										name='captcha'
+										className={s.input}
+										placeholder='Enter capcha text'
+									/>
+								</div>
+							</>
+						}
 						<div className={s.buttons}>
 							<div className={s.button}>
 								<button
