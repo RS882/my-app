@@ -7,9 +7,7 @@ import { composeValidators, required, emailValid } from './../../../utilits/vali
 import { Input } from '../../common/formControl/formControl';
 
 class LoginForm extends React.Component {
-	state = {
-		isPassword: true,
-	}
+	state = { isPassword: true, }
 
 	showPassword = () => this.setState({ isPassword: !this.state.isPassword, })
 
@@ -24,17 +22,16 @@ class LoginForm extends React.Component {
 		return (
 			<Form
 				onSubmit={(values, form) => {
-					this.props.onSubmit(values)
-					this.props.isError && form.restart()
-
+					this.props.onSubmit(values);
+					this.props.isError && form.restart();
+					this.setState({ isPassword: true, });
 				}}
 				initialValues={{ ...formData, }}
 				render={({ handleSubmit, form, submitting, pristine, errors }) => {
 					const resetForm = () => {
-						form.restart()
-						this.setState({ isPassword: true, })
+						form.restart();
+						this.setState({ isPassword: true, });
 					}
-
 					return (
 						<form onSubmit={handleSubmit} className={s.form}>
 							<div>
@@ -48,7 +45,6 @@ class LoginForm extends React.Component {
 							</div>
 							<div className={s.password_box}>
 								<Field
-
 									component={Input}
 									validate={required}
 									name='password'
@@ -56,13 +52,16 @@ class LoginForm extends React.Component {
 									className={s.input}
 									placeholder='Password' />
 								<div>
-									<button onClick={this.showPassword} className={s.btn_eye} type="button">
+									<button
+										onMouseDown={this.showPassword}
+										onMouseUp={this.showPassword}
+										className={s.btn_eye}
+										type="button">
 										<div className={s.eyebox}>
 											<img src={this.state.isPassword ? eyeimg : eyenotimg} alt='eye' />
 										</div>
 									</button>
 								</div>
-
 							</div>
 							<div className={`${s.input} ${s.remember}`}>
 								<Field
