@@ -121,7 +121,7 @@ export const loginUser = (formData) => (dispatch) => {
 					loginAPI.getCapcha()
 						.then(capcha => {
 							dispatch(setCapcha(capcha.url))
-							
+
 						})
 				}
 			}

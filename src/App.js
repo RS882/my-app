@@ -10,16 +10,23 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
+import { connect } from 'react-redux';
+import { setIsClickModal } from './redux/modalReducer';
 
 
 
 
-const App = () => {
+const App = (props) => {
 
-
+  const onClickApp = (e) => {
+    if (e.target && e.target.id !== 'modalWindow') {
+      console.log(e.currentTarget);
+      props.setIsClickModal();
+    }
+  }
   return (
 
-    <div className='app-wrapper'>
+    <div className='app-wrapper' onClick={onClickApp}>
       <HeaderContainer />
       <Navbar />
 
@@ -49,4 +56,4 @@ const App = () => {
 
 
 
-export default App;
+export default connect(null, { setIsClickModal })(App);
