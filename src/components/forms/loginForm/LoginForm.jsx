@@ -2,23 +2,21 @@ import s from './LoginForm.module.css';
 import React from 'react';
 import { Form, Field } from 'react-final-form'
 import eyeimg from './../../../assets/eye-icons/eye.png';
+import eyenotimg from './../../../assets/eye-icons/eye-not.png';
 import { composeValidators, required, emailValid } from './../../../utilits/validators';
 import { Input } from '../../common/formControl/formControl';
 
 class LoginForm extends React.Component {
+	state = {
+		isPassword: true,
+	}
 
+	showPassword = () => {
+		this.setState({ isPassword: !this.state.isPassword, })
 
-	// state = {
-	// 	passwordFieldType: `password`,
-	// }
-
-
-
-	// showPassword = () => {
-	// 	this.setState()
-	// 	// this.passwordFieldType = `text`;
-	// }
+	}
 	render() {
+		console.log(`render`);
 
 		const formData = {
 			email: ``,
@@ -52,13 +50,13 @@ class LoginForm extends React.Component {
 									component={Input}
 									validate={required}
 									name='password'
-									type={this.passwordFieldType}
+									type={this.state.isPassword ? `password` : `text`}
 									className={s.input}
 									placeholder='Password' />
 								<div>
 									<button onClick={this.showPassword} className={s.btn_eye} type="button">
 										<div className={s.eyebox}>
-											<img src={eyeimg} alt='eye' />
+											<img src={this.state.isPassword ? eyeimg : eyenotimg} alt='eye' />
 										</div>
 									</button>
 								</div>
