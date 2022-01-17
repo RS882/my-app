@@ -11,19 +11,16 @@ class LoginForm extends React.Component {
 		isPassword: true,
 	}
 
-	showPassword = () => {
-		this.setState({ isPassword: !this.state.isPassword, })
+	showPassword = () => this.setState({ isPassword: !this.state.isPassword, })
 
-	}
 	render() {
-		console.log(`render`);
-
 		const formData = {
 			email: ``,
 			password: ``,
 			rememberMe: false,
 			captcha: null,
 		};
+
 		return (
 			<Form
 				onSubmit={(values, form) => {
@@ -33,6 +30,11 @@ class LoginForm extends React.Component {
 				}}
 				initialValues={{ ...formData, }}
 				render={({ handleSubmit, form, submitting, pristine, errors }) => {
+					const resetForm = () => {
+						form.restart()
+						this.setState({ isPassword: true, })
+					}
+
 					return (
 						<form onSubmit={handleSubmit} className={s.form}>
 							<div>
@@ -99,7 +101,7 @@ class LoginForm extends React.Component {
 									<button
 										type="button"
 										className={`${s.input} ${s.btn}`}
-										onClick={form.restart}
+										onClick={resetForm}
 										disabled={submitting || pristine}
 									>Reset</button>
 								</div>
