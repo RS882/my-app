@@ -3,7 +3,7 @@ import s from './modal.module.css';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { setIsModalOpen, setCloseModal } from './../../../redux/modalReducer';
+import { setIsModalOpen, setCloseModal, setIsClickModal } from './../../../redux/modalReducer';
 
 
 class Modal extends React.Component {
@@ -22,12 +22,13 @@ class Modal extends React.Component {
 		<div className={s.content} key={i}>{el}</div>);
 
 	onClickCloseModal = () => this.props.closeModal();
+	onModalClick = () => this.props.setIsClickModal()
 
 	render() {
 		this.props.isModalClose && this.onClickCloseModal()
 		return (
 			<div className={s.wrapper}>
-				<div onClick={``} className={s.modal} id='modalWindow'>
+				<div onClick={this.onModalClick} className={s.modal} >
 					{this.content}
 					<div>
 						<button className={s.btn} onClick={this.onClickCloseModal}>ok</button>
@@ -39,7 +40,7 @@ class Modal extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	isModalClose: state.modalWindow.isClickNotOnModal
+	isModalClose: state.modalWindow.isCloseModal
 })
 
-export default connect(mapStateToProps, { setIsModalOpen, setCloseModal })(Modal);
+export default connect(mapStateToProps, { setIsModalOpen, setCloseModal, setIsClickModal, })(Modal);

@@ -11,7 +11,7 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
 import { connect } from 'react-redux';
-import { setIsClickModal } from './redux/modalReducer';
+import { setIsClick } from './redux/modalReducer';
 
 
 
@@ -19,10 +19,11 @@ import { setIsClickModal } from './redux/modalReducer';
 const App = (props) => {
 
   const onClickApp = (e) => {
-    if (e.target && e.target.id !== 'modalWindow') {
-      console.log(e.currentTarget);
-      props.setIsClickModal();
-    }
+    props.setIsClick();
+    // if (e.target && e.target.id !== 'modalWindow') {
+    //   console.log(e.currentTarget);
+    //   props.setIsClickModal();
+    // }
   }
   return (
 
@@ -56,4 +57,4 @@ const App = (props) => {
 
 
 
-export default connect(null, { setIsClickModal })(App);
+export default connect(null, { setIsClick })(App);

@@ -1,13 +1,15 @@
 // action type
-
+const IS_CLICK = `IS_CLICK`;
 const IS_MODAL_OPEN = `IS_MODAL_OPEN`;
 const IS_CLICK_MODAL = `IS_CLICK_MODAL`;
 const CLOSE_MODAL = `CLOSE_MODAL`;
 
 // reducer
 const initialState = {
+
 	isModalOpen: false,
-	isClickNotOnModal: false,
+	isClickModal: false,
+	isCloseModal: false,
 }
 
 
@@ -21,19 +23,29 @@ const modalReducer = (state = initialState, action) => {
 				...state,
 				isModalOpen: true,
 			};
-		case IS_CLICK_MODAL:
 
+		case IS_CLICK:
 			return {
 				...state,
-				isClickNotOnModal: state.isModalOpen ? true : false,
+				isCloseModal: state.isModalOpen && !state.isClickModal,
+				isClickModal: false,
 			};
-		case CLOSE_MODAL:
 
+		case IS_CLICK_MODAL:
+			return {
+				...state,
+				isClickModal: true,
+			};
+
+		case CLOSE_MODAL:
 			return {
 				...state,
 				isModalOpen: false,
-				isClickNotOnModal: false,
+				isClickModal: false,
+				isCloseModal: false,
 			};
+
+
 
 		default:
 			return state;
@@ -46,7 +58,7 @@ const modalReducer = (state = initialState, action) => {
 export const setIsModalOpen = () => ({ type: IS_MODAL_OPEN, });
 export const setIsClickModal = () => ({ type: IS_CLICK_MODAL, });
 export const setCloseModal = () => ({ type: CLOSE_MODAL, });
-
+export const setIsClick = () => ({ type: IS_CLICK, });
 //ThunkCreation
 
 
