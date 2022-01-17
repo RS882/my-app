@@ -13,7 +13,7 @@ export const minValue = (min) => (value) =>
 		`Should be greater than ${min}`;
 
 export const emailValid = (value) =>
-	(/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/).test(value) ?
+	(/^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/).test(value) ?
 		undefined : `Please enter a valid e-mail`;
 
 

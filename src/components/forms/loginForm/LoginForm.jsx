@@ -32,13 +32,22 @@ class LoginForm extends React.Component {
 						form.restart();
 						this.setState({ isPassword: true, });
 					}
+					const snowPasswordEvent = [`onMouseDown`, `onMouseUp`, `onTouchStart`, `onTouchEnd`].reduce(
+						(result, el) => {
+							result[el] = this.showPassword;
+							return result;
+						}, {});
+
 					return (
-						<form onSubmit={handleSubmit} className={s.form}>
+						<form onSubmit={handleSubmit}
+
+							className={s.form}>
 							<div>
 								<Field
 									component={Input}
 									validate={composeValidators(required, emailValid)}
 									name='email'
+									type='text'
 									className={s.input}
 									placeholder='Email'
 								/>
@@ -49,12 +58,12 @@ class LoginForm extends React.Component {
 									validate={required}
 									name='password'
 									type={this.state.isPassword ? `password` : `text`}
+									autoComplete='off'
 									className={s.input}
 									placeholder='Password' />
 								<div>
 									<button
-										onMouseDown={this.showPassword}
-										onMouseUp={this.showPassword}
+										{...snowPasswordEvent}
 										className={s.btn_eye}
 										type="button">
 										<div className={s.eyebox}>
@@ -82,6 +91,7 @@ class LoginForm extends React.Component {
 											component={Input}
 											validate={required}
 											name='captcha'
+											type='text'
 											className={s.input}
 											placeholder='Enter capcha text'
 										/>

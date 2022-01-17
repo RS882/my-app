@@ -10,6 +10,7 @@ const DEL_ERROR_MESSAGE = `DEL_ERROR_MESSAGE`;
 const ADD_REDIRECT_LOGIN_URL = `ADD_REDIRECT_LOGIN_URL`;
 const DEL_REDIRECT_LOGIN_URL = `DEL_REDIRECT_LOGIN_URL`;
 const SET_CAPCHA = `SET_CAPCHA`;
+
 // reducer
 const initialState = {
 	userId: null,
@@ -21,7 +22,6 @@ const initialState = {
 	errorMessage: null,
 	capcha: null,
 	loginRedirectUrl: null,
-
 }
 
 
@@ -100,7 +100,7 @@ export const getAuthUser = () => (dispatch) => {
 			}
 		})
 		.then(id => {
-			profileAPI.getProfile(id)
+			id && profileAPI.getProfile(id)
 				.then(data => dispatch(setUserProfileAuth(data)))
 
 		})
