@@ -2,7 +2,7 @@ import s from './Login.module.css';
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { loginUser, delErrorMessage, delRedirectLoginUrl } from './../../redux/authReducer';
+import { loginUser, delErrorMessage } from './../../redux/authReducer';
 import { Redirect } from 'react-router-dom';
 import Preloader from './../common/preloader/preloader';
 import Modal from '../common/modal/modal';
@@ -11,9 +11,6 @@ import LoginForm from './../forms/loginForm/LoginForm';
 
 class Login extends React.Component {
 
-	componentWillUnmount() {
-		this.props.delRedirectLoginUrl()
-	}
 
 	onSubmit = (formData) => this.props.loginUser(formData)
 
@@ -23,8 +20,13 @@ class Login extends React.Component {
 	}
 
 	render() {
+
 		const isError = this.props.errorMessage && this.props.errorMessage.length > 0;
-		if (this.props.isAuth) { return <Redirect to={this.props.redirectUrl || `/profile`} /> };
+
+		if (this.props.isAuth) {
+
+			return <Redirect to={this.props.redirectUrl || `/profile`} />
+		};
 		return (
 			<div className={s.login}>
 				<h2 className={s.title}>login</h2>
@@ -49,7 +51,7 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps,
-	{ loginUser, delErrorMessage, delRedirectLoginUrl, })(Login);
+	{ loginUser, delErrorMessage, })(Login);
 
 //----------------------------------
 

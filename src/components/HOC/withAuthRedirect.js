@@ -1,30 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Redirect, withRouter } from 'react-router-dom';
-import { compose } from 'redux';
+import { Redirect, useLocation } from 'react-router-dom';
+
 import { addRedirectLoginUrl } from '../../redux/authReducer';
 
 
 export const withAuthRedirect = (Component) => {
-	class RedirectComponent extends React.Component {
-		render() {
-
-			if (!this.props.isAuth) {
-				this.props.addRedirectLoginUrl(this.props.match.url)
-				return <Redirect to='/login' />
-			}
-			return <Component {...this.props} />
-		}
+	const RedirectComponent = (props) => {
+		const url = useLocation();
+		useEffect(() => (!props.isAuth) && props.addRedirectLoginUrl(url.pathname))
+		if (!props.isAuth) return <Redirect to='/login' />
+		return <Component {...props} />
 	}
+
 	const mapStateToPropsForRedirect = (state) => ({
 		isAuth: state.auth.isAuth,
 	})
 
-
-	return compose(
-		connect(mapStateToPropsForRedirect, { addRedirectLoginUrl }),
-		withRouter
-	)(RedirectComponent)
-
+	return connect(mapStateToPropsForRedirect, { addRedirectLoginUrl })(RedirectComponent)
 
 }

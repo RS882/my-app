@@ -21,6 +21,7 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
 
 	componentDidMount() {
+
 		const userId = this.props.match.params.userId ?
 			this.props.match.params.userId :
 			this.props.meId;
@@ -30,7 +31,6 @@ class ProfileContainer extends React.Component {
 
 
 	render() {
-
 
 		const isMe =
 			this.props.meId && this.props.profile ?
