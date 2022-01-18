@@ -5,7 +5,7 @@ import { required } from './../../../utilits/validators';
 import s from './TextareaForm.module.css';
 
 const TextareaForm = (props) => {
-	let formData = { [props.nameForm]: props.newTextValue, }
+	const formData = { [props.nameForm]: props.newTextValue, }
 	const maxLengthText = maxLength(props.maxLengthText)
 	return (
 		<Form

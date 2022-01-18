@@ -22,11 +22,7 @@ class Login extends React.Component {
 	render() {
 
 		const isError = this.props.errorMessage && this.props.errorMessage.length > 0;
-
-		if (this.props.isAuth) {
-
-			return <Redirect to={this.props.redirectUrl || `/profile`} />
-		};
+		if (this.props.isAuth) return <Redirect to={this.props.redirectUrl || `/profile`} />;
 		return (
 			<div className={s.login}>
 				<h2 className={s.title}>login</h2>
