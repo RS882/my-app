@@ -6,7 +6,6 @@ const CLOSE_MODAL = `CLOSE_MODAL`;
 
 // reducer
 const initialState = {
-
 	isModalOpen: false,
 	isClickModal: false,
 	isCloseModal: false,
@@ -19,12 +18,14 @@ const modalReducer = (state = initialState, action) => {
 	switch (action.type) {
 
 		case IS_MODAL_OPEN:
+
 			return {
 				...state,
 				isModalOpen: true,
 			};
 
 		case IS_CLICK:
+
 			return {
 				...state,
 				isCloseModal: state.isModalOpen && !state.isClickModal,
@@ -32,12 +33,14 @@ const modalReducer = (state = initialState, action) => {
 			};
 
 		case IS_CLICK_MODAL:
+
 			return {
 				...state,
 				isClickModal: true,
 			};
 
 		case CLOSE_MODAL:
+
 			return {
 				...state,
 				isModalOpen: false,

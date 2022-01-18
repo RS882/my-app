@@ -1,42 +1,39 @@
 
 import s from './modal.module.css';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setIsModalOpen, setCloseModal, setIsClickModal } from './../../../redux/modalReducer';
 
 
-class Modal extends React.Component {
+const Modal = (props) => {
 
-	componentDidMount() {
-		this.props.setIsModalOpen();
-	}
+	useEffect(() => {
+		props.setIsModalOpen();
+		return () => props.setCloseModal();
+	})
 
-	componentWillUnmount() {
-		this.props.setCloseModal()
-	}
-
-	arrData = (Array.isArray(this.props.content)) ? this.props.content
-		: [this.props.content];
-	content = this.arrData.map((el, i) =>
+	const arrData = (Array.isArray(props.content)) ? props.content
+		: [props.content];
+	const content = arrData.map((el, i) =>
 		<div className={s.content} key={i}>{el}</div>);
 
-	onClickCloseModal = () => this.props.closeModal();
-	onModalClick = () => this.props.setIsClickModal()
+	const onClickCloseModal = () => props.closeModal();
+	const onModalClick = () => props.setIsClickModal()
 
-	render() {
-		this.props.isModalClose && this.onClickCloseModal()
-		return (
-			<div className={s.wrapper}>
-				<div onClick={this.onModalClick} className={s.modal} >
-					{this.content}
-					<div>
-						<button className={s.btn} onClick={this.onClickCloseModal}>ok</button>
-					</div>
+	props.isModalClose && onClickCloseModal()
+
+	return (
+		<div className={s.wrapper}>
+			<div onClick={onModalClick} className={s.modal} >
+				{content}
+				<div>
+					<button className={s.btn} onClick={onClickCloseModal}>ok</button>
 				</div>
 			</div>
-		)
-	}
+		</div>
+	)
+
 }
 
 const mapStateToProps = (state) => ({
