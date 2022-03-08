@@ -2,6 +2,7 @@
 import { loginAPI, profileAPI } from './../api/api';
 
 
+
 const SET_AUTH_USER = `SET_AUTH_USER`;
 const TOOGLE_IS_FETCHING_AUTH = `TOOGLE_IS_FETCHING_AUTH`;
 const SET_AUTH_USER_PROFILE = `SET_AUTH_USER_PROFILE`;
@@ -87,7 +88,7 @@ export const setCapcha = (url) => ({ type: SET_CAPCHA, url, });
 //ThunkCreation
 export const getAuthUser = () => (dispatch) => {
 	dispatch(toogleIsFetchingAuth(true))
-	loginAPI.getAuthUser()
+	return loginAPI.getAuthUser()
 		.then(data => {
 			dispatch(toogleIsFetchingAuth(false))
 			if (data.resultCode === 0) {
@@ -114,6 +115,7 @@ export const loginUser = (formData) => (dispatch) => {
 		.then(error => {
 			if (error.messages.length > 0) {
 				dispatch(addErrorMessage(error.messages))
+
 				if (error.resultCode === 10) {
 					loginAPI.getCapcha()
 						.then(capcha => {
@@ -121,6 +123,8 @@ export const loginUser = (formData) => (dispatch) => {
 
 						})
 				}
+			} else {
+				dispatch(addErrorMessage(`Some error`))
 			}
 		})
 }

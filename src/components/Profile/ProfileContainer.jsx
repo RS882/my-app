@@ -16,6 +16,8 @@ import { withRouter } from 'react-router-dom';
 import avatarUser from './../../assets/img/user3.jpg';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
 import { compose } from 'redux';
+import { getProfileDate } from '../../redux/selectors';
+import { getAuthDate } from './../../redux/selectors';
 
 
 class ProfileContainer extends React.Component {
@@ -25,12 +27,13 @@ class ProfileContainer extends React.Component {
 		const userId = this.props.match.params.userId ?
 			this.props.match.params.userId :
 			this.props.meId;
+
 		this.props.getProfile(userId, this.props.meId);
 		this.props.getUserStatus(userId);
 	}
 
-
 	render() {
+
 
 		const isMe =
 			this.props.meId && this.props.profile ?
@@ -57,11 +60,11 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	profile: state.profilePage.profile,
-	status: state.profilePage.status,
+	profile: getProfileDate.profile(state),
+	status: getProfileDate.status(state),
 	avatarUser,
 	jobIcon,
-	meId: state.auth.userId,
+	meId: getAuthDate.userId(state),
 	socialIcon: { facebook, website, vk, twitter, instagram, youtube, github, mainLink, other, },
 })
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import logo from './../../assets/img/logo.jpg'
 import Header from './Header';
-import { getAuthUser, logoutUser } from './../../redux/authReducer';
+import { logoutUser } from './../../redux/authReducer';
 import avatarUser from './../../assets/img/user3.jpg';
 import { setUserProfile, getUserStatus } from './../../redux/profileReducer';
 import { compose } from 'redux';
@@ -14,9 +14,7 @@ import { withRouter } from 'react-router-dom';
 
 class HeaderContainer extends React.Component {
 
-	componentDidMount() {
-		this.props.getAuthUser();
-	}
+
 
 	showMyProfile = () => {
 		this.props.setUserProfile(this.props.myProfile)
@@ -49,6 +47,6 @@ const mapStateToProps = (state) => ({
 
 
 export default compose(
-	connect(mapStateToProps, { getAuthUser, setUserProfile, getUserStatus, logoutUser }),
+	connect(mapStateToProps, { setUserProfile, getUserStatus, logoutUser }),
 	withRouter
 )(HeaderContainer);

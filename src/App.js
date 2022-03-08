@@ -10,51 +10,58 @@ import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginPage from './components/Login/Login';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setIsClick } from './redux/modalReducer';
 
+import { useEffect } from 'react';
+import { initializApp } from './redux/appReducer';
+import Preloader from './components/common/preloader/preloader';
+import { getAppDate } from './redux/selectors';
 
 
 
 const App = (props) => {
 
-  const onClickApp = (e) => {
-    props.setIsClick();
-    // if (e.target && e.target.id !== 'modalWindow') {
-    //   console.log(e.currentTarget);
-    //   props.setIsClickModal();
-    // }
-  }
-  return (
+  const dispatch = useDispatch();
+  useEffect(() => { dispatch(initializApp()) }, [dispatch]);
 
-    <div className='app-wrapper' onClick={onClickApp}>
-      <HeaderContainer />
-      <Navbar />
+  const onClickApp = () => { dispatch(setIsClick()) };
 
-      <div className='app-wrapper__content'>
+  const initializated = useSelector(state => getAppDate.initializated(state));
 
 
-        <Route path='/dialogs'
-          render={() => < DialogsContainer />} />
 
-        <Route path='/profile/:userId?'
-          render={() => <ProfileContainer />} />
-        <Route path='/login'
-          render={() => < LoginPage />} />
+  if (!initializated) {
+    return <Preloader />
+  } else {
+    return (
+
+      <div className='app-wrapper' onClick={onClickApp}>
+        <HeaderContainer />
+        <Navbar />
+
+        <div className='app-wrapper__content'>
 
 
-        <Route path='/news' render={() => <News />} />
-        <Route path='/music' render={() => <Music />} />
-        <Route path='/settings' render={() => <Settings />} />
-        <Route path='/users' render={() => <UsersContainer />} />
+          <Route path='/dialogs'
+            render={() => < DialogsContainer />} />
 
+          <Route path='/profile/:userId?'
+            render={() => <ProfileContainer />} />
+          <Route path='/login'
+            render={() => < LoginPage />} />
+
+
+          <Route path='/news' render={() => <News />} />
+          <Route path='/music' render={() => <Music />} />
+          <Route path='/settings' render={() => <Settings />} />
+          <Route path='/users' render={() => <UsersContainer />} />
+
+        </div>
       </div>
-    </div>
 
-  );
+    );
+  }
 }
 
-
-
-
-export default connect(null, { setIsClick })(App);
+export default App;

@@ -6,6 +6,7 @@ import usersReducer from "./usersReducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from 'redux-thunk'
 import modalReducer from "./modalReducer";
+import appReducer from './appReducer';
 
 
 const reducers = combineReducers({ // аналогично старому файлу state
@@ -15,6 +16,7 @@ const reducers = combineReducers({ // аналогично старому фай
 	usersPage: usersReducer,
 	auth: authReducer,
 	modalWindow: modalReducer,
+	app: appReducer,
 
 });
 
