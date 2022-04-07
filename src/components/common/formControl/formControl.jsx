@@ -8,7 +8,7 @@ const FormControl = ({ input, meta, FormType, ...props }) => {
 	return (
 		<div className={s.formBox}>
 			<div >
-				<FormType {...props} {...input} style={{ border: hasError && '2px solid red' }} />
+				<FormType {...props} {...input} style={{ border: hasError && '2px solid red', resize: 'none', }} />
 			</div>
 			<div className={s.error}>
 				{hasError && <span>{meta.error}</span>}
