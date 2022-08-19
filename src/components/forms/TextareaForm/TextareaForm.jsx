@@ -3,6 +3,7 @@ import { composeValidators, maxLength } from "../../../utilits/validators";
 import { Textarea } from './../../common/formControl/formControl';
 import { required } from './../../../utilits/validators';
 import s from './TextareaForm.module.css';
+import btnS from './../../../css_style_for_all/button.module.css';
 
 const TextareaForm = (props) => {
 	const formData = { [props.nameForm]: props.newTextValue, }
@@ -24,7 +25,7 @@ const TextareaForm = (props) => {
 						className={s.postsarea}
 					/>
 					<button
-						className={s.button}
+						className={`${btnS.button} ${s.button_width}`}
 						disabled={submitting || pristine || Object.keys(errors).length > 0}
 					>{props.buttonName}</button>
 				</form>

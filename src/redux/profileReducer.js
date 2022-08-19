@@ -88,12 +88,10 @@ export const updateUserStatus = (status) => async (dispatch) => {
 	const response = await profileAPI.updateStatus(status);
 	response.resultCode === 0 && dispatch(setUserStatus(status));
 };
-export const updateUserAvatar = (file) =>
-	async (dispatch) => {
-		const response = await profileAPI.putAvater(file);
-
-		response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
-	};
+export const updateUserAvatar = (file) => async (dispatch) => {
+	const response = await profileAPI.putAvater(file);
+	response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
+};
 
 
 

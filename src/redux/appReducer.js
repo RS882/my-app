@@ -33,10 +33,7 @@ export const initializatedSuccess = () => ({ type: INITIALIZATED_SUCCESS, });
 export const initializApp = () => (dispatch) => {
 
 	Promise.all([dispatch(getAuthUser()),])
-		.then(() => {
-
-			dispatch(initializatedSuccess())
-		})
+		.then(() => { dispatch(initializatedSuccess()) })
 }
 
 
