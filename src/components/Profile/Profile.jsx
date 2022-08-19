@@ -7,8 +7,7 @@ import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
 
-	const dispatch = useDispatch();
-	const saveAvatar = (file) => dispatch(updateUserAvatar(file));
+
 
 	return (
 		<div >
@@ -20,7 +19,7 @@ const Profile = (props) => {
 				jobIcon={props.jobIcon}
 				avatarUser={props.avatarUser}
 				updateUserStatus={props.updateUserStatus}
-				saveAvatar={saveAvatar}
+
 			/>
 			<MyPostsContainer />
 		</div>

@@ -20,9 +20,7 @@ const ProfileInfo = (props) => {
 			<div className={s.wrapper}>
 				<ProfileUser {...props} />
 			</div>
-			<div>
-				{props.isMe ? <AvatarChange saveAvatar={props.saveAvatar} /> : null}
-			</div>
+
 			<div className={s.wrapper}>
 				<ProfileStatus
 					status={props.status}

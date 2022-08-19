@@ -1,5 +1,6 @@
 import React from 'react';
 import Social from '../../../common/social/social';
+import AvatarChange from '../../AvatarChange/AvatarChange';
 import s from './ProfileUser.module.css';
 
 
@@ -13,6 +14,9 @@ const ProfileUser = (props) => {
 					<img className={s.img} src={
 						(props.profile.photos.large) ? props.profile.photos.large : props.avatarUser}
 						alt='user' />
+					<div className={s.changeBtn}>
+						{props.isMe ? <AvatarChange /> : null}
+					</div>
 				</div>
 				<div className={s.fullname}>{props.profile.fullName}</div>
 				<article className={s.about} >{props.profile.aboutMe}	</article>
@@ -34,4 +38,4 @@ const ProfileUser = (props) => {
 	)
 }
 
-export default ProfileUser;
+export default React.memo(ProfileUser);

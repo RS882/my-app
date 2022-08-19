@@ -20,8 +20,8 @@ const Users = (props) => {
 						<div className={s.text}>
 							<div className={s.name}>{e.name}</div>
 							<div className={s.status}>{e.status}</div>
-							<div className={s.contry}>{'{e.location.contry}'},</div>
-							<div className={s.city}>{'{e.location.city}'}</div>
+							{/* <div className={s.contry}>{'{e.location.contry}'},</div>
+							<div className={s.city}>{'{e.location.city}'}</div> */}
 						</div>
 						<NavLink to={`/profile/${e.id}`}>
 							<div className={s.avatar}
