@@ -3,19 +3,25 @@ import s from './ProfileInfo.module.css';
 // import bg from './../../../assets/img/bg.jpg'
 import Preloader from '../../common/preloader/preloader';
 import ProfileUser from './ProfileUser/ProfileUser';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
+import ProfileStatus from './ProfileStatus/ProfileStatusWithHook';
+import AvatarChange from '../AvatarChange/AvatarChange';
+import { updateUserAvatar } from '../../../redux/profileReducer';
 
 const ProfileInfo = (props) => {
+
+
+
+
+
 	if (!props.profile) return <Preloader />
 
 	return (
 		<>
-			{/* <div className={s.img_box}>
-				<img className={s.img} src={bg}
-					alt='background' />
-			</div> */}
 			<div className={s.wrapper}>
 				<ProfileUser {...props} />
+			</div>
+			<div>
+				{props.isMe ? <AvatarChange saveAvatar={props.saveAvatar} /> : null}
 			</div>
 			<div className={s.wrapper}>
 				<ProfileStatus
@@ -27,4 +33,4 @@ const ProfileInfo = (props) => {
 	)
 }
 
-export default ProfileInfo;
+export default React.memo(ProfileInfo);

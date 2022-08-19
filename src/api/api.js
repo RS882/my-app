@@ -29,7 +29,16 @@ export const profileAPI = {
 
 	updateStatus: (userStatus) => instance.put(`profile/status`, { status: userStatus })
 		.then(respons => respons.data),
+
+	putAvater: (file) => {
+		const formData = new FormData();
+		formData.append('image', file);
+		return instance.put(`profile/photo`, formData,
+			{ headers: { 'Content-Type': 'multipart/form-data', } })
+			.then(respons => respons.data)
+	},
 }
+
 
 export const loginAPI = {
 	getAuthUser: () => instance.get(`auth/me`)

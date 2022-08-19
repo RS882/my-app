@@ -23,7 +23,7 @@ import { getAppDate } from './redux/selectors';
 const App = (props) => {
 
   const dispatch = useDispatch();
-  useEffect(() => { dispatch(initializApp()) }, [dispatch]);
+  useEffect(() => { dispatch(initializApp()) }, []);
 
   const onClickApp = () => { dispatch(setIsClick()) };
 
