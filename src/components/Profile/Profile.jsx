@@ -15,7 +15,7 @@ const Profile = (props) => {
 				profile={props.profile}
 				status={props.status}
 				isMe={props.isMe}
-				social={props.social}
+				socialIcon={props.socialIcon}
 				jobIcon={props.jobIcon}
 				avatarUser={props.avatarUser}
 				updateUserStatus={props.updateUserStatus}

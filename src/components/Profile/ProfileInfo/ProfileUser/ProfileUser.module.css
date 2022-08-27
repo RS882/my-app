@@ -5,9 +5,10 @@
 	background-color: var(--secondcolor);
 	border: 4px solid var(--firstcolor);
 	border-radius: 5px;
-	max-width: 60%;
+	/* max-width: 60%; */
 	box-shadow: var(--shadow);
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 }
 
@@ -46,6 +47,7 @@
 	letter-spacing: 0.1em;
 	text-align: justify;
 	box-shadow: var(--shadowOut);
+	margin-bottom: calc(var(--gap) / 2);
 }
 .about::first-letter {
 	text-transform: capitalize;
@@ -73,4 +75,8 @@
 }
 .changeBtn:hover{
 	opacity: 	1;
+}
+
+.button_width{
+	width: 100%;
 }

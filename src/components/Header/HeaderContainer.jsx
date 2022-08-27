@@ -37,7 +37,8 @@ const HeaderContainer = (props) => {
 			img={img}
 			showMyProfile={showMyProfile}
 			logoutUser={logOut}
-			logo={logo} />
+			logo={logo}
+			id={id} />
 	)
 }
 

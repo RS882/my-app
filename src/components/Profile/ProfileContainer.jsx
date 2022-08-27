@@ -39,20 +39,11 @@ class ProfileContainer extends React.Component {
 			this.props.meId && this.props.profile ?
 				(this.props.meId === this.props.profile.userId) : false;
 
-		const social = (this.props.profile) ?
-			(Object.entries(this.props.profile.contacts)
-				.filter(el => el[1])
-				.map(el => ({
-					name: el[0],
-					url: (el[1].startsWith('https://') || el[1].startsWith('http://')) ?
-						el[1] : 'https://' + el[1],
-					img: (el[0] in this.props.profile.contacts) ?
-						this.props.socialIcon[el[0]] : this.props.socialIcon.other,
-				}))) : [];
+
 
 		return <Profile {...this.props}
 			profile={this.props.profile}
-			social={social}
+			socialIcon={this.props.socialIcon}
 			isMe={isMe}
 		/>
 	}

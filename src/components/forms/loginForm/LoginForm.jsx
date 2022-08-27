@@ -37,9 +37,7 @@ const LoginForm = (props) => {
 					}, {});
 
 				return (
-					<form onSubmit={handleSubmit}
-
-						className={s.form}>
+					<form onSubmit={handleSubmit} className={s.form}>
 						<div>
 							<Field
 								component={Input}

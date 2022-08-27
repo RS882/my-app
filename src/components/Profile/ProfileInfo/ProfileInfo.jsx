@@ -8,11 +8,6 @@ import AvatarChange from '../AvatarChange/AvatarChange';
 import { updateUserAvatar } from '../../../redux/profileReducer';
 
 const ProfileInfo = (props) => {
-
-
-
-
-
 	if (!props.profile) return <Preloader />
 
 	return (

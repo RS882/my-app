@@ -1,10 +1,32 @@
-import React from 'react';
-import Social from '../../../common/social/social';
+import React, { useState } from 'react';
+
 import AvatarChange from '../../AvatarChange/AvatarChange';
+import CangeProfile from './CangeProfile';
+import ProfileForm from './ProfileForm';
 import s from './ProfileUser.module.css';
+import ProfileUserInfo from './ProfileUserInfo';
 
 
 const ProfileUser = (props) => {
+
+	const [isEditMode, setIsEditMode] = useState(false);
+	const startProfileEditMode = () => setIsEditMode(true);
+	const stopProfileEditMode = () => setIsEditMode(false);
+
+
+
+
+	const social = (props.profile) ?
+		(Object.entries(props.profile.contacts)
+			.filter(el => el[1])
+			.map(el => ({
+				name: el[0],
+				url: (el[1].startsWith('https://') || el[1].startsWith('http://')) ?
+					el[1] : 'https://' + el[1],
+				img: (el[0] in props.profile.contacts) ?
+					props.socialIcon[el[0]] : props.socialIcon.other,
+			}))) : [];
+	//console.log(social);
 
 	return (
 
@@ -18,20 +40,12 @@ const ProfileUser = (props) => {
 						{props.isMe ? <AvatarChange /> : null}
 					</div>
 				</div>
-				<div className={s.fullname}>{props.profile.fullName}</div>
-				<article className={s.about} >{props.profile.aboutMe}	</article>
 			</div>
-
-			{props.profile.lookingForAJob &&
-				(<div hidden={props.profile.lookingForAJob} className={s.job}>
-					<div className={s.looking}>
-						<img className={s.img} src={props.jobIcon} alt='Looking for a job' />
-					</div>
-					<article className={s.about} >{props.profile.lookingForAJobDescription}</article>
-				</div>)}
-
-			<Social social={props.social} vertical={true} />
-
+			<div className={s.changeBtn}>
+				{props.isMe && !isEditMode ? <CangeProfile startProfileEditMode={startProfileEditMode} /> : null}
+			</div>
+			<ProfileUserInfo profile={props.profile} jobIcon={props.jobIcon} social={social} />
+			<ProfileForm profile={props.profile} stopProfileEditMode={stopProfileEditMode} socialIcon={props.socialIcon} />
 		</div>
 
 

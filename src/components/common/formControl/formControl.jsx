@@ -5,6 +5,8 @@ const FormControl = ({ input, meta, FormType, ...props }) => {
 	if (props.onBlur) input.onBlur = props.onBlur;
 	if (props.onChange) input.onChange = props.onChange;
 	const hasError = meta.error && meta.touched;
+
+
 	return (
 		<div className={s.formBox}>
 			<div >
