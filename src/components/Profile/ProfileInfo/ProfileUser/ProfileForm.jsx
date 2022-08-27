@@ -2,8 +2,10 @@ import React from 'react';
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { Input } from '../../../common/formControl/formControl';
+import s from './ProfileForm.module.css';
+import btnS from './../../../../css_style_for_all/button.module.css';
 
-const ProfileForm = ({ profile, ...props }) => {
+const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => {
 
 
 
@@ -11,7 +13,7 @@ const ProfileForm = ({ profile, ...props }) => {
 	const formData = {
 		aboutMe: profile.aboutMe || '',
 		contacts: {
-			facebook: profile.contacts ? profile.contacts.aboutMe : '',
+			facebook: profile.contacts ? profile.contacts.facebook : '',
 			github: profile.contacts ? profile.contacts.github : '',
 			instagram: profile.contacts ? profile.contacts.instagram : '',
 			mainLink: profile.contacts ? profile.contacts.mainLink : '',
@@ -25,12 +27,49 @@ const ProfileForm = ({ profile, ...props }) => {
 		lookingForAJobDescription: profile.lookingForAJobDescription || '',
 	};
 
-	//console.log(props.socialIcon);
+
+
+	const fields = ['fullName', 'aboutMe', 'lookingForAJob', 'lookingForAJobDescription'];
+	const placeholderObj = {
+		'fullName': 'Enter Your fullname',
+		'aboutMe': 'Enter about You',
+		'lookingForAJobDescription': 'Enter Your description',
+	};
+
+	const fieldsElem = fields.map((e, i) =>
+		<div key={e + i}>
+			<Field
+				id={e}
+				component={Input}
+				name={e}
+				type={e === 'lookingForAJob' ? 'checkbox' : 'text'}
+				placeholder={e !== 'lookingForAJob' ? placeholderObj[e] : ''}
+			/>
+			{e === 'lookingForAJob' ? <label htmlFor='lookingForAJob'  >Looking You a job?</label> : null}
+		</div>
+	);
+
+	const contantFildsElem = profile.contacts && Object.keys(profile.contacts).map((e, i) =>
+		<div key={e + i} className={s.social}>
+			<img src={socialIcon[e]} alt={e} width='30' height='30' className={s.social__img} />
+			<Field
+				name={`contacts.${e}`}
+				component='input'
+				type='text'
+				placeholder={`Enter Your ${e} address`}
+				className={s.social__field}
+			/>
+
+		</div>
+
+	);
+
+
 
 
 	const onSubmit = (values) => {
 		console.log(values);
-		props.stopProfileEditMode();
+		stopProfileEditMode();
 
 	}
 
@@ -45,50 +84,17 @@ const ProfileForm = ({ profile, ...props }) => {
 
 					return (
 						<form onSubmit={handleSubmit}>
-							<Field
-								component={Input}
-								name='fullName'
-								type='text'
-								// className={s.input}
-								placeholder={'Enter Your fullname'}
-							/>
-							<Field
-								component='input'
-								name='aboutMe'
-								type='text'
-								// className={s.input}
-								placeholder={'Enter about You'}
-							/>
-							<Field
-								id={'lookingForAJob'}
-								component='input'
-								name='lookingForAJob'
-								type='checkbox'
+							{fieldsElem}
+							<div className={s.social__box}>
+								{contantFildsElem}
+							</div>
 
-							// className={s.input}
 
-							/>
-							<label htmlFor='lookingForAJob'  >remember me</label>
-
-							<Field
-								component='input'
-								name='lookingForAJobDescription'
-								type='text'
-								// className={s.input}
-								placeholder={'Enter Your description'}
-							/>
-							<Field
-								component='input'
-								name='contacts.facebook'
-								type='text'
-								// className={s.input}
-								placeholder={'Enter Your facebook'}
-							/>
 							<div >
 								<button
 									type="submit"
-								// className={`${s.input} ${s.btn} `}
-								//disabled={submitting || pristine || Object.keys(errors).length > 0}
+									className={`${btnS.button} ${s.button_width}`}
+									disabled={submitting || pristine || Object.keys(errors).length > 0}
 								>submit</button>
 							</div>
 						</form>

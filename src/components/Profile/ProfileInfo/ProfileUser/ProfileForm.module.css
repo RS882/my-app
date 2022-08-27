@@ -1,0 +1,37 @@
+
+
+.button_width{
+	width: 100%;
+	margin-top: 10px;
+}
+
+.social__box{
+
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+		padding-left:  20px;
+}
+.social{
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+	
+}
+.social__img{
+	margin-right: 10px;
+}
+
+.social__field{
+	flex:1 0 auto;
+	height: 30px;
+	padding: calc(var(--gap) / 2);
+	margin-left: calc(var(--gap) / 2);
+	margin-top: calc(var(--gap) / 2);
+	background-color: var(--secondcolor);
+	border: 2px solid var(--firstcolor);
+	border-radius: 5px;
+	box-shadow: var(--shadow);
+	cursor: pointer;
+
+}

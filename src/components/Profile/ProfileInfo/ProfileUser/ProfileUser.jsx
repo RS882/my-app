@@ -45,7 +45,9 @@ const ProfileUser = (props) => {
 				{props.isMe && !isEditMode ? <CangeProfile startProfileEditMode={startProfileEditMode} /> : null}
 			</div>
 			<ProfileUserInfo profile={props.profile} jobIcon={props.jobIcon} social={social} />
-			<ProfileForm profile={props.profile} stopProfileEditMode={stopProfileEditMode} socialIcon={props.socialIcon} />
+			<ProfileForm profile={props.profile}
+				stopProfileEditMode={stopProfileEditMode}
+				socialIcon={props.socialIcon} />
 		</div>
 
 
