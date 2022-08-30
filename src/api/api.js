@@ -37,7 +37,10 @@ export const profileAPI = {
 			{ headers: { 'Content-Type': 'multipart/form-data', } })
 			.then(respons => respons.data)
 	},
-}
+
+	putProfileInfo: (userInfo) => instance.put('/profile', { ...userInfo })
+		.then(respons => respons.data),
+};
 
 
 export const loginAPI = {

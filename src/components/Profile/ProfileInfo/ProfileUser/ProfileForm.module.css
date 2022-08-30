@@ -22,16 +22,46 @@
 	margin-right: 10px;
 }
 
-.social__field{
+.text__field{
 	flex:1 0 auto;
 	height: 30px;
 	padding: calc(var(--gap) / 2);
-	margin-left: calc(var(--gap) / 2);
+	margin-left: 5px;
 	margin-top: calc(var(--gap) / 2);
 	background-color: var(--secondcolor);
 	border: 2px solid var(--firstcolor);
 	border-radius: 5px;
 	box-shadow: var(--shadow);
 	cursor: pointer;
+	color: var(--theecolor);
+	font-weight: 800;
+}
 
+.text__textarea {
+	resize: none;
+	margin-bottom: calc(var(--gap) / 2);
+	width: 100%;
+	padding: calc(var(--gap) / 2);
+	color: var(--theecolor);
+	margin-top: calc(var(--gap) / 2);
+	background-color: var(--secondcolor);
+	border: 2px solid var(--firstcolor);
+	border-radius: 5px;
+	box-shadow: var(--shadow);
+	font-weight: 800;
+}
+.field__wrapper{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.label{
+	color: var(--firstcolor);
+	font-weight: 800;
+}
+.checkbox {
+	margin-left: 5px;
+	width: 20px;
+	height: 20px;
 }

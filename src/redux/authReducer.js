@@ -1,6 +1,6 @@
 // action type
 import { loginAPI, profileAPI } from './../api/api';
-import { SAVE_AVATAR_SUCCESS } from './profileReducer';
+import { SAVE_AVATAR_SUCCESS, SET_USER_PROFILE } from './profileReducer';
 
 
 
@@ -74,6 +74,11 @@ const authReducer = (state = initialState, action) => {
 				...state,
 				profile: { ...state.profile, photos: action.file },
 			};
+		case SET_USER_PROFILE:
+			return {
+				...state,
+				profile: action.profile,
+			}
 		default:
 			return state;
 	}

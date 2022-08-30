@@ -1,9 +1,10 @@
 import { profileAPI } from "../api/api";
+import { setUserProfileAuth } from "./authReducer";
 
 // action type
 const ADD_POSTS = `ADD-POSTS`;
 const DEL_POST_VALUE = `DEL-POST-VALUE`;
-const SET_USER_PROFILE = `SET_USER_PROFILE`;
+export const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const SET_USER_STATUS = `SET_USER_STATUS`;
 export const SAVE_AVATAR_SUCCESS = `SAVE_AVATAR_SUCCESS`;
 
@@ -46,6 +47,7 @@ const profileReducer = (state = initialState, action) => {
 				newTextPost: ``,
 			};
 		case SET_USER_PROFILE:
+
 			return {
 				...state,
 				profile: action.profile,
@@ -92,6 +94,15 @@ export const updateUserAvatar = (file) => async (dispatch) => {
 	const response = await profileAPI.putAvater(file);
 	response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
 };
+
+export const updateUserInfo = (userInfo) => async (dispatch) => {
+	const response = await profileAPI.putProfileInfo(userInfo);
+	if (response.resultCode === 0) {
+		dispatch(getProfile(userInfo.userId, userInfo.userId));
+		// dispatch(dispatch(setUserProfileAuth(data)));
+	}
+
+}
 
 
 
