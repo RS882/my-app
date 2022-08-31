@@ -1,5 +1,5 @@
 import { profileAPI } from "../api/api";
-import { setUserProfileAuth } from "./authReducer";
+
 
 // action type
 const ADD_POSTS = `ADD-POSTS`;
@@ -7,6 +7,7 @@ const DEL_POST_VALUE = `DEL-POST-VALUE`;
 export const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const SET_USER_STATUS = `SET_USER_STATUS`;
 export const SAVE_AVATAR_SUCCESS = `SAVE_AVATAR_SUCCESS`;
+const TOOGLE_IS_FETCHING_PROFILE_INFO = `TOOGLE_IS_FETCHING_PROFILE_INFO`;
 
 
 // reducer
@@ -18,6 +19,7 @@ const initialState = {
 	newTextPost: `Enter your post`,
 	profile: null,
 	status: ``,
+	isFetching: false,
 }
 
 
@@ -63,6 +65,13 @@ const profileReducer = (state = initialState, action) => {
 				...state,
 				profile: { ...state.profile, photos: action.file },
 			};
+		case TOOGLE_IS_FETCHING_PROFILE_INFO:
+
+			return {
+				...state,
+				isFetching: action.isFetching,
+			};
+
 
 		default:
 			return state;
@@ -76,10 +85,13 @@ export const delPostValue = () => ({ type: DEL_POST_VALUE, });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, });
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status, });
 export const saveAvatarSucсess = (file) => ({ type: SAVE_AVATAR_SUCCESS, file, });
+export const toogleIsFetchingProfileInfo = (isFetching) => ({ type: TOOGLE_IS_FETCHING_PROFILE_INFO, isFetching, });
 //ThunkCreation
 export const getProfile = (userId, meId) => async (dispatch) => {
-	const response = await profileAPI.getProfile(userId, meId);
-	dispatch(setUserProfile(response))
+	dispatch(toogleIsFetchingProfileInfo(true));
+	const response = await profileAPI.getProfile(userId, meId)
+		.then(response => dispatch(setUserProfile(response)));
+	dispatch(toogleIsFetchingProfileInfo(false));
 };
 export const getUserStatus = (userId) => async (dispatch) => {
 	const response = await profileAPI.getStatus(userId);
@@ -96,11 +108,12 @@ export const updateUserAvatar = (file) => async (dispatch) => {
 };
 
 export const updateUserInfo = (userInfo) => async (dispatch) => {
-	const response = await profileAPI.putProfileInfo(userInfo);
-	if (response.resultCode === 0) {
-		dispatch(getProfile(userInfo.userId, userInfo.userId));
-		// dispatch(dispatch(setUserProfileAuth(data)));
-	}
+	dispatch(toogleIsFetchingProfileInfo(true));
+	const response = await profileAPI.putProfileInfo(userInfo)
+		.then((response) => response.resultCode === 0 && dispatch(getProfile(userInfo.userId, userInfo.userId)));
+
+
+	dispatch(toogleIsFetchingProfileInfo(false));
 
 }
 

@@ -75,9 +75,10 @@ const authReducer = (state = initialState, action) => {
 				profile: { ...state.profile, photos: action.file },
 			};
 		case SET_USER_PROFILE:
+
 			return {
 				...state,
-				profile: action.profile,
+				profile: state.userId && state.userId === action.profile.userId ? action.profile : state.profile,
 			}
 		default:
 			return state;

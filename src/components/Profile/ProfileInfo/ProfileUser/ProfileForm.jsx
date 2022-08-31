@@ -76,13 +76,9 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 
 
 	const dispatch = useDispatch();
-	const onSubmit = (values) => {
-
-		values.userId = profile.userId
-		values.lookingForAJobDescription = values.lookingForAJob ? values.lookingForAJobDescription : null;
-
+	const onSubmit = async (values) => {
+		values.userId = await profile.userId
 		dispatch(updateUserInfo(values))
-
 		stopProfileEditMode();
 	}
 
@@ -93,12 +89,12 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 				onSubmit={onSubmit}
 				initialValues={{ ...formData }}
 				render={({ handleSubmit, form, submitting, pristine, errors, values }) => {
-					//console.log(values.fullName);
-
 					return (
 						<form onSubmit={handleSubmit}>
 							{fieldsElem}
+							<div className={s.label}>Contacts:</div>
 							<div className={s.social__box}>
+
 								{contantFildsElem}
 							</div>
 

@@ -1,16 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { updateUserAvatar } from '../../redux/profileReducer';
+import { useSelector } from 'react-redux';
+import Preloader from '../common/preloader/preloader';
+
 import MyPostsContainer from './MyPosts/MyPostsContainer';
 // import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props) => {
 
-
+	const isFetching = useSelector((state => state.profilePage.isFetching))
 
 	return (
+
 		<div >
+			{isFetching && <Preloader />}
 			<ProfileInfo
 				profile={props.profile}
 				status={props.status}
