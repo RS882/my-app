@@ -8,7 +8,10 @@ export const SET_USER_PROFILE = `SET_USER_PROFILE`;
 const SET_USER_STATUS = `SET_USER_STATUS`;
 export const SAVE_AVATAR_SUCCESS = `SAVE_AVATAR_SUCCESS`;
 const TOOGLE_IS_FETCHING_PROFILE_INFO = `TOOGLE_IS_FETCHING_PROFILE_INFO`;
-
+const ADD_ERROR_MESSAGE_PROFILE_FORM = `ADD_ERROR_MESSAGE_PROFILE_FORM`;
+const DEL_ERROR_MESSAGE_PROFILE_FORM = `DEL_ERROR_MESSAGE_PROFILE_FORM`;
+const IS_PROFILE_INFO_SUBMITING = `IS_PROFILE_INFO_SUBMITING`;
+const IS_EDIT_MODE_PROFILE_INFO = `IS_EDIT_MODE_PROFILE_INFO`;
 
 // reducer
 const initialState = {
@@ -20,6 +23,9 @@ const initialState = {
 	profile: null,
 	status: ``,
 	isFetching: false,
+	errorMessage: [],
+	isProfileInfoSubmiting: false,
+	isEditModeProfileInfo: false,
 }
 
 
@@ -71,7 +77,30 @@ const profileReducer = (state = initialState, action) => {
 				...state,
 				isFetching: action.isFetching,
 			};
+		case ADD_ERROR_MESSAGE_PROFILE_FORM:
 
+			return {
+				...state,
+				errorMessage: action.errorMessage,
+			};
+		case DEL_ERROR_MESSAGE_PROFILE_FORM:
+
+			return {
+				...state,
+				errorMessage: [],
+			};
+		case IS_PROFILE_INFO_SUBMITING:
+
+			return {
+				...state,
+				isProfileInfoSubmiting: action.isProfileInfoSubmiting,
+			};
+		case IS_EDIT_MODE_PROFILE_INFO:
+
+			return {
+				...state,
+				isEditModeProfileInfo: action.isEditModeProfileInfo,
+			};
 
 		default:
 			return state;
@@ -86,6 +115,10 @@ export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile, }
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status, });
 export const saveAvatarSucсess = (file) => ({ type: SAVE_AVATAR_SUCCESS, file, });
 export const toogleIsFetchingProfileInfo = (isFetching) => ({ type: TOOGLE_IS_FETCHING_PROFILE_INFO, isFetching, });
+export const addErrorsMessageProfileFrom = (errorMessage) => ({ type: ADD_ERROR_MESSAGE_PROFILE_FORM, errorMessage, });
+export const delErrorsMessageProfileFrom = () => ({ type: DEL_ERROR_MESSAGE_PROFILE_FORM, });
+export const setIsProfileInfoSubmiting = (isProfileInfoSubmiting) => ({ type: IS_PROFILE_INFO_SUBMITING, isProfileInfoSubmiting, });
+export const setIsEditModeProfile = (isEditModeProfileInfo) => ({ type: IS_EDIT_MODE_PROFILE_INFO, isEditModeProfileInfo, });
 //ThunkCreation
 export const getProfile = (userId, meId) => async (dispatch) => {
 	dispatch(toogleIsFetchingProfileInfo(true));
@@ -109,11 +142,22 @@ export const updateUserAvatar = (file) => async (dispatch) => {
 
 export const updateUserInfo = (userInfo) => async (dispatch) => {
 	dispatch(toogleIsFetchingProfileInfo(true));
-	const response = await profileAPI.putProfileInfo(userInfo)
-		.then((response) => response.resultCode === 0 && dispatch(getProfile(userInfo.userId, userInfo.userId)));
+
+	profileAPI.putProfileInfo(userInfo)
+		.then(response => {
+			if (response.resultCode === 0) {
+				dispatch(getProfile(userInfo.userId, userInfo.userId));
+				dispatch(setIsEditModeProfile(false));
+			} else {
+				dispatch(setIsProfileInfoSubmiting(true));
+				dispatch(addErrorsMessageProfileFrom(response.messages))
+			}
 
 
-	dispatch(toogleIsFetchingProfileInfo(false));
+		}).then(() => dispatch(toogleIsFetchingProfileInfo(false)));
+
+
+
 
 }
 

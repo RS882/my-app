@@ -1,16 +1,16 @@
-import React from 'react';
-import { useCallback } from 'react';
+import React, { useState } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Form, Field } from 'react-final-form';
 
 import s from './ProfileForm.module.css';
 import btnS from './../../../../css_style_for_all/button.module.css';
-import { updateUserInfo } from './../../../../redux/profileReducer';
-import { useDispatch } from 'react-redux';
+import { delErrorsMessageProfileFrom, updateUserInfo } from './../../../../redux/profileReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { required } from '../../../../utilits/validators';
+import { Input, Textarea } from '../../../common/formControl/formControl';
+import Modal from './../../../common/modal/modal';
 
 const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => {
-
-
-
 
 	const formData = {
 		aboutMe: profile.aboutMe || null,
@@ -49,7 +49,8 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 			<label htmlFor={e} className={s.label}>{labelTextObj[e]}</label>
 			<Field
 				id={e}
-				component={e === 'lookingForAJob' || e === 'fullName' ? 'input' : 'textarea'}
+				validate={e !== 'lookingForAJob' && required}
+				component={e === 'lookingForAJob' ? 'input' : e === 'fullName' ? Input : Textarea}
 				name={e}
 				type={e === 'lookingForAJob' ? 'checkbox' : 'text'}
 				placeholder={e !== 'lookingForAJob' ? placeholderObj[e] : ''}
@@ -76,12 +77,14 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 
 
 	const dispatch = useDispatch();
-	const onSubmit = async (values) => {
-		values.userId = await profile.userId
-		dispatch(updateUserInfo(values))
-		stopProfileEditMode();
-	}
+	const errorMessages = useSelector(state => state.profilePage.errorMessage);
+	const delErrorMesage = () => { dispatch(delErrorsMessageProfileFrom()) };
 
+
+	const onSubmit = (values) => {
+		values.userId = profile.userId
+		dispatch(updateUserInfo(values))
+	};
 
 	const MyForm = useCallback(() => {
 		return (
@@ -94,7 +97,6 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 							{fieldsElem}
 							<div className={s.label}>Contacts:</div>
 							<div className={s.social__box}>
-
 								{contantFildsElem}
 							</div>
 
@@ -120,9 +122,11 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 			<button
 				onClick={stopProfileEditMode}
 				className={`${btnS.button} ${s.button_width}`}>cancel</button>
+			{errorMessages.length !== 0 ? < Modal closeModal={delErrorMesage} content={errorMessages} /> : null}
 		</>
 	)
 
+
 };
 
-export default React.memo(ProfileForm);
+export default ProfileForm;

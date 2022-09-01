@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsEditModeProfile } from '../../../../redux/profileReducer';
 
 import AvatarChange from '../../AvatarChange/AvatarChange';
 import CangeProfile from './CangeProfile';
@@ -9,9 +11,10 @@ import ProfileUserInfo from './ProfileUserInfo';
 
 const ProfileUser = (props) => {
 
-	const [isEditMode, setIsEditMode] = useState(false);
-	const startProfileEditMode = () => setIsEditMode(true);
-	const stopProfileEditMode = () => setIsEditMode(false);
+	const isEditMode = useSelector(state => state.profilePage.isEditModeProfileInfo)
+	const dispatch = useDispatch();
+	const startProfileEditMode = () => dispatch(setIsEditModeProfile(true));
+	const stopProfileEditMode = () => dispatch(setIsEditModeProfile(false));
 
 
 
@@ -26,7 +29,7 @@ const ProfileUser = (props) => {
 				img: (el[0] in props.profile.contacts) ?
 					props.socialIcon[el[0]] : props.socialIcon.other,
 			}))) : [];
-	//console.log(social);
+
 
 	return (
 
