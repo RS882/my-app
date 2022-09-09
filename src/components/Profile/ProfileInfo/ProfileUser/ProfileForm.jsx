@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useCallback, useEffect } from 'react';
+import React from 'react';
+import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-
+import cn from 'classnames';
 import s from './ProfileForm.module.css';
 import btnS from './../../../../css_style_for_all/button.module.css';
 import { delErrorsMessageProfileFrom, updateUserInfo } from './../../../../redux/profileReducer';
@@ -103,7 +103,7 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 							<div >
 								<button
 									type="submit"
-									className={`${btnS.button} ${s.button_width}`}
+									className={cn(btnS.button, s.button_width)}
 									disabled={submitting || pristine || Object.keys(errors).length > 0}
 								>submit</button>
 
@@ -113,6 +113,8 @@ const ProfileForm = ({ profile, stopProfileEditMode, socialIcon, ...props }) => 
 				}}
 			/>
 		);
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 

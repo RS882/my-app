@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import logo from './../../assets/img/logo.jpg'
 import Header from './Header';
 import { logoutUser } from './../../redux/authReducer';
 import avatarUser from './../../assets/img/user3.jpg';
 import { setUserProfile, getUserStatus } from './../../redux/profileReducer';
-import { compose } from 'redux';
-import { useLocation, withRouter } from 'react-router-dom';
+
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 

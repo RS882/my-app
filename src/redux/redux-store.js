@@ -7,7 +7,7 @@ import authReducer from "./authReducer";
 import thunkMiddleware from 'redux-thunk'
 import modalReducer from "./modalReducer";
 import appReducer from './appReducer';
-
+import errorReducer from './errorReducer';
 
 const reducers = combineReducers({ // аналогично старому файлу state
 	dialogsPage: dialogsReducer,
@@ -17,6 +17,7 @@ const reducers = combineReducers({ // аналогично старому фай
 	auth: authReducer,
 	modalWindow: modalReducer,
 	app: appReducer,
+	error: errorReducer,
 
 });
 

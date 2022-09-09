@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import s from './ProfileStatus.module.css';
 
 const ProfileStatus = (props) => {
 
 	const [editMode, setEditMode] = useState(false);
 	const [status, setStatus] = useState(props.status || `no status`);
-	// state = {
-	// 	editMode: false,
-	// 	status: this.props.status || `no status`,
-	// }
-
-	// componentDidUpdate(prevProps, prevState) {
-	// 	(prevProps.status !== this.props.status) && this.setState({ status: this.props.status, })
-	// }
-
-	// useEffect(() => {
-	// 	setStatus(props.status)
-	// }, [status]);
 
 	const toogleEditMode = () => {
 		if (props.isMe) {

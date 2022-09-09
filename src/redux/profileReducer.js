@@ -1,4 +1,5 @@
 import { profileAPI } from "../api/api";
+import { errorFunction } from "./errorReducer";
 
 
 // action type
@@ -120,27 +121,48 @@ export const delErrorsMessageProfileFrom = () => ({ type: DEL_ERROR_MESSAGE_PROF
 export const setIsProfileInfoSubmiting = (isProfileInfoSubmiting) => ({ type: IS_PROFILE_INFO_SUBMITING, isProfileInfoSubmiting, });
 export const setIsEditModeProfile = (isEditModeProfileInfo) => ({ type: IS_EDIT_MODE_PROFILE_INFO, isEditModeProfileInfo, });
 //ThunkCreation
-export const getProfile = (userId, meId) => async (dispatch) => {
+
+
+
+
+export const getProfile = (userId, meId) => (dispatch) => {
 	dispatch(toogleIsFetchingProfileInfo(true));
-	const response = await profileAPI.getProfile(userId, meId)
-		.then(response => dispatch(setUserProfile(response)));
-	dispatch(toogleIsFetchingProfileInfo(false));
+	profileAPI.getProfile(userId, meId)
+		.then(response => dispatch(setUserProfile(response)))
+		.then(() => dispatch(toogleIsFetchingProfileInfo(false)))
+		.catch(error => { errorFunction(dispatch, error, toogleIsFetchingProfileInfo) });
+
 };
 export const getUserStatus = (userId) => async (dispatch) => {
-	const response = await profileAPI.getStatus(userId);
-	dispatch(setUserStatus(response));
+	try {
+		const response = await profileAPI.getStatus(userId);
+		dispatch(setUserStatus(response));
+	}
+	catch (error) {
+		errorFunction(dispatch, error, toogleIsFetchingProfileInfo)
+	}
 };
 
 export const updateUserStatus = (status) => async (dispatch) => {
-	const response = await profileAPI.updateStatus(status);
-	response.resultCode === 0 && dispatch(setUserStatus(status));
+	try {
+		const response = await profileAPI.updateStatus(status);
+		response.resultCode === 0 && dispatch(setUserStatus(status));
+	}
+	catch (error) {
+		errorFunction(dispatch, error, toogleIsFetchingProfileInfo)
+	}
 };
 export const updateUserAvatar = (file) => async (dispatch) => {
-	const response = await profileAPI.putAvater(file);
-	response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
+	try {
+		const response = await profileAPI.putAvater(file);
+		response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
+	}
+	catch (error) {
+		errorFunction(dispatch, error, toogleIsFetchingProfileInfo)
+	}
 };
 
-export const updateUserInfo = (userInfo) => async (dispatch) => {
+export const updateUserInfo = (userInfo) => (dispatch) => {
 	dispatch(toogleIsFetchingProfileInfo(true));
 
 	profileAPI.putProfileInfo(userInfo)
@@ -152,9 +174,10 @@ export const updateUserInfo = (userInfo) => async (dispatch) => {
 				dispatch(setIsProfileInfoSubmiting(true));
 				dispatch(addErrorsMessageProfileFrom(response.messages))
 			}
-
-
-		}).then(() => dispatch(toogleIsFetchingProfileInfo(false)));
+		})
+		.then(() => dispatch(toogleIsFetchingProfileInfo(false)))
+		.catch(error => { errorFunction(dispatch, error, toogleIsFetchingProfileInfo) });
+	;
 
 
 

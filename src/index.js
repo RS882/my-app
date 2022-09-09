@@ -1,28 +1,14 @@
 import './index.css';
-
 import './css_style_for_all/ResetStyle.css';
 import './css_style_for_all/style_var.css'
 import reportWebVitals from './reportWebVitals';
-import store from './redux/redux-store';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Provider } from 'react-redux';
-import { BrowserRouter } from "react-router-dom";
+import AppContainer from './App';
 
 
-ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter basename='/social-network'>
 
-			<Provider store={store}>
-				<App />
-			</Provider >
-
-		</BrowserRouter >
-	</React.StrictMode>,
-	document.getElementById('root')
-);
+ReactDOM.render(<AppContainer />, document.getElementById('root'));
 
 
 // rerenderEntireTee();

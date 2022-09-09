@@ -1,11 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-// import bg from './../../../assets/img/bg.jpg'
+
 import Preloader from '../../common/preloader/preloader';
 import ProfileUser from './ProfileUser/ProfileUser';
 import ProfileStatus from './ProfileStatus/ProfileStatusWithHook';
-import AvatarChange from '../AvatarChange/AvatarChange';
-import { updateUserAvatar } from '../../../redux/profileReducer';
+
 
 const ProfileInfo = (props) => {
 	if (!props.profile) return <Preloader />

@@ -1,5 +1,6 @@
 // action type
 import { loginAPI, profileAPI } from './../api/api';
+import { errorFunction } from './errorReducer';
 import { SAVE_AVATAR_SUCCESS, SET_USER_PROFILE } from './profileReducer';
 
 
@@ -10,6 +11,7 @@ const SET_AUTH_USER_PROFILE = `SET_AUTH_USER_PROFILE`;
 const ADD_ERROR_MESSAGE = `ADD_ERROR_MESSAGE`;
 const DEL_ERROR_MESSAGE = `DEL_ERROR_MESSAGE`;
 const ADD_REDIRECT_LOGIN_URL = `ADD_REDIRECT_LOGIN_URL`;
+
 
 const SET_CAPCHA = `SET_CAPCHA`;
 
@@ -24,6 +26,7 @@ const initialState = {
 	errorMessage: null,
 	capcha: null,
 	loginRedirectUrl: null,
+
 }
 
 
@@ -97,6 +100,8 @@ export const addRedirectLoginUrl = (url) => ({ type: ADD_REDIRECT_LOGIN_URL, url
 
 export const setCapcha = (url) => ({ type: SET_CAPCHA, url, });
 
+
+
 //ThunkCreation
 export const getAuthUser = () => (dispatch) => {
 	dispatch(toogleIsFetchingAuth(true))
@@ -113,6 +118,9 @@ export const getAuthUser = () => (dispatch) => {
 			id && profileAPI.getProfile(id)
 				.then(data => dispatch(setUserProfileAuth(data)))
 
+		})
+		.catch(error => {
+			errorFunction(dispatch, error, toogleIsFetchingAuth)
 		})
 
 }
@@ -139,6 +147,9 @@ export const loginUser = (formData) => (dispatch) => {
 				dispatch(addErrorMessage(`Some error`))
 			}
 		})
+		.catch(error => {
+			errorFunction(dispatch, error, toogleIsFetchingAuth)
+		})
 }
 
 export const logoutUser = () => (dispatch) => {
@@ -153,6 +164,9 @@ export const logoutUser = () => (dispatch) => {
 				dispatch(setCapcha(null))
 			}
 			dispatch(toogleIsFetchingAuth(false))
+		})
+		.catch(error => {
+			errorFunction(dispatch, error, toogleIsFetchingAuth)
 		})
 }
 

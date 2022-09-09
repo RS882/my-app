@@ -2,31 +2,34 @@
 import s from './modal.module.css';
 
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setIsModalOpen, setCloseModal, setIsClickModal } from './../../../redux/modalReducer';
 
 
-const Modal = (props) => {
+const Modal = ({ content, closeModal, ...props }) => {
+
+	const isModalClose = useSelector(state => state.modalWindow.isCloseModal);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		props.setIsModalOpen();
-		return () => props.setCloseModal();
-	})
+		dispatch(setIsModalOpen());
+		return () => dispatch(setCloseModal());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
-	const arrData = (Array.isArray(props.content)) ? props.content
-		: [props.content];
-	const content = arrData.map((el, i) =>
-		<div className={s.content} key={i}>{el}</div>);
+	const arrData = (Array.isArray(content)) ? content
+		: [content];
+	const message = arrData.map((el, i) => <div className={s.content} key={i}>{el}</div>);
 
-	const onClickCloseModal = () => props.closeModal();
-	const onModalClick = () => props.setIsClickModal()
+	const onClickCloseModal = () => closeModal();
+	const onModalClick = () => dispatch(setIsClickModal())
 
-	props.isModalClose && onClickCloseModal()
+	isModalClose && onClickCloseModal()
 
 	return (
 		<div className={s.wrapper}>
 			<div onClick={onModalClick} className={s.modal} >
-				{content}
+				{message}
 				<div>
 					<button className={s.btn} onClick={onClickCloseModal}>ok</button>
 				</div>
@@ -36,8 +39,4 @@ const Modal = (props) => {
 
 }
 
-const mapStateToProps = (state) => ({
-	isModalClose: state.modalWindow.isCloseModal
-})
-
-export default connect(mapStateToProps, { setIsModalOpen, setCloseModal, setIsClickModal, })(Modal);
+export default React.memo(Modal);

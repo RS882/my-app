@@ -1,4 +1,5 @@
 import { userAPI } from './../api/api';
+import { errorFunction } from './errorReducer';
 
 // action type
 const TOOGLE_FOLLOW = `TOOGLE_FOLLOW`;
@@ -108,6 +109,9 @@ export const goEndPage = () => ({ type: GO_END_PAGE, });
 export const toogleIsFetching = (isFetching) => ({ type: TOOGLE_IS_FETCHING, isFetching })
 export const toogleFollowInProgres = (isFetching, userId) => ({ type: TOOGLE_FOLLOW_IN_PROGRES, isFetching, userId })
 
+
+
+
 // ThunkCreation
 export const getUsers = (currentPage, pageSize) => (dispatch) => {
 	dispatch(toogleIsFetching(true));
@@ -118,6 +122,7 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
 			dispatch(setTotalUsersCout(data.totalCount));
 			// dispatch(setTotalUsersCout(120));
 		})
+		.catch(error => { errorFunction(dispatch, error, toogleIsFetching) });
 }
 
 
@@ -129,6 +134,7 @@ export const onPageChanged = (pageNumber, pageSize) => (dispatch) => {
 			dispatch(toogleIsFetching(false));
 			dispatch(setUsers(data.items));
 		})
+		.catch(error => { errorFunction(dispatch, error, toogleIsFetching) });
 }
 
 export const toogleFollowBtn = (follow, id) => (dispatch) => {
@@ -137,7 +143,8 @@ export const toogleFollowBtn = (follow, id) => (dispatch) => {
 		.then(data => {
 			data.resultCode === 0 && dispatch(toogleFollow(id))
 			dispatch(toogleFollowInProgres(false, id));
-		});
+		})
+		.catch(error => { errorFunction(dispatch, error, toogleIsFetching) });
 }
 
 
