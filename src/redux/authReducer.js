@@ -113,9 +113,12 @@ export const getAuthUser = () => (dispatch) => {
 				dispatch(setAuthUser(id, email, login, true))
 				return id;
 			}
+			else {
+				return new Error(data)
+			}
 		})
 		.then(id => {
-			id && profileAPI.getProfile(id)
+			typeof id !== 'object' && id !== null && id && profileAPI.getProfile(id)
 				.then(data => dispatch(setUserProfileAuth(data)))
 
 		})
@@ -131,7 +134,9 @@ export const loginUser = (formData) => (dispatch) => {
 			if (data.resultCode === 0) dispatch(getAuthUser());
 			dispatch(toogleIsFetchingAuth(false))
 			return { messages: data.messages, resultCode: data.resultCode };
-		})
+		}
+
+		)
 		.then(error => {
 			if (error.messages.length > 0) {
 				dispatch(addErrorMessage(error.messages))
@@ -162,6 +167,8 @@ export const logoutUser = () => (dispatch) => {
 				dispatch(addErrorMessage(null))
 
 				dispatch(setCapcha(null))
+			} else {
+				return new Error(data)
 			}
 			dispatch(toogleIsFetchingAuth(false))
 		})

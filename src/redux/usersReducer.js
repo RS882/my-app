@@ -120,7 +120,6 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
 			dispatch(toogleIsFetching(false));
 			dispatch(setUsers(data.items));
 			dispatch(setTotalUsersCout(data.totalCount));
-			// dispatch(setTotalUsersCout(120));
 		})
 		.catch(error => { errorFunction(dispatch, error, toogleIsFetching) });
 }
@@ -141,7 +140,7 @@ export const toogleFollowBtn = (follow, id) => (dispatch) => {
 	dispatch(toogleFollowInProgres(true, id));
 	(!follow ? userAPI.followUser(id) : userAPI.unfollowUser(id))
 		.then(data => {
-			data.resultCode === 0 && dispatch(toogleFollow(id))
+			data.resultCode === 0 ? dispatch(toogleFollow(id)) : new Error(data);
 			dispatch(toogleFollowInProgres(false, id));
 		})
 		.catch(error => { errorFunction(dispatch, error, toogleIsFetching) });

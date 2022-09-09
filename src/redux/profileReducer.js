@@ -146,7 +146,7 @@ export const getUserStatus = (userId) => async (dispatch) => {
 export const updateUserStatus = (status) => async (dispatch) => {
 	try {
 		const response = await profileAPI.updateStatus(status);
-		response.resultCode === 0 && dispatch(setUserStatus(status));
+		response.resultCode === 0 ? dispatch(setUserStatus(status)) : new Error(response);
 	}
 	catch (error) {
 		errorFunction(dispatch, error, toogleIsFetchingProfileInfo)
@@ -155,7 +155,7 @@ export const updateUserStatus = (status) => async (dispatch) => {
 export const updateUserAvatar = (file) => async (dispatch) => {
 	try {
 		const response = await profileAPI.putAvater(file);
-		response.resultCode === 0 && dispatch(saveAvatarSucсess(response.data.photos));
+		response.resultCode === 0 ? dispatch(saveAvatarSucсess(response.data.photos)) : new Error(response);
 	}
 	catch (error) {
 		errorFunction(dispatch, error, toogleIsFetchingProfileInfo)

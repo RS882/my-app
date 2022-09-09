@@ -37,6 +37,7 @@ const App = () => {
   const catchAllError = (error) => {
     dispatch(setErrorMessageAll(error.reason))
     console.log("Error occurred: " + error.reason.message);
+    console.log(error);
   };
 
 
